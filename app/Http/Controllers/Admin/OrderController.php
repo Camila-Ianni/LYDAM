@@ -55,32 +55,45 @@ class OrderController extends Controller
         
         $productSales = [];
         $totalSalesSum = 0;
+        $totalCostSum = 0;
+        $totalProfitSum = 0;
         
         foreach ($orders as $order) {
             foreach ($order->items as $item) {
                 $productId = $item->product_id;
-                $productName = $item->product ? $item->product->translatedName('es') : ($item->name ?? 'Producto Eliminado');
+                $productName = $item->product ? $item->product->translatedName('es') : ($item->product_name ?? 'Producto Eliminado');
                 $quantity = (int) $item->quantity;
-                $subtotal = (float) $item->price * $quantity;
+                $itemTotal = (float) $item->total;
+                $itemCost = (float) ($item->unit_cost ?? 0.00) * $quantity;
+                $itemProfit = $itemTotal - $itemCost;
                 
                 if (!isset($productSales[$productId])) {
                     $productSales[$productId] = [
                         'name' => $productName,
-                        'sku' => $item->sku,
+                        'sku' => $item->product_sku,
                         'quantity' => 0,
                         'total' => 0,
+                        'total_cost' => 0,
+                        'total_profit' => 0,
                     ];
                 }
                 
                 $productSales[$productId]['quantity'] += $quantity;
-                $productSales[$productId]['total'] += $subtotal;
-                $totalSalesSum += $subtotal;
+                $productSales[$productId]['total'] += $itemTotal;
+                $productSales[$productId]['total_cost'] += $itemCost;
+                $productSales[$productId]['total_profit'] += $itemProfit;
+                
+                $totalSalesSum += $itemTotal;
+                $totalCostSum += $itemCost;
+                $totalProfitSum += $itemProfit;
             }
         }
         
         return view('admin.sales.dashboard', [
             'productSales' => collect($productSales)->sortByDesc('total'),
             'totalSalesSum' => $totalSalesSum,
+            'totalCostSum' => $totalCostSum,
+            'totalProfitSum' => $totalProfitSum,
         ]);
     }
 

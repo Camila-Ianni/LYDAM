@@ -21,6 +21,7 @@ class ProductSeeder extends Seeder
                     'en' => 'Acid-washed 14oz heavy black denim. Features aggressive high-density red tribal skull embroidery on the back pockets and lower leg. Contrast red stitching throughout. Ultra baggy fit designed for maximum drag. Trust no one.'
                 ],
                 'sku' => 'LYD-BGY-SKL',
+                'cost' => 200000.00,
                 'price' => 425000.00,
                 'stock' => 35,
                 'image_path' => json_encode([
@@ -41,6 +42,7 @@ class ProductSeeder extends Seeder
                     'en' => 'Baggy pants with infernal reinforced stitching and signature tribal embroidery from the Tribal Under collection.'
                 ],
                 'sku' => 'LYD-BGY-INF',
+                'cost' => 250000.00,
                 'price' => 540000.00,
                 'stock' => 45,
                 'image_path' => json_encode([
@@ -60,6 +62,7 @@ class ProductSeeder extends Seeder
                     'en' => 'Loose fit brutalist style pants with underground aesthetics for walking the void.'
                 ],
                 'sku' => 'LYD-PTS-VOD',
+                'cost' => 180000.00,
                 'price' => 375000.00,
                 'stock' => 20,
                 'image_path' => json_encode([
@@ -78,6 +81,7 @@ class ProductSeeder extends Seeder
                     'en' => 'Premium denim featuring blood-red accents and a baggy fit built to last.'
                 ],
                 'sku' => 'LYD-DNM-BLD',
+                'cost' => 260000.00,
                 'price' => 550000.00,
                 'stock' => 12,
                 'image_path' => json_encode([
@@ -96,6 +100,7 @@ class ProductSeeder extends Seeder
                     'en' => 'Heavy cotton boxy fit t-shirt with brutalist graphic printed on the chest.'
                 ],
                 'sku' => 'LYD-TEE-BXF',
+                'cost' => 110000.00,
                 'price' => 240000.00,
                 'stock' => 15,
                 'image_path' => json_encode([
@@ -114,6 +119,7 @@ class ProductSeeder extends Seeder
                     'en' => 'Oversized black t-shirt featuring a distressed white spiderweb and tribal graphic. Underground aesthetic.'
                 ],
                 'sku' => 'LYD-TEE-SPW',
+                'cost' => 60000.00,
                 'price' => 140000.00,
                 'stock' => 30,
                 'image_path' => json_encode([

@@ -160,6 +160,7 @@ class ProductController extends Controller
                 Rule::unique('products', 'sku')->ignore($productId),
             ],
             'price' => ['required', 'numeric', 'min:0'],
+            'cost' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'max:8192'],

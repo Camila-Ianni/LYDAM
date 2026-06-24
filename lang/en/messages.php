@@ -65,6 +65,7 @@ return [
     'payment_pending_title' => 'Payment pending',
     'payment_reference' => 'Payment reference',
     'payment_transfer' => 'Bank transfer',
+    'cost' => 'Cost',
     'price' => 'Price',
     'proceed_to_checkout' => 'Proceed to checkout',
     'product' => 'Product',

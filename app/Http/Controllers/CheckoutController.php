@@ -45,7 +45,6 @@ class CheckoutController extends Controller
             'payment_method' => ['required', Rule::in([
                 Order::PAYMENT_TRANSFER,
                 Order::PAYMENT_MERCADOPAGO,
-                Order::PAYMENT_PAYPAL,
             ])],
         ]);
 
@@ -115,6 +114,7 @@ class CheckoutController extends Controller
                     'product_name' => $product->translatedName(),
                     'product_sku' => $product->sku,
                     'quantity' => $quantity,
+                    'unit_cost' => $product->cost ?? 0.00,
                     'unit_price' => $product->price,
                     'total' => $lineTotal,
                 ]);
@@ -177,13 +177,7 @@ class CheckoutController extends Controller
             return redirect()->away($preference['redirect_url']);
         }
 
-        $paypalOrder = $this->payPalService->createOrder($order->load('items'));
-
-        if ($paypalOrder['reference'] ?? null) {
-            $order->update(['payment_reference' => $paypalOrder['reference']]);
-        }
-
-        return redirect()->away($paypalOrder['approval_url']);
+        return redirect()->route('checkout.success', $order);
     }
 
     private function cartTotal(array $cart): float

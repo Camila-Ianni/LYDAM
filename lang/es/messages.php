@@ -65,6 +65,7 @@ return [
     'payment_pending_title' => 'Pago pendiente',
     'payment_reference' => 'Referencia de pago',
     'payment_transfer' => 'Transferencia bancaria',
+    'cost' => 'Costo',
     'price' => 'Precio',
     'proceed_to_checkout' => 'Proceder al checkout',
     'product' => 'Producto',

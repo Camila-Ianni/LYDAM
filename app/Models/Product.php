@@ -16,6 +16,7 @@ class Product extends Model
         'slug',
         'description',
         'sku',
+        'cost',
         'price',
         'stock',
         'image_path',
@@ -27,6 +28,7 @@ class Product extends Model
         return [
             'name' => 'array',
             'description' => 'array',
+            'cost' => 'decimal:2',
             'price' => 'decimal:2',
             'stock' => 'integer',
             'is_active' => 'boolean',

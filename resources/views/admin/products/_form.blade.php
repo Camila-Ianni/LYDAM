@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="mt-6 grid gap-6 md:grid-cols-3">
+<div class="mt-6 grid gap-6 md:grid-cols-4">
     <div>
         <label for="sku" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.sku') }}</label>
         <input id="sku" name="sku" type="text" value="{{ old('sku', $product->sku) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
@@ -38,6 +38,11 @@
     <div>
         <label for="price" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.price') }}</label>
         <input id="price" name="price" type="number" step="0.01" min="0" value="{{ old('price', $product->price) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+    </div>
+
+    <div>
+        <label for="cost" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.cost') }}</label>
+        <input id="cost" name="cost" type="number" step="0.01" min="0" value="{{ old('cost', $product->cost) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
     </div>
 
     <div>
