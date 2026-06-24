@@ -8,20 +8,23 @@
             <div class="group flex flex-col border border-transparent hover:border-blood-red transition-all duration-300 relative bg-surface-container-lowest">
                 <!-- Image Container -->
                 <div class="relative aspect-[3/4] overflow-hidden bg-surface-container w-full">
-                    @if ($product->imageUrl())
-                        <img alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="{{ $product->imageUrl() }}"/>
-                    @else
-                        <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-headline-lg text-blood-red">
-                            LYDAM
-                        </div>
-                    @endif
+                    <!-- Link around Image -->
+                    <a href="{{ route('products.show', $product) }}" class="block w-full h-full absolute inset-0 z-10">
+                        @if ($product->imageUrl())
+                            <img alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="{{ $product->imageUrl() }}"/>
+                        @else
+                            <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-headline-lg text-blood-red">
+                                LYDAM
+                            </div>
+                        @endif
+                    </a>
 
                     @if($product->stock <= 5)
-                        <div class="absolute top-2 left-2 z-30 bg-raw-white text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black">
+                        <div class="absolute top-2 left-2 z-20 bg-raw-white text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black pointer-events-none">
                             STOCK BAJO
                         </div>
                     @else
-                        <div class="absolute top-2 left-2 z-30 bg-blood-red text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black">
+                        <div class="absolute top-2 left-2 z-20 bg-blood-red text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black pointer-events-none">
                             NUEVO DROP
                         </div>
                     @endif
