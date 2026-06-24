@@ -1,19 +1,26 @@
 @extends('layouts.guest')
 
 @section('content')
-<section class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 lg:px-8">
-    <div class="rounded-3xl border border-amber-200 bg-white p-8 shadow-xl">
-        <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-amber-100 text-lg font-black text-amber-700">...</div>
-        <h1 class="mt-6 text-4xl font-black text-stitch-navy">{{ __('messages.payment_pending_title') }}</h1>
-        <p class="mt-3 text-slate-600">{{ __('messages.payment_pending_copy') }}</p>
+<main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24 flex flex-col items-center">
+    <div class="bg-surface-container-low border border-surface-container-highest p-8 max-w-2xl w-full text-center">
+        
+        <div class="mx-auto flex h-20 w-20 items-center justify-center border border-blood-red bg-void-black text-3xl font-headline-lg text-blood-red mb-6">
+            ...
+        </div>
+        
+        <h1 class="font-headline-lg text-headline-lg text-raw-white uppercase tracking-tight">{{ __('messages.payment_pending_title') }}</h1>
+        <p class="mt-4 text-ash-grey font-label-caps text-sm">{{ __('messages.payment_pending_copy') }}</p>
+
         @if ($paymentId || $externalReference)
-            <p class="mt-5 rounded-2xl bg-sky-50 px-4 py-3 text-sm text-slate-600">
-                {{ __('messages.payment_reference') }}: {{ $paymentId ?? $externalReference }}
-            </p>
+            <div class="mt-8 bg-void-black border border-surface-container-highest p-6 text-left">
+                <span class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest block">{{ __('messages.payment_reference') }}</span>
+                <span class="font-label-caps text-lg text-raw-white block mt-1">{{ $paymentId ?? $externalReference }}</span>
+            </div>
         @endif
-        <a href="{{ route('products.index') }}" class="mt-8 inline-flex rounded-full bg-stitch-blue px-6 py-3 text-sm font-black uppercase tracking-wide text-white hover:bg-stitch-navy">
+
+        <a href="{{ route('products.index') }}" class="mt-12 inline-block bg-blood-red text-raw-white font-headline-lg-mobile text-headline-lg-mobile py-4 px-12 border border-raw-white hover:bg-void-black hover:text-blood-red hover:border-blood-red transition-colors duration-300">
             {{ __('messages.back_to_catalog') }}
         </a>
     </div>
-</section>
+</main>
 @endsection

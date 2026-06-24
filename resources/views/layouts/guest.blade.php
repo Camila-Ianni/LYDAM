@@ -42,7 +42,11 @@
             </div>
         @endif
 
-        @yield('content')
+        @isset($slot)
+            {{ $slot }}
+        @else
+            @yield('content')
+        @endisset
     </main>
 
     <!-- Footer -->
