@@ -1,15 +1,8 @@
 @csrf
 
-<div class="grid gap-6 lg:grid-cols-2">
-    <div>
-        <label for="name_es" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.product_name_es') }}</label>
-        <input id="name_es" name="name[es]" type="text" value="{{ old('name.es', $product->name['es'] ?? '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
-    </div>
-
-    <div>
-        <label for="name_en" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.product_name_en') }}</label>
-        <input id="name_en" name="name[en]" type="text" value="{{ old('name.en', $product->name['en'] ?? '') }}" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
-    </div>
+<div class="mt-6">
+    <label for="name_es" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Nombre del Producto</label>
+    <input id="name_es" name="name[es]" type="text" value="{{ old('name.es', $product->name['es'] ?? '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
 </div>
 
 <div class="mt-6">
@@ -17,16 +10,9 @@
     <input id="slug" name="slug" type="text" value="{{ old('slug', $product->slug) }}" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
 </div>
 
-<div class="mt-6 grid gap-6 lg:grid-cols-2">
-    <div>
-        <label for="description_es" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.description_es') }}</label>
-        <textarea id="description_es" name="description[es]" rows="5" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">{{ old('description.es', $product->description['es'] ?? '') }}</textarea>
-    </div>
-
-    <div>
-        <label for="description_en" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.description_en') }}</label>
-        <textarea id="description_en" name="description[en]" rows="5" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">{{ old('description.en', $product->description['en'] ?? '') }}</textarea>
-    </div>
+<div class="mt-6">
+    <label for="description_es" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Descripción</label>
+    <textarea id="description_es" name="description[es]" rows="5" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">{{ old('description.es', $product->description['es'] ?? '') }}</textarea>
 </div>
 
 <div class="mt-6 grid gap-6 md:grid-cols-4">

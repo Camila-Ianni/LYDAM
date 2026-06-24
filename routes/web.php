@@ -5,17 +5,12 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/lang/{locale}', [LocaleController::class, 'switch'])
-    ->whereIn('locale', ['es', 'en'])
-    ->name('locale.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

@@ -144,7 +144,6 @@ class ProductController extends Controller
 
         return $request->validate([
             'name.es' => ['required', 'string', 'max:255'],
-            'name.en' => ['nullable', 'string', 'max:255'],
             'slug' => [
                 'required',
                 'string',
@@ -152,7 +151,6 @@ class ProductController extends Controller
                 Rule::unique('products', 'slug')->ignore($productId),
             ],
             'description.es' => ['nullable', 'string'],
-            'description.en' => ['nullable', 'string'],
             'sku' => [
                 'required',
                 'string',

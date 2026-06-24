@@ -8,7 +8,7 @@ return [
     'locale' => env('APP_LOCALE', 'es'),
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'es'),
     'faker_locale' => env('APP_FAKER_LOCALE', 'es_AR'),
-    'available_locales' => ['es', 'en'],
+    'available_locales' => ['es'],
     'cipher' => 'AES-256-CBC',
     'key' => env('APP_KEY'),
     'previous_keys' => [
