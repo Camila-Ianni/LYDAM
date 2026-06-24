@@ -22,10 +22,10 @@
             @endforeach
         </div>
         
-        <!-- Center: Main Image with Hover-Zoom Magnifier -->
-        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative aspect-[3/4] w-full md:max-h-[600px] border border-surface-container-highest overflow-hidden cursor-zoom-in group select-none">
+        <!-- Center: Main Image -->
+        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative aspect-[2/3] w-full md:max-h-[650px] border border-surface-container-highest overflow-hidden group select-none">
             @if ($product->imageUrl())
-                <img id="main-image" alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover object-center z-10 transition-transform duration-300 ease-out origin-center" src="{{ $product->imageUrl() }}"/>
+                <img id="main-image" alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover object-center z-10" src="{{ $product->imageUrl() }}"/>
             @else
                 <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-display-xl text-blood-red">
                     LYDAM
@@ -100,7 +100,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
         const mainImage = document.getElementById('main-image');
-        const mainImageContainer = document.getElementById('main-image-container');
 
         thumbnailBtns.forEach(btn => {
             const updateImage = () => {
@@ -119,22 +118,6 @@
             btn.addEventListener('click', updateImage);
             btn.addEventListener('mouseenter', updateImage);
         });
-
-        if (mainImageContainer && mainImage) {
-            mainImageContainer.addEventListener('mousemove', function (e) {
-                const rect = mainImageContainer.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-                mainImage.style.transformOrigin = `${x}% ${y}%`;
-                mainImage.style.transform = 'scale(1.5)';
-            });
-
-            mainImageContainer.addEventListener('mouseleave', function () {
-                mainImage.style.transform = 'scale(1)';
-                mainImage.style.transformOrigin = 'center';
-            });
-        }
     });
 </script>
 @endsection
