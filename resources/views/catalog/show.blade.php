@@ -23,9 +23,9 @@
         </div>
         
         <!-- Center: Main Image with Hover-Zoom Magnifier -->
-        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative flex items-center justify-center min-h-[60vh] md:min-h-[80vh] border border-surface-container-highest overflow-hidden cursor-zoom-in group select-none">
+        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative aspect-[3/4] w-full md:max-h-[600px] border border-surface-container-highest overflow-hidden cursor-zoom-in group select-none">
             @if ($product->imageUrl())
-                <img id="main-image" alt="{{ $product->translatedName() }}" class="max-h-[80vh] max-w-full object-contain z-10 transition-transform duration-200 ease-out origin-center" src="{{ $product->imageUrl() }}"/>
+                <img id="main-image" alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover object-center z-10 transition-transform duration-300 ease-out origin-center" src="{{ $product->imageUrl() }}"/>
             @else
                 <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-display-xl text-blood-red">
                     LYDAM
@@ -127,7 +127,7 @@
                 const y = ((e.clientY - rect.top) / rect.height) * 100;
 
                 mainImage.style.transformOrigin = `${x}% ${y}%`;
-                mainImage.style.transform = 'scale(2.5)';
+                mainImage.style.transform = 'scale(1.5)';
             });
 
             mainImageContainer.addEventListener('mouseleave', function () {
