@@ -18,6 +18,7 @@ class Product extends Model
         'sku',
         'cost',
         'price',
+        'sizes',
         'stock',
         'image_path',
         'is_active',
@@ -30,6 +31,7 @@ class Product extends Model
             'description' => 'array',
             'cost' => 'decimal:2',
             'price' => 'decimal:2',
+            'sizes' => 'array',
             'stock' => 'integer',
             'is_active' => 'boolean',
         ];

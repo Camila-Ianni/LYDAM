@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->decimal('cost', 12, 2)->default(0.00);
             $table->decimal('price', 12, 2);
+            $table->json('sizes')->nullable();
             $table->unsignedInteger('stock')->default(0);
             $table->string('image_path')->nullable();
             $table->boolean('is_active')->default(true)->index();

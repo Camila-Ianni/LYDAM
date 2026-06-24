@@ -55,16 +55,18 @@
             </div>
             
             <!-- Size Selector -->
-            <div class="flex flex-col gap-4">
-                <span class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest">VENTA POR CURVA (TALLES INCLUIDOS)</span>
-                <div class="flex flex-wrap gap-3">
-                    <div class="w-12 h-12 flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">38</div>
-                    <div class="w-12 h-12 flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">40</div>
-                    <div class="w-12 h-12 flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">42</div>
-                    <div class="w-12 h-12 flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">44</div>
-                    <div class="w-12 h-12 flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">46</div>
+            @if(!empty($product->sizes))
+                <div class="flex flex-col gap-4">
+                    <span class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest">VENTA POR CURVA (TALLES INCLUIDOS)</span>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach($product->sizes as $size)
+                            <div class="px-4 h-12 min-w-[3rem] flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">
+                                {{ $size }}
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
             
             <!-- Action Form -->
             <form method="POST" action="{{ route('cart.add', $product) }}">

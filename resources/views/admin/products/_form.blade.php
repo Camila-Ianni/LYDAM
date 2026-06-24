@@ -38,6 +38,12 @@
 </div>
 
 <div class="mt-6">
+    <label for="sizes" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Talles incluidos en la curva</label>
+    <input id="sizes" name="sizes" type="text" value="{{ old('sizes', is_array($product->sizes) ? implode(', ', $product->sizes) : '') }}" placeholder="Ej: 38, 40, 42, 44, 46 o S, M, L, XL" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+    <p class="mt-2 text-xs text-ash-grey font-label-caps">Ingresá los talles separados por coma para que los clientes sepan qué talles incluye cada curva.</p>
+</div>
+
+<div class="mt-6">
     <label for="images" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Imágenes del Producto (Subir una o más)</label>
     <input id="images" name="images[]" type="file" accept="image/*" multiple class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full file:bg-blood-red file:border-none file:text-raw-white file:px-4 file:py-2 file:font-bold file:cursor-pointer uppercase file:font-label-caps">
     <p class="mt-2 text-xs text-ash-grey font-label-caps">Formatos soportados: JPG, PNG, WEBP, GIF. Podés seleccionar múltiples archivos. Máximo recomendado: 8MB por imagen.</p>

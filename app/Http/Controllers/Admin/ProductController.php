@@ -44,6 +44,9 @@ class ProductController extends Controller
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']['es']);
         $data['is_active'] = $request->boolean('is_active');
 
+        $sizesString = $request->input('sizes');
+        $data['sizes'] = $sizesString ? array_filter(array_map('trim', explode(',', $sizesString))) : [];
+
         Product::create($data);
 
         return redirect()
@@ -97,6 +100,9 @@ class ProductController extends Controller
         $data['image_path'] = !empty($currentPaths) ? json_encode($currentPaths) : null;
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']['es']);
         $data['is_active'] = $request->boolean('is_active');
+
+        $sizesString = $request->input('sizes');
+        $data['sizes'] = $sizesString ? array_filter(array_map('trim', explode(',', $sizesString))) : [];
 
         $product->update($data);
 
@@ -159,6 +165,7 @@ class ProductController extends Controller
             ],
             'price' => ['required', 'numeric', 'min:0'],
             'cost' => ['required', 'numeric', 'min:0'],
+            'sizes' => ['nullable', 'string'],
             'stock' => ['required', 'integer', 'min:0'],
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'max:8192'],
