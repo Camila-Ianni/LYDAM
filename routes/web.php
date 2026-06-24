@@ -73,6 +73,7 @@ Route::middleware(['auth', 'admin'])
         Route::resource('products', AdminProductController::class);
 
         Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+        Route::get('sales', [AdminOrderController::class, 'salesDashboard'])->name('sales.dashboard');
         Route::get('orders/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::patch('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.update-status');
     });

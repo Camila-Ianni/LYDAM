@@ -8,9 +8,22 @@
         
         <!-- Navigation Links (Desktop) -->
         <nav class="hidden md:flex space-x-8">
-            <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
-            <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">PANTALONES</a>
-            <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">REMERAS</a>
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.products.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.products.index') }}">PRODUCTOS</a>
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.orders.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.orders.index') }}">PEDIDOS</a>
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.sales.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.sales.dashboard') }}">VENTAS</a>
+                    <a class="font-label-caps text-label-caps text-ash-grey font-normal hover:text-blood-red transition-all duration-200" href="{{ route('home') }}">VER TIENDA</a>
+                @else
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
+                    <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">PANTALONES</a>
+                    <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">REMERAS</a>
+                @endif
+            @else
+                <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
+                <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">PANTALONES</a>
+                <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">REMERAS</a>
+            @endauth
         </nav>
         
         <!-- Trailing Icons / Auth -->

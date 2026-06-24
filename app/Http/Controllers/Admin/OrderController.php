@@ -47,6 +47,43 @@ class OrderController extends Controller
         return back()->with('status', __('Estado de la orden actualizado.'));
     }
 
+    public function salesDashboard(): View
+    {
+        $orders = Order::whereIn('status', [Order::STATUS_PAID, Order::STATUS_SHIPPED])
+            ->with('items.product')
+            ->get();
+        
+        $productSales = [];
+        $totalSalesSum = 0;
+        
+        foreach ($orders as $order) {
+            foreach ($order->items as $item) {
+                $productId = $item->product_id;
+                $productName = $item->product ? $item->product->translatedName('es') : ($item->name ?? 'Producto Eliminado');
+                $quantity = (int) $item->quantity;
+                $subtotal = (float) $item->price * $quantity;
+                
+                if (!isset($productSales[$productId])) {
+                    $productSales[$productId] = [
+                        'name' => $productName,
+                        'sku' => $item->sku,
+                        'quantity' => 0,
+                        'total' => 0,
+                    ];
+                }
+                
+                $productSales[$productId]['quantity'] += $quantity;
+                $productSales[$productId]['total'] += $subtotal;
+                $totalSalesSum += $subtotal;
+            }
+        }
+        
+        return view('admin.sales.dashboard', [
+            'productSales' => collect($productSales)->sortByDesc('total'),
+            'totalSalesSum' => $totalSalesSum,
+        ]);
+    }
+
     private function statuses(): array
     {
         return [
