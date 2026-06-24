@@ -23,7 +23,7 @@
         </div>
         
         <!-- Center: Main Image -->
-        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative aspect-[2/3] w-full md:max-h-[650px] border border-surface-container-highest overflow-hidden group select-none">
+        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative w-full max-w-[500px] aspect-[2/3] mx-auto border border-surface-container-highest overflow-hidden group select-none">
             @if ($product->imageUrl())
                 <img id="main-image" alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover object-center z-10" src="{{ $product->imageUrl() }}"/>
             @else
