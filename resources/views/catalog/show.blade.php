@@ -23,9 +23,9 @@
         </div>
         
         <!-- Center: Main Image -->
-        <div class="md:col-span-7 order-1 md:order-2 bg-void-black relative flex items-center justify-center min-h-[50vh] md:min-h-[70vh] border border-surface-container-highest overflow-hidden">
+        <div class="md:col-span-7 order-1 md:order-2 bg-void-black relative flex items-center justify-center min-h-[50vh] md:min-h-[70vh] border border-surface-container-highest overflow-hidden p-4">
             @if ($product->imageUrl())
-                <img alt="{{ $product->translatedName() }}" class="w-full h-full object-cover object-center absolute inset-0" src="{{ $product->imageUrl() }}"/>
+                <img alt="{{ $product->translatedName() }}" class="max-h-[70vh] max-w-full object-contain z-10" src="{{ $product->imageUrl() }}"/>
             @else
                 <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-display-xl text-blood-red">
                     LYDAM
