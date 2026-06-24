@@ -73,6 +73,9 @@ class Product extends Model
 
         return array_map(function ($path) {
             if (Str::startsWith($path, ['http://', 'https://'])) {
+                if (Str::contains($path, 'lh3.googleusercontent.com') && ! Str::contains($path, '=')) {
+                    return $path . '=s0';
+                }
                 return $path;
             }
             return asset('storage/'.$path);
