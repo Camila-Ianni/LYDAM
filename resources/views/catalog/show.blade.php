@@ -15,26 +15,26 @@
         
         <!-- Left: Thumbnail Gallery -->
         <div class="md:col-span-1 order-2 md:order-1 flex md:flex-col gap-4 overflow-x-auto md:overflow-visible no-scrollbar pb-4 md:pb-0">
-            @if ($product->imageUrl())
-                <button class="flex-shrink-0 w-20 h-24 md:w-full md:h-32 border border-blood-red relative overflow-hidden group">
-                    <img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300" src="{{ $product->imageUrl() }}"/>
+            @foreach ($product->imageUrls() as $index => $url)
+                <button type="button" class="thumbnail-btn flex-shrink-0 w-20 h-24 md:w-full md:h-32 border {{ $loop->first ? 'border-blood-red' : 'border-surface-container-highest hover:border-raw-white' }} relative overflow-hidden group transition-colors duration-200" data-large-url="{{ $url }}" data-index="{{ $index }}">
+                    <img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300" src="{{ $url }}"/>
                 </button>
-            @endif
+            @endforeach
         </div>
         
-        <!-- Center: Main Image -->
-        <div class="md:col-span-7 order-1 md:order-2 bg-void-black relative flex items-center justify-center min-h-[50vh] md:min-h-[70vh] border border-surface-container-highest overflow-hidden p-4">
+        <!-- Center: Main Image with Hover-Zoom Magnifier -->
+        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative flex items-center justify-center min-h-[60vh] md:min-h-[80vh] border border-surface-container-highest overflow-hidden cursor-zoom-in group select-none">
             @if ($product->imageUrl())
-                <img alt="{{ $product->translatedName() }}" class="max-h-[70vh] max-w-full object-contain z-10" src="{{ $product->imageUrl() }}"/>
+                <img id="main-image" alt="{{ $product->translatedName() }}" class="max-h-[80vh] max-w-full object-contain z-10 transition-transform duration-200 ease-out origin-center" src="{{ $product->imageUrl() }}"/>
             @else
                 <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-display-xl text-blood-red">
                     LYDAM
                 </div>
             @endif
             <!-- Overlay for depth -->
-            <div class="absolute inset-0 bg-gradient-to-t from-void-black via-transparent to-transparent opacity-80 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-void-black via-transparent to-transparent opacity-80 pointer-events-none z-20"></div>
             <!-- Drop Badge -->
-            <div class="absolute top-4 left-4 bg-blood-red text-void-black font-label-caps text-label-caps px-4 py-2 uppercase tracking-widest font-bold border border-void-black">
+            <div class="absolute top-4 left-4 bg-blood-red text-void-black font-label-caps text-label-caps px-4 py-2 uppercase tracking-widest font-bold border border-void-black z-20">
                 NUEVO DROP
             </div>
         </div>
@@ -95,4 +95,46 @@
         </div>
     </div>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+        const mainImage = document.getElementById('main-image');
+        const mainImageContainer = document.getElementById('main-image-container');
+
+        thumbnailBtns.forEach(btn => {
+            const updateImage = () => {
+                const largeUrl = btn.getAttribute('data-large-url');
+                if (mainImage && largeUrl) {
+                    mainImage.src = largeUrl;
+                }
+                thumbnailBtns.forEach(b => {
+                    b.classList.remove('border-blood-red');
+                    b.classList.add('border-surface-container-highest', 'hover:border-raw-white');
+                });
+                btn.classList.add('border-blood-red');
+                btn.classList.remove('border-surface-container-highest', 'hover:border-raw-white');
+            };
+
+            btn.addEventListener('click', updateImage);
+            btn.addEventListener('mouseenter', updateImage);
+        });
+
+        if (mainImageContainer && mainImage) {
+            mainImageContainer.addEventListener('mousemove', function (e) {
+                const rect = mainImageContainer.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                mainImage.style.transformOrigin = `${x}% ${y}%`;
+                mainImage.style.transform = 'scale(2.5)';
+            });
+
+            mainImageContainer.addEventListener('mouseleave', function () {
+                mainImage.style.transform = 'scale(1)';
+                mainImage.style.transformOrigin = 'center';
+            });
+        }
+    });
+</script>
 @endsection

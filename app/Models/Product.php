@@ -60,17 +60,29 @@ class Product extends Model
         return $this->translatedAttribute('description', $locale);
     }
 
-    public function imageUrl(): ?string
+    public function imageUrls(): array
     {
         if (! $this->image_path) {
-            return null;
+            return [];
         }
 
-        if (Str::startsWith($this->image_path, ['http://', 'https://'])) {
-            return $this->image_path;
+        $paths = json_decode($this->image_path, true);
+        if (! is_array($paths)) {
+            $paths = [$this->image_path];
         }
 
-        return asset('storage/'.$this->image_path);
+        return array_map(function ($path) {
+            if (Str::startsWith($path, ['http://', 'https://'])) {
+                return $path;
+            }
+            return asset('storage/'.$path);
+        }, $paths);
+    }
+
+    public function imageUrl(): ?string
+    {
+        $urls = $this->imageUrls();
+        return $urls[0] ?? null;
     }
 
     private function translatedAttribute(string $attribute, ?string $locale = null): string

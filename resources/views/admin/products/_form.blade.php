@@ -46,21 +46,28 @@
     </div>
 </div>
 
-<div class="mt-6 grid gap-6 lg:grid-cols-[1fr_220px]">
-    <div>
-        <label for="image" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.product_image') }}</label>
-        <input id="image" name="image" type="file" accept="image/*" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full file:bg-blood-red file:border-none file:text-raw-white file:px-4 file:py-2 file:font-bold file:cursor-pointer uppercase file:font-label-caps">
-        <p class="mt-2 text-xs text-ash-grey font-label-caps">{{ __('messages.image_help') }}</p>
-    </div>
-
-    <div class="overflow-hidden border border-surface-container-highest bg-void-black">
-        @if ($product->imageUrl())
-            <img src="{{ $product->imageUrl() }}" alt="{{ $product->translatedName() }}" class="h-44 w-full object-cover">
-        @else
-            <div class="flex h-44 items-center justify-center text-4xl font-headline-lg text-blood-red">LYDAM</div>
-        @endif
-    </div>
+<div class="mt-6">
+    <label for="images" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Imágenes del Producto (Subir una o más)</label>
+    <input id="images" name="images[]" type="file" accept="image/*" multiple class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full file:bg-blood-red file:border-none file:text-raw-white file:px-4 file:py-2 file:font-bold file:cursor-pointer uppercase file:font-label-caps">
+    <p class="mt-2 text-xs text-ash-grey font-label-caps">Formatos soportados: JPG, PNG, WEBP, GIF. Podés seleccionar múltiples archivos. Máximo recomendado: 8MB por imagen.</p>
 </div>
+
+@if(!empty($product->imageUrls()))
+    <div class="mt-6">
+        <span class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-3">Imágenes Actuales (Marcar para eliminar)</span>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            @foreach($product->imageUrls() as $index => $url)
+                <div class="relative border border-surface-container-highest bg-void-black p-2 flex flex-col items-center">
+                    <img src="{{ $url }}" class="h-28 w-full object-contain mb-2 bg-black/40">
+                    <label class="inline-flex items-center gap-2 cursor-pointer mt-1 select-none">
+                        <input type="checkbox" name="delete_images[]" value="{{ $index }}" class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none">
+                        <span class="font-label-caps text-[10px] text-ash-grey hover:text-blood-red transition-colors uppercase">Eliminar</span>
+                    </label>
+                </div>
+            @endforeach
+        </div>
+    </div>
+@endif
 
 <label class="mt-6 flex items-center gap-3 border border-surface-container-highest bg-void-black p-4 rounded-none cursor-pointer group">
     <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $product->is_active ?? true)) class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none">

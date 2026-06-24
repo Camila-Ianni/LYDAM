@@ -23,7 +23,12 @@ class ProductSeeder extends Seeder
                 'sku' => 'LYD-BGY-SKL',
                 'price' => 425000.00,
                 'stock' => 35,
-                'image_path' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAYMkMUwGEZ6NXQsCB0zWOjnoXuZoXpSf_X2LTqO1k2m5y1duqcpSE67RgFkr-30D2e8X_0916Nl7dujbD9T43DmXmwQHKXlfRd_Vsxm8lUabDLb8Q29rUL__YPBxoIaLJe_Zbm8Qo3WeuoDhT7BPHSi4xVrbiaF8UWcOMXHYjnN5xDL7y8Lr0RcEptceqz-LuFerwdRpx7W7kUqK7daKi2zg2gxuRfVHJlbySatyfvQD99MAp5Yfye6po094lo_X5XYMHxtcZ7C6kD',
+                'image_path' => json_encode([
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAYMkMUwGEZ6NXQsCB0zWOjnoXuZoXpSf_X2LTqO1k2m5y1duqcpSE67RgFkr-30D2e8X_0916Nl7dujbD9T43DmXmwQHKXlfRd_Vsxm8lUabDLb8Q29rUL__YPBxoIaLJe_Zbm8Qo3WeuoDhT7BPHSi4xVrbiaF8UWcOMXHYjnN5xDL7y8Lr0RcEptceqz-LuFerwdRpx7W7kUqK7daKi2zg2gxuRfVHJlbySatyfvQD99MAp5Yfye6po094lo_X5XYMHxtcZ7C6kD',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBEsQ1LWYLuT5D6mQGsV8ORduRQTcFdLsrQFBGUTk7IZoKXYEKkdePLBH_yjHszhJ0MoGC_bQF3jCmxp2Ga769MTJIQLjIK9u7clByfGX-SYmEEkgOli9_kgiOr19PBjqUvKF8aAzVmPQ8atTp55aAzSgdZ9pssh_l4La7udBz5UAzbckjq3itx9mqia-kOw6CciFNdlCE-K8QAIXUu_6qoRNZIfQBOWlaxfe4xTFEOMlZd3DEaXe99TrUDNxLLorDXd43PTRkx_k0V',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAa92DQ9_pPEcC8K2IL8a0s84uiifXVq33FyFjwjA5tsRTkAPGAQ7acCyEqOHqT18oiB7GCixff_l_EKgRMC_KfcuEC1cmjVC4suAeVU_yhWl5BbzWHxu0aCAwMlj1Ttgb710p6amITuguPIRC02m7zev7Bx4MtUDrel8AFuZbtX0vt8KBPrWRu50FqFV4v9een-8e_dqHtR_i-KioJr7zZap0jwXNTG50f3kwo3eJB0RLKNL3LGXgsE72Bsrm3CprMzdCAvZXzOBD3',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBpd74_Fbl-nsIWnM2od-Tuu3RGZnvjINnkNMati83l5jNXk_f_xiROWkp2_FJ2lUHXBnlT2kw2O3AvCleeS2peeXf6UJtaNt0kaRN6QM9fZMq4ao3uMVTeli-hqUSivcLZIwnWsGLeDQhFeH8U8kU5yLuocIdm4pmeJbigNq1k44rS0QKhYxj35V2S31NI0TS1UNMaQgluw5BuJU-2cHEDRx88ZjaJFZcNnsSlxN4Bm5TR4ZmCPhTHTtXxgMi4K35BmVThqBv_unUw'
+                ]),
             ],
             [
                 'name' => [
@@ -38,7 +43,11 @@ class ProductSeeder extends Seeder
                 'sku' => 'LYD-BGY-INF',
                 'price' => 540000.00,
                 'stock' => 45,
-                'image_path' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBEsQ1LWYLuT5D6mQGsV8ORduRQTcFdLsrQFBGUTk7IZoKXYEKkdePLBH_yjHszhJ0MoGC_bQF3jCmxp2Ga769MTJIQLjIK9u7clByfGX-SYmEEkgOli9_kgiOr19PBjqUvKF8aAzVmPQ8atTp55aAzSgdZ9pssh_l4La7udBz5UAzbckjq3itx9mqia-kOw6CciFNdlCE-K8QAIXUu_6qoRNZIfQBOWlaxfe4xTFEOMlZd3DEaXe99TrUDNxLLorDXd43PTRkx_k0V',
+                'image_path' => json_encode([
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBEsQ1LWYLuT5D6mQGsV8ORduRQTcFdLsrQFBGUTk7IZoKXYEKkdePLBH_yjHszhJ0MoGC_bQF3jCmxp2Ga769MTJIQLjIK9u7clByfGX-SYmEEkgOli9_kgiOr19PBjqUvKF8aAzVmPQ8atTp55aAzSgdZ9pssh_l4La7udBz5UAzbckjq3itx9mqia-kOw6CciFNdlCE-K8QAIXUu_6qoRNZIfQBOWlaxfe4xTFEOMlZd3DEaXe99TrUDNxLLorDXd43PTRkx_k0V',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAa92DQ9_pPEcC8K2IL8a0s84uiifXVq33FyFjwjA5tsRTkAPGAQ7acCyEqOHqT18oiB7GCixff_l_EKgRMC_KfcuEC1cmjVC4suAeVU_yhWl5BbzWHxu0aCAwMlj1Ttgb710p6amITuguPIRC02m7zev7Bx4MtUDrel8AFuZbtX0vt8KBPrWRu50FqFV4v9een-8e_dqHtR_i-KioJr7zZap0jwXNTG50f3kwo3eJB0RLKNL3LGXgsE72Bsrm3CprMzdCAvZXzOBD3',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBpd74_Fbl-nsIWnM2od-Tuu3RGZnvjINnkNMati83l5jNXk_f_xiROWkp2_FJ2lUHXBnlT2kw2O3AvCleeS2peeXf6UJtaNt0kaRN6QM9fZMq4ao3uMVTeli-hqUSivcLZIwnWsGLeDQhFeH8U8kU5yLuocIdm4pmeJbigNq1k44rS0QKhYxj35V2S31NI0TS1UNMaQgluw5BuJU-2cHEDRx88ZjaJFZcNnsSlxN4Bm5TR4ZmCPhTHTtXxgMi4K35BmVThqBv_unUw'
+                ]),
             ],
             [
                 'name' => [
@@ -53,7 +62,10 @@ class ProductSeeder extends Seeder
                 'sku' => 'LYD-PTS-VOD',
                 'price' => 375000.00,
                 'stock' => 20,
-                'image_path' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBpd74_Fbl-nsIWnM2od-Tuu3RGZnvjINnkNMati83l5jNXk_f_xiROWkp2_FJ2lUHXBnlT2kw2O3AvCleeS2peeXf6UJtaNt0kaRN6QM9fZMq4ao3uMVTeli-hqUSivcLZIwnWsGLeDQhFeH8U8kU5yLuocIdm4pmeJbigNq1k44rS0QKhYxj35V2S31NI0TS1UNMaQgluw5BuJU-2cHEDRx88ZjaJFZcNnsSlxN4Bm5TR4ZmCPhTHTtXxgMi4K35BmVThqBv_unUw',
+                'image_path' => json_encode([
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBpd74_Fbl-nsIWnM2od-Tuu3RGZnvjINnkNMati83l5jNXk_f_xiROWkp2_FJ2lUHXBnlT2kw2O3AvCleeS2peeXf6UJtaNt0kaRN6QM9fZMq4ao3uMVTeli-hqUSivcLZIwnWsGLeDQhFeH8U8kU5yLuocIdm4pmeJbigNq1k44rS0QKhYxj35V2S31NI0TS1UNMaQgluw5BuJU-2cHEDRx88ZjaJFZcNnsSlxN4Bm5TR4ZmCPhTHTtXxgMi4K35BmVThqBv_unUw',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAa92DQ9_pPEcC8K2IL8a0s84uiifXVq33FyFjwjA5tsRTkAPGAQ7acCyEqOHqT18oiB7GCixff_l_EKgRMC_KfcuEC1cmjVC4suAeVU_yhWl5BbzWHxu0aCAwMlj1Ttgb710p6amITuguPIRC02m7zev7Bx4MtUDrel8AFuZbtX0vt8KBPrWRu50FqFV4v9een-8e_dqHtR_i-KioJr7zZap0jwXNTG50f3kwo3eJB0RLKNL3LGXgsE72Bsrm3CprMzdCAvZXzOBD3'
+                ]),
             ],
             [
                 'name' => [
@@ -68,14 +80,17 @@ class ProductSeeder extends Seeder
                 'sku' => 'LYD-DNM-BLD',
                 'price' => 550000.00,
                 'stock' => 12,
-                'image_path' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBcjtbyo0Xf_wiMUtTF99JJ5vmBzVr-0fHgPoUv592XjKan7dWs7HuomVd5P69ji_xe5XU7K0WSlgBT6Ruy5ajBzO-0XCEWtLCsDbTmDjlHeesqjwruTvUQ-GwdBWfPQqWZM6hWpKt3E2js_5m615d0FNKY7wHY3YS4C69js_1eJGjrwjS8ip66Y-WRomG1pIKWLrQ_rawgvxG9S-hp2Rt_ygZdJcYGkjWN1gkpD49iMn-rph_HzB4t9oClsmp_6D-3ytks7iRbem90',
+                'image_path' => json_encode([
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBcjtbyo0Xf_wiMUtTF99JJ5vmBzVr-0fHgPoUv592XjKan7dWs7HuomVd5P69ji_xe5XU7K0WSlgBT6Ruy5ajBzO-0XCEWtLCsDbTmDjlHeesqjwruTvUQ-GwdBWfPQqWZM6hWpKt3E2js_5m615d0FNKY7wHY3YS4C69js_1eJGjrwjS8ip66Y-WRomG1pIKWLrQ_rawgvxG9S-hp2Rt_ygZdJcYGkjWN1gkpD49iMn-rph_HzB4t9oClsmp_6D-3ytks7iRbem90',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAa92DQ9_pPEcC8K2IL8a0s84uiifXVq33FyFjwjA5tsRTkAPGAQ7acCyEqOHqT18oiB7GCixff_l_EKgRMC_KfcuEC1cmjVC4suAeVU_yhWl5BbzWHxu0aCAwMlj1Ttgb710p6amITuguPIRC02m7zev7Bx4MtUDrel8AFuZbtX0vt8KBPrWRu50FqFV4v9een-8e_dqHtR_i-KioJr7zZap0jwXNTG50f3kwo3eJB0RLKNL3LGXgsE72Bsrm3CprMzdCAvZXzOBD3'
+                ]),
             ],
             [
                 'name' => [
-                    'es' => 'REMERÓN BOXFIT',
-                    'en' => 'REMERÓN BOXFIT'
+                    'es' => 'REMERÓN VOID',
+                    'en' => 'REMERÓN VOID'
                 ],
-                'slug' => 'remeron-boxfit',
+                'slug' => 'remeron-void',
                 'description' => [
                     'es' => 'Remera boxy fit pesada de algodón con diseño brutalista impreso en el pecho.',
                     'en' => 'Heavy cotton boxy fit t-shirt with brutalist graphic printed on the chest.'
@@ -83,7 +98,10 @@ class ProductSeeder extends Seeder
                 'sku' => 'LYD-TEE-BXF',
                 'price' => 240000.00,
                 'stock' => 15,
-                'image_path' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDc3H3FSWA3yWW9JuDKuw-GfzN0uYTZIAKDPLDCvvzwBMUornG3_CDGCqY7ZBEyef3L6ZjALp1_LTKYU4FxTPbGqNqOKmygYguFztLAEsSMbZCW9BPusT1hd0copgjn5KWzZzB3IVmPZ0HMtO8X6lZuLH77h5EoJu2dV1xXDGdKyl6LMrvZuOr1G-Xx1S_sUDdj-a2saO8urclxjs1LN-SLzWM27fcVnv0NoVpOOTX7IMNz3kqYPc-dviLn18irKSgFda6SwY6OUkht',
+                'image_path' => json_encode([
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuDc3H3FSWA3yWW9JuDKuw-GfzN0uYTZIAKDPLDCvvzwBMUornG3_CDGCqY7ZBEyef3L6ZjALp1_LTKYU4FxTPbGqNqOKmygYguFztLAEsSMbZCW9BPusT1hd0copgjn5KWzZzB3IVmPZ0HMtO8X6lZuLH77h5EoJu2dV1xXDGdKyl6LMrvZuOr1G-Xx1S_sUDdj-a2saO8urclxjs1LN-SLzWM27fcVnv0NoVpOOTX7IMNz3kqYPc-dviLn18irKSgFda6SwY6OUkht',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAXYv5WPFWuSXPu4_eGIMKxFCII3E6Ot4B06cNNAtKueAkeauO6P4gh2j4Wz7r_pPI7uiP-8ZtzaRjUHvF-JR2mKzisnGTHVFL8i8GOL8QzRSmRl_Qk2apHCbgHayeqb0Ze6UtdEs40j9YltX2Nv_RWl6_G3NnJyxeLid2IiIZKBpY5CafrT_ekLEx1Sny1BrZNmUn0OVPpNOBwJ10EeFcnKwcSKKdVPxyCZRdX8y0kKImit1hezDCxV3iZv6OeB8ETJUJDv6n4LypH'
+                ]),
             ],
             [
                 'name' => [
@@ -98,7 +116,10 @@ class ProductSeeder extends Seeder
                 'sku' => 'LYD-TEE-SPW',
                 'price' => 140000.00,
                 'stock' => 30,
-                'image_path' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAjYIUsIMtQk2ql4ErWmcPTazG6Wx9zOitJC-lK4xU36aM1GmFDkvdhgDNt6x0yu5tgcRwDm7lWraBosc6BsJi--Qa4FYRj8d3GwRtbHg9G8BY-nGMXiAsJ6WDU8tQ4TQASevGGCMMYbd9wWjynnedFRYPXlVdLps0hi-lz18mnpbD792-6cbhazi4N7eB6rTWCKl4CCs6GximHxcIscfYyzv6ZXD5nNZ3X40e04u4smImaSPIYnlykj5rC3KKFnLTzU5UnLESYG7Fv',
+                'image_path' => json_encode([
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAjYIUsIMtQk2ql4ErWmcPTazG6Wx9zOitJC-lK4xU36aM1GmFDkvdhgDNt6x0yu5tgcRwDm7lWraBosc6BsJi--Qa4FYRj8d3GwRtbHg9G8BY-nGMXiAsJ6WDU8tQ4TQASevGGCMMYbd9wWjynnedFRYPXlVdLps0hi-lz18mnpbD792-6cbhazi4N7eB6rTWCKl4CCs6GximHxcIscfYyzv6ZXD5nNZ3X40e04u4smImaSPIYnlykj5rC3KKFnLTzU5UnLESYG7Fv',
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAXYv5WPFWuSXPu4_eGIMKxFCII3E6Ot4B06cNNAtKueAkeauO6P4gh2j4Wz7r_pPI7uiP-8ZtzaRjUHvF-JR2mKzisnGTHVFL8i8GOL8QzRSmRl_Qk2apHCbgHayeqb0Ze6UtdEs40j9YltX2Nv_RWl6_G3NnJyxeLid2IiIZKBpY5CafrT_ekLEx1Sny1BrZNmUn0OVPpNOBwJ10EeFcnKwcSKKdVPxyCZRdX8y0kKImit1hezDCxV3iZv6OeB8ETJUJDv6n4LypH'
+                ]),
             ],
         ];
 

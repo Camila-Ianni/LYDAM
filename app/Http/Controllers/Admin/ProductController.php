@@ -33,9 +33,13 @@ class ProductController extends Controller
     {
         $data = $this->validatedData($request);
 
-        if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('products', 'public');
+        $imagePaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imagePaths[] = $image->store('products', 'public');
+            }
         }
+        $data['image_path'] = !empty($imagePaths) ? json_encode($imagePaths) : null;
 
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']['es']);
         $data['is_active'] = $request->boolean('is_active');
@@ -63,14 +67,34 @@ class ProductController extends Controller
     {
         $data = $this->validatedData($request, $product);
 
-        if ($request->hasFile('image')) {
-            if ($product->image_path && ! Str::startsWith($product->image_path, ['http://', 'https://'])) {
-                Storage::disk('public')->delete($product->image_path);
-            }
-
-            $data['image_path'] = $request->file('image')->store('products', 'public');
+        $currentPaths = [];
+        if ($product->image_path) {
+            $decoded = json_decode($product->image_path, true);
+            $currentPaths = is_array($decoded) ? $decoded : [$product->image_path];
         }
 
+        if ($request->has('delete_images') && is_array($request->input('delete_images'))) {
+            $indicesToDelete = array_map('intval', $request->input('delete_images'));
+            rsort($indicesToDelete);
+            foreach ($indicesToDelete as $index) {
+                if (isset($currentPaths[$index])) {
+                    $pathToDelete = $currentPaths[$index];
+                    if ($pathToDelete && ! Str::startsWith($pathToDelete, ['http://', 'https://'])) {
+                        Storage::disk('public')->delete($pathToDelete);
+                    }
+                    unset($currentPaths[$index]);
+                }
+            }
+            $currentPaths = array_values($currentPaths);
+        }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $currentPaths[] = $image->store('products', 'public');
+            }
+        }
+
+        $data['image_path'] = !empty($currentPaths) ? json_encode($currentPaths) : null;
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']['es']);
         $data['is_active'] = $request->boolean('is_active');
 
@@ -91,8 +115,14 @@ class ProductController extends Controller
                 ->with('status', __('El producto tiene ventas asociadas, por eso fue desactivado.'));
         }
 
-        if ($product->image_path && ! Str::startsWith($product->image_path, ['http://', 'https://'])) {
-            Storage::disk('public')->delete($product->image_path);
+        if ($product->image_path) {
+            $decoded = json_decode($product->image_path, true);
+            $paths = is_array($decoded) ? $decoded : [$product->image_path];
+            foreach ($paths as $path) {
+                if ($path && ! Str::startsWith($path, ['http://', 'https://'])) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
         }
 
         $product->delete();
@@ -131,7 +161,8 @@ class ProductController extends Controller
             ],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'max:2048'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'max:8192'],
             'is_active' => ['nullable', 'boolean'],
         ]);
     }
