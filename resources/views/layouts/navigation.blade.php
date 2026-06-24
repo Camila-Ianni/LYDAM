@@ -3,8 +3,13 @@
 @endphp
 <header class="bg-void-black border-b border-surface-variant sticky top-0 z-50">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
-        <!-- Brand Logo -->
-        <a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-raw-white gothic-text" href="{{ route('home') }}">LYDAM</a>
+        <!-- Brand Logo and Hamburger for Mobile -->
+        <div class="flex items-center gap-4">
+            <button id="mobile-menu-toggle" class="md:hidden text-raw-white hover:text-blood-red focus:outline-none p-1 flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+            <a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-raw-white gothic-text" href="{{ route('home') }}">LYDAM</a>
+        </div>
         
         <!-- Navigation Links (Desktop) -->
         <nav class="hidden md:flex space-x-8">
@@ -15,11 +20,13 @@
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.sales.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.sales.dashboard') }}">VENTAS</a>
                     <a class="font-label-caps text-label-caps text-ash-grey font-normal hover:text-blood-red transition-all duration-200" href="{{ route('home') }}">VER TIENDA</a>
                 @else
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('home') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('home') }}">INICIO</a>
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
                     <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">PANTALONES</a>
                     <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">REMERAS</a>
                 @endif
             @else
+                <a class="font-label-caps text-label-caps {{ request()->routeIs('home') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('home') }}">INICIO</a>
                 <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
                 <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">PANTALONES</a>
                 <a class="font-label-caps text-label-caps text-raw-white font-normal hover:text-blood-red transition-all duration-200" href="{{ route('products.index') }}">REMERAS</a>
@@ -57,4 +64,38 @@
             </a>
         </div>
     </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-void-black border-t border-surface-variant px-margin-mobile py-4 flex flex-col gap-4 font-label-caps text-label-caps">
+        @auth
+            @if (auth()->user()->isAdmin())
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.products.index') }}">PRODUCTOS</a>
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.orders.index') }}">PEDIDOS</a>
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.sales.dashboard') }}">VENTAS</a>
+                <a class="text-ash-grey hover:text-blood-red py-2" href="{{ route('home') }}">VER TIENDA</a>
+            @else
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('home') }}">INICIO</a>
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('products.index') }}">CATÁLOGO</a>
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('products.index') }}">PANTALONES</a>
+                <a class="text-raw-white hover:text-blood-red py-2" href="{{ route('products.index') }}">REMERAS</a>
+            @endif
+        @else
+            <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('home') }}">INICIO</a>
+            <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('products.index') }}">CATÁLOGO</a>
+            <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('products.index') }}">PANTALONES</a>
+            <a class="text-raw-white hover:text-blood-red py-2" href="{{ route('products.index') }}">REMERAS</a>
+        @endauth
+    </div>
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('mobile-menu-toggle');
+        const menu = document.getElementById('mobile-menu');
+        if (toggle && menu) {
+            toggle.addEventListener('click', function () {
+                menu.classList.toggle('hidden');
+            });
+        }
+    });
+</script>
