@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BURZACO | VENTA MAYORISTA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Hanken+Grotesk:wght@400;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#aa8984",
+                      "on-tertiary-container": "#b1aeae",
+                      "on-tertiary": "#313030",
+                      "error": "#ffb4ab",
+                      "inverse-on-surface": "#313030",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-container": "#ff907f",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-primary": "#690000",
+                      "background": "#131313",
+                      "on-background": "#e5e2e1",
+                      "inverse-primary": "#b52619",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container": "#201f1f",
+                      "outline-variant": "#5a403c",
+                      "primary": "#ffb4a8",
+                      "surface": "#131313",
+                      "ash-grey": "#808080",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "secondary-fixed": "#e2e2e2",
+                      "primary-fixed-dim": "#ffb4a8",
+                      "surface-bright": "#3a3939",
+                      "on-surface": "#e5e2e1",
+                      "raw-white": "#f2f2f2",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "void-black": "#0a0a0a",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "tertiary-container": "#434242",
+                      "surface-container-highest": "#353534",
+                      "secondary-container": "#454747",
+                      "tertiary": "#c8c6c5",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "on-primary-fixed-variant": "#920703",
+                      "primary-container": "#8b0000",
+                      "on-secondary": "#2f3131",
+                      "surface-variant": "#353534",
+                      "on-secondary-fixed-variant": "#454747",
+                      "on-surface-variant": "#e3beb8",
+                      "tertiary-fixed": "#e5e2e1",
+                      "on-error": "#690005",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary-container": "#b4b5b5",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "surface-dim": "#131313",
+                      "secondary": "#c6c6c7",
+                      "blood-red": "#8b0000",
+                      "surface-tint": "#ffb4a8",
+                      "primary-fixed": "#ffdad4",
+                      "on-primary-fixed": "#410000"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "margin-desktop": "64px",
+                      "margin-mobile": "20px",
+                      "max-width": "1440px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Space Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Bebas Neue"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-xl": [
+                              "Bebas Neue"
+                      ],
+                      "headline-lg": [
+                              "Bebas Neue"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl": [
+                              "96px",
+                              {
+                                      "lineHeight": "90px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .group:hover .hover-reveal {
+            opacity: 1;
+        }
+        .group:hover .default-img {
+            opacity: 0;
+        }
+      </style>
+</head>
+<body class="bg-void-black text-on-surface min-h-screen flex flex-col font-body-md selection:bg-blood-red selection:text-raw-white">
+<!-- TopNavBar -->
+<nav class="bg-background dark:bg-background fixed top-0 w-full z-50 border-b border-surface-container-highest">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+<!-- Mobile Menu Button (Placeholder for actual functionality) -->
+<button class="md:hidden text-on-surface hover:text-blood-red transition-colors duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Brand Logo -->
+<a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-blood-red dark:text-blood-red tracking-tighter" href="#">LYDAM</a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex gap-8 items-center font-label-caps text-label-caps uppercase tracking-widest">
+<a class="text-blood-red border-b-2 border-blood-red pb-1 py-2 px-1 active:opacity-80" href="#">PANTALONES</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 active:opacity-80 py-2 px-1" href="#">REMERAS</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 active:opacity-80 py-2 px-1" href="#">SWEATERS</a>
+</div>
+<!-- Trailing Icons -->
+<div class="flex gap-4 items-center">
+<button class="text-on-surface hover:text-blood-red transition-colors duration-200 active:opacity-80">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="text-on-surface hover:text-blood-red transition-colors duration-200 active:opacity-80">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+<!-- Header -->
+<header class="mb-12 border-b border-surface-container-highest pb-8 flex flex-col gap-2">
+<div class="bg-blood-red text-void-black font-label-caps text-label-caps px-3 py-1 self-start inline-block uppercase tracking-wider mb-2">VENTA MAYORISTA - POR CURVA</div>
+<h1 class="font-display-xl text-display-xl text-raw-white uppercase">PANTALONES</h1>
+<p class="text-ash-grey mt-4 max-w-2xl font-body-md">Venta exclusiva por curva de talles. Precios mayoristas para revendedores.</p>
+</header>
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 border-r border-surface-container-highest pr-8 hidden md:block">
+<!-- Filter Section: Size -->
+<div class="mb-8">
+<h3 class="font-label-caps text-label-caps text-ash-grey uppercase mb-4 tracking-widest border-b border-outline-variant pb-2">CATEGORÍAS</h3>
+<div class="flex flex-col gap-2 font-label-caps text-label-caps text-on-surface">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Pantalones</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Remeras</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Sweaters</span>
+</label>
+</div>
+</div>
+<!-- Filter Section: Price -->
+<div class="mb-8">
+<h3 class="font-label-caps text-label-caps text-ash-grey uppercase mb-4 tracking-widest border-b border-outline-variant pb-2">PRECIO POR CURVA</h3>
+<div class="flex flex-col gap-2 font-label-caps text-label-caps text-on-surface">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Menos de $300</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">$300 - $600</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Más de $600</span>
+</label>
+</div>
+</div>
+<!-- Filter Section: Collection -->
+<div class="mb-8">
+<h3 class="font-label-caps text-label-caps text-ash-grey uppercase mb-4 tracking-widest border-b border-outline-variant pb-2">TIPO DE CURVA</h3>
+<div class="flex flex-col gap-2 font-label-caps text-label-caps text-on-surface">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Curva x5 (36-44)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Curva x6 (38-48)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none" type="checkbox"/>
+<span class="group-hover:text-raw-white transition-colors">Surtido Pack x10</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+<!-- Card 1 -->
+<div class="group flex flex-col border border-transparent hover:border-blood-red transition-all duration-300 relative bg-surface-container-lowest">
+<!-- Image Container -->
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container w-full"><img alt="Ultimate Hardcore Denim" class="default-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYMkMUwGEZ6NXQsCB0zWOjnoXuZoXpSf_X2LTqO1k2m5y1duqcpSE67RgFkr-30D2e8X_0916Nl7dujbD9T43DmXmwQHKXlfRd_Vsxm8lUabDLb8Q29rUL__YPBxoIaLJe_Zbm8Qo3WeuoDhT7BPHSi4xVrbiaF8UWcOMXHYjnN5xDL7y8Lr0RcEptceqz-LuFerwdRpx7W7kUqK7daKi2zg2gxuRfVHJlbySatyfvQD99MAp5Yfye6po094lo_X5XYMHxtcZ7C6kD"/><img alt="Ultimate Hardcore Denim Detail" class="hover-reveal absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 z-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYMkMUwGEZ6NXQsCB0zWOjnoXuZoXpSf_X2LTqO1k2m5y1duqcpSE67RgFkr-30D2e8X_0916Nl7dujbD9T43DmXmwQHKXlfRd_Vsxm8lUabDLb8Q29rUL__YPBxoIaLJe_Zbm8Qo3WeuoDhT7BPHSi4xVrbiaF8UWcOMXHYjnN5xDL7y8Lr0RcEptceqz-LuFerwdRpx7W7kUqK7daKi2zg2gxuRfVHJlbySatyfvQD99MAp5Yfye6po094lo_X5XYMHxtcZ7C6kD"/><div class="absolute top-2 left-2 z-30 bg-blood-red text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black">NUEVO DROP</div><div class="absolute bottom-0 left-0 w-full bg-void-black/90 backdrop-blur-sm border-t border-surface-container-highest p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 flex flex-col gap-2"><span class="font-label-caps text-label-caps text-ash-grey uppercase text-center block mb-1">VENTA POR CURVA</span><div class="flex justify-center gap-1"><button class="border border-outline-variant px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps hover:bg-raw-white hover:text-void-black transition-colors text-raw-white text-xs">AGREGAR CURVA (x5 U.)</button></div></div></div>
+<!-- Product Info -->
+<div class="p-4 flex flex-col flex-grow bg-surface-container-lowest border-t border-surface-container-highest">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white leading-tight uppercase mb-1 line-clamp-2">ULTIMATE HARDCORE DENIM</h2>
+<p class="font-label-caps text-label-caps text-ash-grey mb-2 uppercase">Curva 36 al 44</p>
+<div class="mt-auto pt-2 flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-blood-red text-lg">$425.00 <span class="text-xs text-ash-grey block sm:inline">/ CURVA</span></span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col border border-transparent hover:border-blood-red transition-all duration-300 relative bg-surface-container-lowest">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container w-full"><img alt="Infernal Stitch Baggy" class="default-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEsQ1LWYLuT5D6mQGsV8ORduRQTcFdLsrQFBGUTk7IZoKXYEKkdePLBH_yjHszhJ0MoGC_bQF3jCmxp2Ga769MTJIQLjIK9u7clByfGX-SYmEEkgOli9_kgiOr19PBjqUvKF8aAzVmPQ8atTp55aAzSgdZ9pssh_l4La7udBz5UAzbckjq3itx9mqia-kOw6CciFNdlCE-K8QAIXUu_6qoRNZIfQBOWlaxfe4xTFEOMlZd3DEaXe99TrUDNxLLorDXd43PTRkx_k0V"/><img alt="Infernal Stitch Baggy Detail" class="hover-reveal absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 z-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEsQ1LWYLuT5D6mQGsV8ORduRQTcFdLsrQFBGUTk7IZoKXYEKkdePLBH_yjHszhJ0MoGC_bQF3jCmxp2Ga769MTJIQLjIK9u7clByfGX-SYmEEkgOli9_kgiOr19PBjqUvKF8aAzVmPQ8atTp55aAzSgdZ9pssh_l4La7udBz5UAzbckjq3itx9mqia-kOw6CciFNdlCE-K8QAIXUu_6qoRNZIfQBOWlaxfe4xTFEOMlZd3DEaXe99TrUDNxLLorDXd43PTRkx_k0V"/><div class="absolute bottom-0 left-0 w-full bg-void-black/90 backdrop-blur-sm border-t border-surface-container-highest p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 flex flex-col gap-2"><span class="font-label-caps text-label-caps text-ash-grey uppercase text-center block mb-1">VENTA POR CURVA</span><div class="flex justify-center gap-1"><button class="border border-outline-variant px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps hover:bg-raw-white hover:text-void-black transition-colors text-raw-white text-xs">AGREGAR CURVA (x6 U.)</button></div></div></div>
+<div class="p-4 flex flex-col flex-grow bg-surface-container-lowest border-t border-surface-container-highest">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white leading-tight uppercase mb-1 line-clamp-2">INFERNAL STITCH BAGGY</h2>
+<p class="font-label-caps text-label-caps text-ash-grey mb-2 uppercase">Curva 38 al 48</p>
+<div class="mt-auto pt-2 flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-blood-red text-lg">$540.00 <span class="text-xs text-ash-grey block sm:inline">/ CURVA</span></span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col border border-transparent hover:border-blood-red transition-all duration-300 relative bg-surface-container-lowest">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container w-full"><img alt="Void Walker Pants" class="default-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpd74_Fbl-nsIWnM2od-Tuu3RGZnvjINnkNMati83l5jNXk_f_xiROWkp2_FJ2lUHXBnlT2kw2O3AvCleeS2peeXf6UJtaNt0kaRN6QM9fZMq4ao3uMVTeli-hqUSivcLZIwnWsGLeDQhFeH8U8kU5yLuocIdm4pmeJbigNq1k44rS0QKhYxj35V2S31NI0TS1UNMaQgluw5BuJU-2cHEDRx88ZjaJFZcNnsSlxN4Bm5TR4ZmCPhTHTtXxgMi4K35BmVThqBv_unUw"/><img alt="Void Walker Pants Detail" class="hover-reveal absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 z-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpd74_Fbl-nsIWnM2od-Tuu3RGZnvjINnkNMati83l5jNXk_f_xiROWkp2_FJ2lUHXBnlT2kw2O3AvCleeS2peeXf6UJtaNt0kaRN6QM9fZMq4ao3uMVTeli-hqUSivcLZIwnWsGLeDQhFeH8U8kU5yLuocIdm4pmeJbigNq1k44rS0QKhYxj35V2S31NI0TS1UNMaQgluw5BuJU-2cHEDRx88ZjaJFZcNnsSlxN4Bm5TR4ZmCPhTHTtXxgMi4K35BmVThqBv_unUw"/><div class="absolute bottom-0 left-0 w-full bg-void-black/90 backdrop-blur-sm border-t border-surface-container-highest p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 flex flex-col gap-2"><span class="font-label-caps text-label-caps text-ash-grey uppercase text-center block mb-1">VENTA POR CURVA</span><div class="flex justify-center gap-1"><button class="border border-outline-variant px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps hover:bg-raw-white hover:text-void-black transition-colors text-raw-white text-xs">AGREGAR CURVA (x5 U.)</button></div></div></div>
+<div class="p-4 flex flex-col flex-grow bg-surface-container-lowest border-t border-surface-container-highest">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white leading-tight uppercase mb-1 line-clamp-2">VOID WALKER PANTS</h2>
+<p class="font-label-caps text-label-caps text-ash-grey mb-2 uppercase">Curva 36 al 44</p>
+<div class="mt-auto pt-2 flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-blood-red text-lg">$375.00 <span class="text-xs text-ash-grey block sm:inline">/ CURVA</span></span>
+</div>
+</div>
+</div>
+<!-- Card 4 (Similar structure, repeated for grid fill) -->
+<div class="group flex flex-col border border-transparent hover:border-blood-red transition-all duration-300 relative bg-surface-container-lowest">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container w-full"><img alt="Bloodline Denim" class="default-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcjtbyo0Xf_wiMUtTF99JJ5vmBzVr-0fHgPoUv592XjKan7dWs7HuomVd5P69ji_xe5XU7K0WSlgBT6Ruy5ajBzO-0XCEWtLCsDbTmDjlHeesqjwruTvUQ-GwdBWfPQqWZM6hWpKt3E2js_5m615d0FNKY7wHY3YS4C69js_1eJGjrwjS8ip66Y-WRomG1pIKWLrQ_rawgvxG9S-hp2Rt_ygZdJcYGkjWN1gkpD49iMn-rph_HzB4t9oClsmp_6D-3ytks7iRbem90"/><img alt="Bloodline Denim Detail" class="hover-reveal absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 z-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcjtbyo0Xf_wiMUtTF99JJ5vmBzVr-0fHgPoUv592XjKan7dWs7HuomVd5P69ji_xe5XU7K0WSlgBT6Ruy5ajBzO-0XCEWtLCsDbTmDjlHeesqjwruTvUQ-GwdBWfPQqWZM6hWpKt3E2js_5m615d0FNKY7wHY3YS4C69js_1eJGjrwjS8ip66Y-WRomG1pIKWLrQ_rawgvxG9S-hp2Rt_ygZdJcYGkjWN1gkpD49iMn-rph_HzB4t9oClsmp_6D-3ytks7iRbem90"/><div class="absolute top-2 left-2 z-30 bg-raw-white text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black">STOCK BAJO</div><div class="absolute bottom-0 left-0 w-full bg-void-black/90 backdrop-blur-sm border-t border-surface-container-highest p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 flex flex-col gap-2"><span class="font-label-caps text-label-caps text-ash-grey uppercase text-center block mb-1">VENTA POR CURVA</span><div class="flex justify-center gap-1"><button class="border border-outline-variant px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps hover:bg-raw-white hover:text-void-black transition-colors text-raw-white text-xs">AGREGAR CURVA (x5 U.)</button></div></div></div>
+<div class="p-4 flex flex-col flex-grow bg-surface-container-lowest border-t border-surface-container-highest">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white leading-tight uppercase mb-1 line-clamp-2">BLOODLINE DENIM</h2>
+<p class="font-label-caps text-label-caps text-ash-grey mb-2 uppercase">Curva 36 al 44</p>
+<div class="mt-auto pt-2 flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-blood-red text-lg">$550.00 <span class="text-xs text-ash-grey block sm:inline">/ CURVA</span></span>
+</div>
+</div>
+</div>
+<!-- Add more cards as needed to fill out 12 items, using placeholders to maintain brevity in code -->
+<!-- ... 8 more cards omitted for concise output, structure identical to above ... -->
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-16 flex justify-center border-t border-surface-container-highest pt-8">
+<button class="bg-void-black text-raw-white border border-raw-white font-headline-lg-mobile text-headline-lg-mobile uppercase px-8 py-4 hover:bg-blood-red hover:border-blood-red transition-colors duration-300 flex items-center gap-2">CARGAR MÁS <span class="material-symbols-outlined text-sm">arrow_downward</span></button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-void-black dark:bg-void-black w-full mt-auto border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 gap-gutter max-w-max-width mx-auto">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tighter">LYDAM</span>
+<div class="flex gap-6 font-label-caps text-label-caps uppercase text-ash-grey">
+<a class="hover:text-raw-white transition-all duration-300" href="#">ENVÍOS</a>
+<a class="hover:text-raw-white transition-all duration-300" href="#">DEVOLUCIONES</a>
+<a class="hover:text-raw-white transition-all duration-300" href="#">CONTACTO</a>
+<a class="hover:text-raw-white transition-all duration-300" href="#">INSTAGRAM</a>
+</div>
+<span class="font-label-caps text-label-caps text-ash-grey">© 2024 LYDAM - NO CONFÍES EN NADIE</span>
+</div>
+</footer>
+</body></html>
