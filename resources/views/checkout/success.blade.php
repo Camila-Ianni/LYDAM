@@ -3,12 +3,22 @@
 @section('content')
 @php
     $isTransfer = isset($order) && $order?->payment_method === \App\Models\Order::PAYMENT_TRANSFER;
-    $bank = [
-        'holder' => config('services.bank.holder', 'LYDAM Store'),
-        'bank' => config('services.bank.name', 'Banco de la Nación Argentina'),
-        'cbu' => config('services.bank.cbu', '0000003100098765432101'),
-        'alias' => config('services.bank.alias', 'LYDAM.TRIBAL.UNDER'),
-    ];
+    
+    if ($isTransfer) {
+        $threshold = (float) \App\Models\Setting::get('bank_threshold', 300000);
+        $orderTotal = isset($order) ? (float) $order->total : 0.0;
+        
+        $selectedAlias = $orderTotal < $threshold
+            ? \App\Models\Setting::get('bank_alias_1', 'LYDAM.TRIBAL.UNO')
+            : \App\Models\Setting::get('bank_alias_2', 'LYDAM.TRIBAL.DOS');
+
+        $bank = [
+            'holder' => \App\Models\Setting::get('bank_holder', 'LYDAM Store'),
+            'bank' => \App\Models\Setting::get('bank_name', 'Banco de la Nación Argentina'),
+            'cbu' => \App\Models\Setting::get('bank_cbu', '0000003100098765432101'),
+            'alias' => $selectedAlias,
+        ];
+    }
 @endphp
 
 <main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24 flex flex-col items-center">

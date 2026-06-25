@@ -18,6 +18,7 @@
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.products.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.products.index') }}">PRODUCTOS</a>
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.orders.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.orders.index') }}">PEDIDOS</a>
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.sales.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.sales.dashboard') }}">VENTAS</a>
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('admin.settings.*') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('admin.settings.edit') }}">AJUSTES</a>
                     <a class="font-label-caps text-label-caps text-ash-grey font-normal hover:text-blood-red transition-all duration-200" href="{{ route('home') }}">VER TIENDA</a>
                 @else
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('home') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('home') }}">INICIO</a>
@@ -68,6 +69,7 @@
                 <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.products.index') }}">PRODUCTOS</a>
                 <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.orders.index') }}">PEDIDOS</a>
                 <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.sales.dashboard') }}">VENTAS</a>
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('admin.settings.edit') }}">AJUSTES</a>
                 <a class="text-ash-grey hover:text-blood-red py-2" href="{{ route('home') }}">VER TIENDA</a>
             @else
                 <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('home') }}">INICIO</a>
