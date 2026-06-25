@@ -25,8 +25,8 @@
                             @if (!empty($item['image_url']))
                                 <img class="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" src="{{ $item['image_url'] }}" alt="{{ $item['name'] }}">
                             @else
-                                <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-headline-lg text-blood-red">
-                                    LYDAM
+                                <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low p-6">
+                                    <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="max-w-[100px] w-full h-auto object-contain opacity-40">
                                 </div>
                             @endif
                         </div>

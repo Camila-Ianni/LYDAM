@@ -27,8 +27,8 @@
             @if ($product->imageUrl())
                 <img id="main-image" alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover object-center z-10" src="{{ $product->imageUrl() }}"/>
             @else
-                <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-display-xl text-blood-red">
-                    LYDAM
+                <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low p-12">
+                    <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="max-w-xs w-full h-auto object-contain opacity-40">
                 </div>
             @endif
             <!-- Overlay for depth -->

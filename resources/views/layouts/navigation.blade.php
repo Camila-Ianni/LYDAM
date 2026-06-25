@@ -8,7 +8,9 @@
             <button id="mobile-menu-toggle" class="md:hidden text-raw-white hover:text-blood-red focus:outline-none p-1 flex items-center justify-center">
                 <span class="material-symbols-outlined text-2xl">menu</span>
             </button>
-            <a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-raw-white gothic-text" href="{{ route('home') }}">LYDAM</a>
+            <a class="flex items-center" href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-10 md:h-12 w-auto object-contain">
+            </a>
         </div>
         
         <!-- Navigation Links (Desktop) -->

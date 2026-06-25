@@ -13,8 +13,8 @@
                         @if ($product->imageUrl())
                             <img alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="{{ $product->imageUrl() }}"/>
                         @else
-                            <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low font-headline-lg text-blood-red">
-                                LYDAM
+                            <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low p-8">
+                                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="max-w-[120px] w-full h-auto object-contain opacity-40">
                             </div>
                         @endif
                     </a>
