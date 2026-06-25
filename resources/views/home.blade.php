@@ -24,8 +24,8 @@
 <!-- Marquee -->
 <div class="bg-surface-container border-b border-surface-variant py-4 marquee-container">
     <div class="marquee-content font-label-caps text-label-caps text-blood-red">
-        <span class="mx-4">VENTA MAYORISTA EXCLUSIVA</span> • <span class="mx-4">COMPRA MÍNIMA 1 CURVA</span> • <span class="mx-4">ENVÍOS A TODO EL PAÍS</span> • <span class="mx-4">VENTA POR CURVA CERRADA</span> •
-        <span class="mx-4">VENTA MAYORISTA EXCLUSIVA</span> • <span class="mx-4">COMPRA MÍNIMA 1 CURVA</span> • <span class="mx-4">ENVÍOS A TODO EL PAÍS</span> • <span class="mx-4">VENTA POR CURVA CERRADA</span> •
+        <span class="mx-4">VENTA MAYORISTA EXCLUSIVA</span> • <span class="mx-4">COMPRA MÍNIMA 1 CURVA</span> • <span class="mx-4">VENTA POR CURVA CERRADA</span> •
+        <span class="mx-4">VENTA MAYORISTA EXCLUSIVA</span> • <span class="mx-4">COMPRA MÍNIMA 1 CURVA</span> • <span class="mx-4">VENTA POR CURVA CERRADA</span> •
     </div>
 </div>
 
