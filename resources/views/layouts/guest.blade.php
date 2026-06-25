@@ -53,7 +53,7 @@
     <footer class="bg-void-black dark:bg-surface-container-lowest border-t border-surface-variant">
         <div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 max-w-max-width mx-auto">
             <div class="mb-8 md:mb-0 text-center md:text-left">
-                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-16 w-auto object-contain mb-4 mx-auto md:mx-0">
+                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-10 w-auto object-contain mb-4 mx-auto md:mx-0">
                 <p class="font-label-caps text-label-caps text-ash-grey mb-4">SUSCRIBITE AL NEWSLETTER MAYORISTA</p>
                 <form class="flex border border-surface-variant w-full max-w-sm">
                     <input class="bg-void-black text-raw-white font-label-caps border-none focus:ring-0 w-full px-4 py-2 placeholder:text-surface-variant" placeholder="TU EMAIL..." type="email"/>
