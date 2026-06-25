@@ -92,7 +92,7 @@ return [
     'stock' => 'Stock',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
-    'transfer_instructions_copy' => 'Realizá la transferencia por el total de la orden y enviá el comprobante indicando tu número de pedido.',
+    'transfer_instructions_copy' => 'Realizá la transferencia por el total de la orden y enviá el comprobante a :email indicando tu número de pedido.',
     'transfer_instructions_title' => 'Datos para transferencia',
     'unit_price' => 'Precio unitario',
     'update' => 'Actualizar',

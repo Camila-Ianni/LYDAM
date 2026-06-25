@@ -17,6 +17,7 @@
             'bank' => \App\Models\Setting::get('bank_name', 'Banco de la Nación Argentina'),
             'cbu' => \App\Models\Setting::get('bank_cbu', '0000003100098765432101'),
             'alias' => $selectedAlias,
+            'receipt_email' => \App\Models\Setting::get('bank_receipt_email', 'hello@lydam.com'),
         ];
     }
 @endphp
@@ -46,7 +47,7 @@
         @if ($isTransfer)
             <div class="mt-8 border border-blood-red bg-void-black p-6 text-left">
                 <h2 class="font-label-caps text-label-caps text-blood-red uppercase tracking-widest border-b border-surface-container-highest pb-2 mb-4">{{ __('messages.transfer_instructions_title') }}</h2>
-                <p class="text-ash-grey font-body-sm mb-6">{{ __('messages.transfer_instructions_copy') }}</p>
+                <p class="text-ash-grey font-body-sm mb-6">{{ __('messages.transfer_instructions_copy', ['email' => $bank['receipt_email']]) }}</p>
                 
                 <dl class="grid gap-4 sm:grid-cols-2 font-label-caps text-xs">
                     <div>

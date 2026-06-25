@@ -19,6 +19,7 @@ class SettingController extends Controller
             'bank_alias_1' => Setting::get('bank_alias_1', 'LYDAM.TRIBAL.UNO'),
             'bank_alias_2' => Setting::get('bank_alias_2', 'LYDAM.TRIBAL.DOS'),
             'bank_threshold' => Setting::get('bank_threshold', '300000'),
+            'bank_receipt_email' => Setting::get('bank_receipt_email', 'hello@lydam.com'),
         ]);
     }
 
@@ -31,6 +32,7 @@ class SettingController extends Controller
             'bank_alias_1' => ['required', 'string', 'max:255'],
             'bank_alias_2' => ['required', 'string', 'max:255'],
             'bank_threshold' => ['required', 'numeric', 'min:0'],
+            'bank_receipt_email' => ['required', 'email', 'max:255'],
         ]);
 
         foreach ($data as $key => $value) {

@@ -34,6 +34,12 @@
         </div>
     </div>
 
+    <div class="mt-6">
+        <label for="bank_receipt_email" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Email para Recibir Comprobantes de Transferencia</label>
+        <input id="bank_receipt_email" name="bank_receipt_email" type="email" value="{{ old('bank_receipt_email', $bank_receipt_email) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+        <p class="mt-2 text-xs text-ash-grey font-label-caps">La dirección de correo electrónico que se mostrará a los clientes al finalizar el checkout para que envíen el comprobante de pago.</p>
+    </div>
+
     <div class="mt-6 border-t border-surface-container-highest pt-6">
         <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white mb-4 uppercase tracking-wide">Cuentas / Alias Destino</h2>
         

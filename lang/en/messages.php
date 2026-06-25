@@ -92,7 +92,7 @@ return [
     'stock' => 'Stock',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
-    'transfer_instructions_copy' => 'Transfer the order total and send the receipt with your order number.',
+    'transfer_instructions_copy' => 'Transfer the order total and send the receipt to :email with your order number.',
     'transfer_instructions_title' => 'Bank transfer details',
     'unit_price' => 'Unit price',
     'update' => 'Update',

@@ -19,6 +19,7 @@ class SettingSeeder extends Seeder
             'bank_alias_1' => 'LYDAM.TRIBAL.UNO',
             'bank_alias_2' => 'LYDAM.TRIBAL.DOS',
             'bank_threshold' => '300000',
+            'bank_receipt_email' => 'hello@lydam.com',
         ];
 
         foreach ($settings as $key => $value) {
