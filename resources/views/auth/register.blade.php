@@ -3,7 +3,7 @@
         <div class="w-full max-w-md bg-surface-container-low border border-surface-container-highest p-8 flex flex-col gap-6">
             
             <div class="text-center border-b border-surface-container-highest pb-4 mb-2">
-                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-16 w-auto object-contain mx-auto mb-2">
+                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-24 w-auto object-contain mx-auto mb-2">
                 <h1 class="font-headline-lg text-headline-lg text-raw-white uppercase mt-2">REGISTRARSE</h1>
             </div>
 

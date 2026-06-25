@@ -9,7 +9,7 @@
                 <span class="material-symbols-outlined text-2xl">menu</span>
             </button>
             <a class="flex items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-10 md:h-12 w-auto object-contain">
+                <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="h-16 md:h-20 w-auto object-contain">
             </a>
         </div>
         
