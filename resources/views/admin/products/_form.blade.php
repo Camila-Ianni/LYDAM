@@ -79,3 +79,132 @@
         {{ __('messages.cancel') }}
     </a>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const imagesInput = document.getElementById('images');
+    if (!imagesInput) return;
+
+    // Create AI button container dynamically
+    const aiContainer = document.createElement('div');
+    aiContainer.className = 'mt-3 flex items-center gap-3';
+    aiContainer.innerHTML = `
+        <button type="button" id="ai-fill-btn" class="bg-surface-container border border-surface-container-highest text-raw-white font-label-caps text-[10px] py-2 px-4 hover:border-blood-red hover:text-blood-red transition-all duration-200 uppercase tracking-wider hidden">
+            Autocompletar campos con IA usando esta imagen
+        </button>
+        <span id="ai-fill-status" class="font-label-caps text-[10px] text-ash-grey uppercase"></span>
+    `;
+    imagesInput.parentNode.appendChild(aiContainer);
+
+    const aiFillBtn = document.getElementById('ai-fill-btn');
+    const aiFillStatus = document.getElementById('ai-fill-status');
+
+    imagesInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files.length > 0) {
+            aiFillBtn.classList.remove('hidden');
+            aiFillStatus.innerText = 'Nueva imagen seleccionada. Haz clic en el botón para analizar.';
+        } else {
+            aiFillBtn.classList.add('hidden');
+            aiFillStatus.innerText = '';
+        }
+    });
+
+    aiFillBtn.addEventListener('click', async function() {
+        const apiKey = "{{ config('services.gemini.key') }}";
+        if (!apiKey) {
+            alert('La clave de API de Gemini no está configurada en el servidor. Por favor, añádela en tu archivo .env.');
+            return;
+        }
+
+        const file = imagesInput.files[0];
+        if (!file) return;
+
+        aiFillBtn.disabled = true;
+        aiFillStatus.innerText = 'Analizando con IA...';
+
+        try {
+            const base64Data = await getBase64(file);
+            
+            const payload = {
+                contents: [
+                    {
+                        parts: [
+                            {
+                                text: "Analiza la imagen de este producto de ropa. Genera un objeto JSON estructurado que contenga:\n- 'name': Un nombre de producto corto e impactante en español (en mayúsculas) al estilo brutalista / gothic streetwear (ej: 'BAGGY JEAN TRIBAL CROSS', 'REMERÓN VOID WHITE', 'SWEATER OVERSIZED RIP').\n- 'description': Una descripción detallada en español que venda el producto, mencionando la estética brutalista, urbana y de alta calidad (1 o 2 párrafos).\n- 'price': Precio sugerido en pesos argentinos (ARS), razonable y similar a otros productos (entre 120.000 y 550.000 ARS).\n- 'cost': Costo estimado (aproximadamente la mitad o el 40% del precio de venta).\n- 'sku': Un SKU único en mayúsculas (ej: 'LYD-TEE-VOD').\n- 'sizes': Una lista de talles sugeridos separados por coma (ej: 'S, M, L, XL' si es remera/sweater, o '38, 40, 42, 44, 46' si es pantalón/jean).\n- 'stock': Un stock por defecto (número entero entre 10 y 50).\n- 'slug': Un slug amigable para URL generado a partir del nombre en minúsculas y separado por guiones (ej: 'baggy-jean-tribal-cross')."
+                            },
+                            {
+                                inlineData: {
+                                    mimeType: file.type,
+                                    data: base64Data.split(',')[1]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                generationConfig: {
+                    responseMimeType: "application/json"
+                }
+            };
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error?.message || 'Error en la petición de Gemini.');
+            }
+
+            const result = await response.json();
+            let responseText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (!responseText) {
+                throw new Error('La IA no devolvió contenido.');
+            }
+
+            responseText = responseText.replace(/```json/gi, '').replace(/```/gi, '').trim();
+            const productData = JSON.parse(responseText);
+
+            // Populate fields if they exist
+            const nameEl = document.getElementById('name_es');
+            const slugEl = document.getElementById('slug');
+            const descEl = document.getElementById('description_es');
+            const skuEl = document.getElementById('sku');
+            const priceEl = document.getElementById('price');
+            const costEl = document.getElementById('cost');
+            const stockEl = document.getElementById('stock');
+            const sizesEl = document.getElementById('sizes');
+
+            if (nameEl && productData.name) nameEl.value = productData.name;
+            if (slugEl && productData.slug) slugEl.value = productData.slug;
+            if (descEl && productData.description) descEl.value = productData.description;
+            if (skuEl && productData.sku) skuEl.value = productData.sku;
+            if (priceEl && productData.price) priceEl.value = productData.price;
+            if (costEl && productData.cost) costEl.value = productData.cost;
+            if (stockEl && productData.stock) stockEl.value = productData.stock;
+            if (sizesEl && productData.sizes) sizesEl.value = productData.sizes;
+
+            aiFillStatus.innerText = '¡Autocompletado con éxito!';
+            aiFillBtn.classList.add('hidden');
+        } catch (error) {
+            console.error(error);
+            aiFillStatus.innerText = `Error: ${error.message}`;
+            alert(`Error al analizar la imagen con IA: ${error.message}`);
+        } finally {
+            aiFillBtn.disabled = false;
+        }
+    });
+
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+});
+</script>
