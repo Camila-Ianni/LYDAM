@@ -29,6 +29,32 @@ class ProductController extends Controller
         ]);
     }
 
+    public function getProductImageBase64(Product $product): \Illuminate\Http\JsonResponse
+    {
+        $imageUrl = $product->imageUrl();
+        if (!$imageUrl) {
+            return response()->json(['error' => 'No image found'], 404);
+        }
+
+        try {
+            $imageContent = file_get_contents($imageUrl);
+            if ($imageContent === false) {
+                return response()->json(['error' => 'Failed to read image'], 500);
+            }
+            
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+            $mimeType = $finfo->buffer($imageContent);
+            $base64 = base64_encode($imageContent);
+            
+            return response()->json([
+                'mime_type' => $mimeType,
+                'base64' => $base64
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function create(): View
     {
         return view('admin.products.create', [
