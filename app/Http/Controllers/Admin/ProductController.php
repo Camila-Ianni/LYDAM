@@ -22,6 +22,13 @@ class ProductController extends Controller
         ]);
     }
 
+    public function aiUpload(): View
+    {
+        return view('admin.products.ai-upload', [
+            'product' => new Product(),
+        ]);
+    }
+
     public function create(): View
     {
         return view('admin.products.create', [

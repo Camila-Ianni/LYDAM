@@ -65,6 +65,7 @@ Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function (): void {
+        Route::get('products/ai-upload', [AdminProductController::class, 'aiUpload'])->name('products.ai-upload');
         Route::resource('products', AdminProductController::class);
 
         Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');

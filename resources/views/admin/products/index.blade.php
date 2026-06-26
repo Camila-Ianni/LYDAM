@@ -6,9 +6,14 @@
         <span class="font-label-caps text-label-caps text-blood-red uppercase tracking-widest">{{ __('messages.admin_panel') }}</span>
         <h1 class="font-headline-lg text-headline-lg text-raw-white uppercase mt-2">{{ __('messages.products') }}</h1>
     </div>
-    <a href="{{ route('admin.products.create') }}" class="bg-blood-red text-raw-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-200 uppercase tracking-widest text-center">
-        {{ __('messages.new_product') }}
-    </a>
+    <div class="flex flex-wrap gap-3">
+        <a href="{{ route('admin.products.ai-upload') }}" class="bg-surface-container border border-surface-container-highest text-raw-white font-label-caps text-xs py-3 px-6 hover:border-blood-red hover:text-blood-red transition-all duration-200 uppercase tracking-widest text-center">
+            Subir con IA
+        </a>
+        <a href="{{ route('admin.products.create') }}" class="bg-blood-red text-raw-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-200 uppercase tracking-widest text-center">
+            {{ __('messages.new_product') }}
+        </a>
+    </div>
 </div>
 
 <div class="bg-surface-container-low border border-surface-container-highest p-8">
