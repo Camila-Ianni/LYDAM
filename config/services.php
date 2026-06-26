@@ -19,4 +19,8 @@ return [
         'cbu' => env('BANK_CBU', '0000003100098765432101'),
         'alias' => env('BANK_ALIAS', 'STITCH.OHANA.SHOP'),
     ],
+
+    'gemini' => [
+        'key' => env('GEMINI_API_KEY'),
+    ],
 ];

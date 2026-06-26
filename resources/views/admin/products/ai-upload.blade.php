@@ -14,25 +14,6 @@
     </div>
 </div>
 
-<!-- API KEY CONFIGURATION -->
-<div class="bg-surface-container-low border border-surface-container-highest p-6 mb-8">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="max-w-xl">
-            <h3 class="font-headline-sm text-raw-white uppercase tracking-wider">Clave de API de Gemini</h3>
-            <p class="text-ash-grey text-xs mt-1 font-label-caps">Para usar esta función necesitas una clave gratuita de Google AI Studio. Tus datos se guardan de forma segura localmente en tu navegador.</p>
-            <a href="https://aistudio.google.com/" target="_blank" class="text-blood-red hover:underline text-xs font-bold font-label-caps mt-2 inline-block">
-                Consigue tu API Key 100% gratis en Google AI Studio →
-            </a>
-        </div>
-        <div class="flex gap-2 w-full md:w-auto md:max-w-md shrink-0">
-            <input type="password" id="gemini-api-key" placeholder="Pega tu API Key de Gemini aquí" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-mono text-sm focus:border-blood-red focus:ring-0 rounded-none w-full md:w-80">
-            <button type="button" id="save-api-key-btn" class="bg-blood-red text-raw-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-200 uppercase tracking-widest whitespace-nowrap">
-                Guardar Key
-            </button>
-        </div>
-    </div>
-</div>
-
 <div class="grid gap-8 lg:grid-cols-12">
     <!-- LEFT: IMAGE UPLOAD AND PREVIEW -->
     <div class="lg:col-span-4 flex flex-col gap-6">
@@ -87,8 +68,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const apiKeyInput = document.getElementById('gemini-api-key');
-    const saveKeyBtn = document.getElementById('save-api-key-btn');
     const imageInput = document.getElementById('ai-image-input');
     const dropZone = document.getElementById('drop-zone');
     const imagePreview = document.getElementById('image-preview');
@@ -106,25 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const hiddenImageSubmit = document.getElementById('hidden-image-submit');
     
     let selectedFile = null;
-
-    // Load saved API Key
-    const savedKey = localStorage.getItem('gemini_api_key');
-    if (savedKey) {
-        apiKeyInput.value = savedKey;
-        apiKeyInput.type = 'password';
-    }
-
-    // Save API Key
-    saveKeyBtn.addEventListener('click', function() {
-        const key = apiKeyInput.value.trim();
-        if (key) {
-            localStorage.setItem('gemini_api_key', key);
-            alert('¡Clave de API guardada correctamente!');
-        } else {
-            localStorage.removeItem('gemini_api_key');
-            alert('Clave de API eliminada.');
-        }
-    });
 
     // Handle Image Input Selection
     imageInput.addEventListener('change', handleFileSelect);
@@ -176,10 +136,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Analyze with IA
     analyzeBtn.addEventListener('click', async function() {
-        const apiKey = apiKeyInput.value.trim();
+        const apiKey = "{{ config('services.gemini.key') }}";
         if (!apiKey) {
-            alert('Por favor, ingresá una clave de API de Gemini válida.');
-            apiKeyInput.focus();
+            alert('La clave de API de Gemini no está configurada en el servidor. Por favor, añádela en tu archivo .env.');
             return;
         }
 
