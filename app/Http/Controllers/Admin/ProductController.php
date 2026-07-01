@@ -146,12 +146,19 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        if ($product->orderItems()->exists()) {
-            $product->update(['is_active' => false]);
+        // 1. Get associated order items and unique order IDs
+        $orderItems = $product->orderItems;
+        $orderIds = $orderItems->pluck('order_id')->unique();
 
-            return redirect()
-                ->route('admin.products.index')
-                ->with('status', __('El producto tiene ventas asociadas, por eso fue desactivado.'));
+        // 2. Delete linked order items
+        $product->orderItems()->delete();
+
+        // 3. Delete any orders that are left with zero items
+        foreach ($orderIds as $orderId) {
+            $order = \App\Models\Order::find($orderId);
+            if ($order && $order->items()->count() === 0) {
+                $order->delete();
+            }
         }
 
         if ($product->image_path) {

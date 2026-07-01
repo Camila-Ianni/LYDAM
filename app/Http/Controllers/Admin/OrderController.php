@@ -97,6 +97,15 @@ class OrderController extends Controller
         ]);
     }
 
+    public function destroy(Order $order): RedirectResponse
+    {
+        $order->delete();
+
+        return redirect()
+            ->route('admin.orders.index')
+            ->with('status', __('Pedido eliminado correctamente.'));
+    }
+
     private function statuses(): array
     {
         return [

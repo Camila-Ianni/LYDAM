@@ -44,10 +44,17 @@
                         </td>
                         <td class="px-6 py-4 text-right text-raw-white font-bold">${{ number_format((float) $order->total, 0, ',', '.') }} ARS</td>
                         <td class="px-6 py-4 text-center text-ash-grey text-xs">{{ $order->created_at?->format('d/m/Y H:i') }}</td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4 text-right whitespace-nowrap">
                             <a href="{{ route('admin.orders.show', $order) }}" class="bg-surface-container border border-surface-container-highest px-3 py-2 text-xs font-label-caps text-raw-white hover:border-blood-red hover:text-blood-red transition-colors inline-block">
                                 {{ __('messages.view') }}
                             </a>
+                            <form action="{{ route('admin.orders.destroy', $order) }}" method="POST" class="inline-block ms-2" onsubmit="return confirm('¿Estás seguro de que querés eliminar este pedido de forma permanente?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-blood-red/10 border border-blood-red/30 px-3 py-2 text-xs font-label-caps text-blood-red hover:bg-blood-red hover:text-raw-white transition-colors">
+                                    ELIMINAR
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
