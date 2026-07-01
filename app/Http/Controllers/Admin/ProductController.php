@@ -182,6 +182,18 @@ class ProductController extends Controller
     {
         $productId = $product?->id;
 
+        if ($request->has('price')) {
+            $request->merge([
+                'price' => $this->parseLocalizedNumber($request->input('price')),
+            ]);
+        }
+
+        if ($request->has('cost')) {
+            $request->merge([
+                'cost' => $this->parseLocalizedNumber($request->input('cost')),
+            ]);
+        }
+
         if (! $request->filled('slug') && $request->filled('name.es')) {
             $request->merge([
                 'slug' => Str::slug($request->input('name.es')),
@@ -211,5 +223,47 @@ class ProductController extends Controller
             'images.*' => ['image', 'max:8192'],
             'is_active' => ['nullable', 'boolean'],
         ]);
+    }
+
+    private function parseLocalizedNumber($value)
+    {
+        if (is_null($value) || $value === '') {
+            return null;
+        }
+
+        if (is_numeric($value)) {
+            return (float) $value;
+        }
+
+        // Remove spaces
+        $value = str_replace(' ', '', $value);
+
+        // If contains both dot and comma (e.g. 120.000,00)
+        if (strpos($value, '.') !== false && strpos($value, ',') !== false) {
+            if (strrpos($value, ',') > strrpos($value, '.')) {
+                $value = str_replace('.', '', $value);
+                $value = str_replace(',', '.', $value);
+            } else {
+                $value = str_replace(',', '', $value);
+            }
+        } else {
+            // Contains only comma
+            if (strpos($value, ',') !== false) {
+                $parts = explode(',', $value);
+                if (strlen(end($parts)) === 3) {
+                    $value = str_replace(',', '', $value);
+                } else {
+                    $value = str_replace(',', '.', $value);
+                }
+            } else if (strpos($value, '.') !== false) {
+                // Contains only dot (e.g. 120.000)
+                $parts = explode('.', $value);
+                if (strlen(end($parts)) === 3) {
+                    $value = str_replace('.', '', $value);
+                }
+            }
+        }
+
+        return is_numeric($value) ? (float) $value : null;
     }
 }
