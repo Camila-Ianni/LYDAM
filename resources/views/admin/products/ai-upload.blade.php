@@ -216,8 +216,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('slug').value = productData.slug || '';
             document.getElementById('description_es').value = productData.description || '';
             document.getElementById('sku').value = productData.sku || '';
-            document.getElementById('price').value = productData.price || '';
-            document.getElementById('cost').value = productData.cost || '';
+            document.getElementById('price').value = productData.price ? Number(productData.price).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
+            document.getElementById('cost').value = productData.cost ? Number(productData.cost).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
             document.getElementById('stock').value = productData.stock || '15';
             document.getElementById('sizes').value = productData.sizes || '';
 

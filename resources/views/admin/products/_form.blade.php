@@ -23,12 +23,12 @@
 
     <div>
         <label for="price" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.price') }}</label>
-        <input id="price" name="price" type="number" step="0.01" min="0" value="{{ old('price', $product->price) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+        <input id="price" name="price" type="text" value="{{ old('price', $product->price ? number_format((float) $product->price, 2, ',', '.') : '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
     </div>
 
     <div>
         <label for="cost" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.cost') }}</label>
-        <input id="cost" name="cost" type="number" step="0.01" min="0" value="{{ old('cost', $product->cost) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+        <input id="cost" name="cost" type="text" value="{{ old('cost', $product->cost ? number_format((float) $product->cost, 2, ',', '.') : '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
     </div>
 
     <div>
@@ -182,8 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (slugEl && productData.slug) slugEl.value = productData.slug;
             if (descEl && productData.description) descEl.value = productData.description;
             if (skuEl && productData.sku) skuEl.value = productData.sku;
-            if (priceEl && productData.price) priceEl.value = productData.price;
-            if (costEl && productData.cost) costEl.value = productData.cost;
+            if (priceEl && productData.price) priceEl.value = Number(productData.price).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            if (costEl && productData.cost) costEl.value = Number(productData.cost).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             if (stockEl && productData.stock) stockEl.value = productData.stock;
             if (sizesEl && productData.sizes) sizesEl.value = productData.sizes;
 
