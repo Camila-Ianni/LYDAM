@@ -1,0 +1,150 @@
+import os
+import zipfile
+import subprocess
+import shutil
+
+def run_npm_build():
+    print("Compilando recursos CSS/JS para producción con Vite (npm run build)...")
+    try:
+        subprocess.run(["npm", "run", "build"], check=True)
+        print("✓ Recursos compilados con éxito.")
+    except subprocess.CalledProcessError as e:
+        print("❌ Error al compilar recursos:", e)
+        return False
+    return True
+
+def create_zip():
+    zip_filename = "deploy.zip"
+    print(f"Creando archivo de despliegue {zip_filename}...")
+    
+    exclude_dirs = {
+        ".git",
+        ".github",
+        "node_modules",
+        "FOTOS",
+        "storage/framework/cache/data",
+        "storage/framework/sessions",
+        "storage/framework/views",
+        "storage/logs",
+    }
+    
+    exclude_files = {
+        ".env",
+        "deploy.zip",
+        "prepare_deploy.py",
+        "unzip.php",
+        ".DS_Store",
+    }
+
+    count = 0
+    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for root, dirs, files in os.walk("."):
+            # Excluir directorios completos
+            relative_root = os.path.relpath(root, ".")
+            if relative_root != ".":
+                normalized_root = relative_root.replace("\\", "/")
+                # Verificar si alguna parte de la ruta está en directorios excluidos
+                skip = False
+                for ex_dir in exclude_dirs:
+                    if normalized_root == ex_dir or normalized_root.startswith(ex_dir + "/"):
+                        skip = True
+                        break
+                if skip:
+                    continue
+            
+            # Filtrar subdirectorios en os.walk
+            dirs[:] = [d for d in dirs if os.path.join(relative_root, d).replace("\\", "/") not in exclude_dirs]
+            
+            for file in files:
+                file_path = os.path.join(root, file)
+                rel_path = os.path.relpath(file_path, ".")
+                normalized_rel_path = rel_path.replace("\\", "/")
+                
+                # Excluir archivos específicos
+                if normalized_rel_path in exclude_files or file == ".DS_Store":
+                    continue
+                
+                zipf.write(file_path, rel_path)
+                count += 1
+                
+    print(f"✓ Archivo {zip_filename} creado. Se agregaron {count} archivos.")
+
+def generate_unzip_script():
+    script_content = """<?php
+// unzip.php - Ayudante de despliegue de LYDAM para DonWeb
+header('Content-Type: text/plain; charset=utf-8');
+
+$zipFile = 'deploy.zip';
+
+if (!file_exists($zipFile)) {
+    die("Error: No se encontró el archivo $zipFile en la raíz.\\n");
+}
+
+echo "Iniciando descompresión de $zipFile...\\n";
+
+if (class_exists('ZipArchive')) {
+    $zip = new ZipArchive;
+    if ($zip->open($zipFile) === TRUE) {
+        $zip->extractTo(__DIR__);
+        $zip->close();
+        echo "¡Descompresión completada con éxito!\\n\\n";
+        
+        // Crear carpetas de cache de Laravel si no existen
+        $dirs = [
+            'storage/app/public',
+            'storage/framework/cache/data',
+            'storage/framework/sessions',
+            'storage/framework/views',
+            'storage/logs',
+            'bootstrap/cache'
+        ];
+        
+        foreach ($dirs as $dir) {
+            if (!file_exists(__DIR__ . '/' . $dir)) {
+                mkdir(__DIR__ . '/' . $dir, 0775, true);
+                echo "Directorio creado: $dir\\n";
+            }
+        }
+        
+        // Crear base de datos sqlite vacía si no existe
+        $dbFile = __DIR__ . '/database/database.sqlite';
+        if (!file_exists($dbFile)) {
+            if (!file_exists(dirname($dbFile))) {
+                mkdir(dirname($dbFile), 0775, true);
+            }
+            touch($dbFile);
+            chmod($dbFile, 0775);
+            echo "Base de datos SQLite creada en: database/database.sqlite\\n";
+        }
+        
+        // Configurar permisos
+        echo "Configurando permisos de escritura...\\n";
+        @chmod(__DIR__ . '/storage', 0775);
+        @chmod(__DIR__ . '/bootstrap/cache', 0775);
+        
+        echo "\\n======================================================\\n";
+        echo "¡DESPLIEGUE FINALIZADO EXITOSAMENTE!\\n";
+        echo "======================================================\\n";
+        echo "ATENCIÓN: Por motivos de seguridad extrema, elimina de\\n";
+        echo "inmediato este archivo (unzip.php) y el zip (deploy.zip)\\n";
+        echo "de tu servidor.\\n";
+    } else {
+        echo "Error al abrir el archivo $zipFile.\\n";
+    }
+} else {
+    echo "Error: La clase ZipArchive no está disponible en este servidor de PHP. Solicita al soporte de DonWeb que la active o extrae el archivo deploy.zip usando el Administrador de Archivos de Ferozo/cPanel.\\n";
+}
+"""
+    with open("unzip.php", "w", encoding="utf-8") as f:
+        f.write(script_content)
+    print("✓ Script auxiliar unzip.php generado.")
+
+if __name__ == "__main__":
+    if run_npm_build():
+        create_zip()
+        generate_unzip_script()
+        print("\nPróximos pasos:")
+        print("1. Sube por FTP/File Manager los archivos 'deploy.zip' y 'unzip.php' a la raíz de tu hosting en DonWeb.")
+        print("2. Abre tu navegador y visita: http://tudominio.com/unzip.php (reemplazando con tu dominio real).")
+        print("3. Crea tu archivo '.env' en el hosting con la clave de producción, desactiva el APP_DEBUG y pon la APP_URL.")
+        print("4. Borra de inmediato 'unzip.php' y 'deploy.zip' del servidor.")
