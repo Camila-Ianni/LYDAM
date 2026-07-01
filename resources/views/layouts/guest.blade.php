@@ -15,7 +15,7 @@
 <body class="bg-void-black text-on-surface font-body-md antialiased selection:bg-blood-red selection:text-raw-white min-h-screen flex flex-col">
     <!-- Top Bar -->
     <div class="bg-blood-red text-raw-white text-center py-2 font-label-caps text-label-caps border-b border-surface-variant">
-        ENVÍOS A TODO EL PAÍS • VENTA MAYORISTA EXCLUSIVA • VENTA POR CURVA
+        VENTA MAYORISTA EXCLUSIVA • VENTA POR CURVA
     </div>
 
     @include('layouts.navigation')
