@@ -67,7 +67,14 @@ Route::middleware(['auth', 'admin'])
     ->group(function (): void {
         Route::get('products/ai-upload', [AdminProductController::class, 'aiUpload'])->name('products.ai-upload');
         Route::get('products/{product}/image-base64', [AdminProductController::class, 'getProductImageBase64'])->name('products.image-base64');
-        Route::resource('products', AdminProductController::class);
+        Route::get('products', [AdminProductController::class, 'index'])->name('products.index');
+        Route::get('products/create', [AdminProductController::class, 'create'])->name('products.create');
+        Route::post('products', [AdminProductController::class, 'store'])->name('products.store');
+        Route::get('products/{product}', [AdminProductController::class, 'show'])->name('products.show');
+        Route::get('products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+        Route::put('products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+        Route::patch('products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+        Route::delete('products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
         Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('sales', [AdminOrderController::class, 'salesDashboard'])->name('sales.dashboard');
