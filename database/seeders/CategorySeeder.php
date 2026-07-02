@@ -92,6 +92,9 @@ class CategorySeeder extends Seeder
                     $product->category_id = $categories['baggys-por-curva']->id;
                 }
             }
+
+            // Restore correct sizes for wholesale curve packs
+            $product->sizes = ['talles 36 al 44 (pack de 5 prendas)'];
             $product->save();
         }
     }
