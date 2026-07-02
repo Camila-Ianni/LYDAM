@@ -5,9 +5,20 @@
     <input id="name_es" name="name[es]" type="text" value="{{ old('name.es', $product->name['es'] ?? '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
 </div>
 
-<div class="mt-6">
-    <label for="slug" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.slug') }}</label>
-    <input id="slug" name="slug" type="text" value="{{ old('slug', $product->slug) }}" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+    <div>
+        <label for="slug" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.slug') }}</label>
+        <input id="slug" name="slug" type="text" value="{{ old('slug', $product->slug) }}" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+    </div>
+    <div>
+        <label for="category_id" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Categoría del Producto</label>
+        <select id="category_id" name="category_id" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full appearance-none">
+            <option value="">-- Sin Categoría --</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" @selected(old('category_id', $product->category_id) == $category->id)>{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
 
 <div class="mt-6">

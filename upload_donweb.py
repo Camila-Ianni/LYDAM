@@ -3,39 +3,33 @@ import sys
 from ftplib import FTP, FTP_TLS
 import getpass
 
-def upload_to_donweb():
-    zip_file = "deploy.zip"
-    php_file = "unzip.php"
-    
-    if not os.path.exists(zip_file) or not os.path.exists(php_file):
-        print("❌ Error: No se encontró 'deploy.zip' o 'unzip.php'. Ejecuta primero 'python3 prepare_deploy.py'.")
-        return
+def upload_file_ftp(ftp, local_file, remote_file):
+    print(f"Subiendo {local_file} como {remote_file}...")
+    file_size = os.path.getsize(local_file)
+    uploaded = 0
 
-    print("======================================================")
-    print("      ASISTENTE DE SUBIDA AUTOMÁTICA A DONWEB         ")
-    print("======================================================")
-    print("Introduce tus credenciales de FTP de DonWeb.")
-    print("(No quedarán guardadas en ningún archivo por seguridad)\n")
+    def progress_callback(block):
+        nonlocal uploaded
+        uploaded += len(block)
+        percent = (uploaded / file_size) * 100
+        sys.stdout.write(f"\rProgreso: {percent:.1f}% ({uploaded / (1024*1024):.2f} MB / {file_size / (1024*1024):.2f} MB)")
+        sys.stdout.flush()
 
-    host = input("Servidor FTP (ej: ftp.tudominio.com o la IP de DonWeb): ").strip()
-    user = input("Usuario FTP: ").strip()
-    password = getpass.getpass("Contraseña FTP: ")
-    
-    remote_path = input("Carpeta remota (Presiona Enter para la raíz '/', o escribe 'public_html'): ").strip()
-    if not remote_path:
-        remote_path = "/"
+    with open(local_file, "rb") as f:
+        ftp.storbinary(f"STOR {remote_file}", f, callback=progress_callback)
+    print("\n✓ Subida completa.")
 
+def connect_ftp(host, user, password):
     print("\nConectando al servidor FTP...")
-    
-    # Intentar conexión segura FTPS primero (SSL/TLS implicit/explicit)
-    ftp = None
+    # Intentar FTPS primero
     try:
         print("Intentando conexión segura FTPS...")
         ftp = FTP_TLS()
         ftp.connect(host, 21, timeout=30)
         ftp.login(user, password)
-        ftp.prot_p() # Cambiar a canal de datos seguro
+        ftp.prot_p()
         print("✓ Conexión segura FTPS establecida.")
+        return ftp
     except Exception as e:
         print(f"⚠️ Conexión segura no disponible o fallida ({e}).")
         print("Intentando conexión FTP estándar (sin cifrado)...")
@@ -44,65 +38,122 @@ def upload_to_donweb():
             ftp.connect(host, 21, timeout=30)
             ftp.login(user, password)
             print("✓ Conexión FTP estándar establecida.")
+            return ftp
         except Exception as e2:
             print(f"❌ Error de conexión FTP: {e2}")
-            return
+            return None
+
+def change_or_create_dir(ftp, remote_path):
+    # remote_path can be nested like "public_html/lydamworld"
+    parts = [p for p in remote_path.replace("\\", "/").split("/") if p]
+    current = ""
+    for part in parts:
+        current += f"/{part}"
+        try:
+            ftp.cwd(current)
+        except Exception:
+            try:
+                ftp.mkd(current)
+                ftp.cwd(current)
+                print(f"✓ Directorio creado: {current}")
+            except Exception as e:
+                print(f"❌ No se pudo cambiar ni crear el directorio {current}: {e}")
+                return False
+    return True
+
+def upload_donweb():
+    print("======================================================")
+    print("      ASISTENTE DE SUBIDA AUTOMÁTICA A DONWEB         ")
+    print("======================================================")
+    print("Selecciona qué deseas subir:")
+    print("1. Tienda Laravel (para lydamworld.com.ar)")
+    print("2. Linktree personalizado (para lydam.store)")
+    print("3. Ambos proyectos (Laravel y Linktree)")
+    
+    choice = input("\nIntroduce tu opción (1, 2 o 3): ").strip()
+    if choice not in ["1", "2", "3"]:
+        print("❌ Opción no válida. Cancelando.")
+        return
+
+    # Check file availability
+    unzip_file = "unzip.php"
+    laravel_zip = "deploy_laravel.zip"
+    linktree_zip = "deploy_linktree.zip"
+
+    if choice in ["1", "3"] and not os.path.exists(laravel_zip):
+        print(f"❌ Error: No se encontró '{laravel_zip}'. Ejecuta primero 'python3 prepare_deploy.py'.")
+        return
+    if choice in ["2", "3"] and not os.path.exists(linktree_zip):
+        print(f"❌ Error: No se encontró '{linktree_zip}'. Ejecuta primero 'python3 prepare_deploy.py'.")
+        return
+    if not os.path.exists(unzip_file):
+        print(f"❌ Error: No se encontró '{unzip_file}'. Ejecuta primero 'python3 prepare_deploy.py'.")
+        return
+
+    # Ask credentials
+    host = input("\nServidor FTP (ej: ftp.lydam.store o la IP de DonWeb): ").strip()
+    user = input("Usuario FTP: ").strip()
+    password = getpass.getpass("Contraseña FTP: ")
+
+    ftp = connect_ftp(host, user, password)
+    if not ftp:
+        return
+
+    ftp.set_pasv(True)
 
     try:
-        ftp.set_pasv(True) # Activar modo pasivo
-        
-        # Moverse a la carpeta destino
-        if remote_path != "/":
-            try:
-                ftp.cwd(remote_path)
-                print(f"✓ Cambiado al directorio remoto: {remote_path}")
-            except Exception:
-                # Intentar crear la carpeta si no existe
-                try:
-                    ftp.mkd(remote_path)
-                    ftp.cwd(remote_path)
-                    print(f"✓ Creado y cambiado al directorio remoto: {remote_path}")
-                except Exception as e:
-                    print(f"❌ No se pudo acceder o crear la carpeta '{remote_path}': {e}")
-                    return
-
-        # Subir unzip.php
-        print(f"\nSubiendo {php_file}...")
-        with open(php_file, "rb") as f:
-            ftp.storbinary(f"STOR {php_file}", f)
-        print(f"✓ {php_file} subido con éxito.")
-
-        # Subir deploy.zip con barra de progreso simple
-        file_size = os.path.getsize(zip_file)
-        print(f"\nSubiendo {zip_file} ({file_size / (1024*1024):.2f} MB)...")
-        print("Esto puede tardar unos minutos dependiendo de tu conexión. Por favor, espera.")
-        
-        uploaded = 0
-        def progress_callback(block):
-            nonlocal uploaded
-            uploaded += len(block)
-            percent = (uploaded / file_size) * 100
-            sys.stdout.write(f"\rProgreso: {percent:.1f}% ({uploaded / (1024*1024):.2f} MB / {file_size / (1024*1024):.2f} MB)")
-            sys.stdout.flush()
-
-        with open(zip_file, "rb") as f:
-            ftp.storbinary(f"STOR {zip_file}", f, callback=progress_callback)
+        if choice in ["1", "3"]:
+            # Upload Laravel
+            laravel_path = input("\nCarpeta remota para Tienda Laravel (Presiona Enter para 'public_html/lydamworld'): ").strip()
+            if not laravel_path:
+                laravel_path = "public_html/lydamworld"
             
-        print("\n✓ deploy.zip subido con éxito.")
-        
+            print(f"\nPreparando carpeta de destino: {laravel_path}")
+            if change_or_create_dir(ftp, laravel_path):
+                upload_file_ftp(ftp, unzip_file, "unzip.php")
+                upload_file_ftp(ftp, laravel_zip, "deploy_laravel.zip")
+                print("✓ Archivos de la tienda Laravel subidos.")
+            else:
+                print("❌ Cancelando subida de Tienda Laravel debido a un error en el directorio.")
+
+        if choice in ["2", "3"]:
+            # Upload Linktree
+            linktree_path = input("\nCarpeta remota para Linktree (Presiona Enter para la raíz 'public_html'): ").strip()
+            if not linktree_path:
+                linktree_path = "public_html"
+            
+            print(f"\nPreparando carpeta de destino: {linktree_path}")
+            if change_or_create_dir(ftp, linktree_path):
+                upload_file_ftp(ftp, unzip_file, "unzip.php")
+                upload_file_ftp(ftp, linktree_zip, "deploy_linktree.zip")
+                print("✓ Archivos del Linktree subidos.")
+            else:
+                print("❌ Cancelando subida del Linktree debido a un error en el directorio.")
+
         print("\n======================================================")
         print("          ¡SUBIDA FINALIZADA CON ÉXITO!               ")
         print("======================================================")
-        print("Pasos finales:")
-        print("1. Entra a tu navegador web a la dirección:")
-        print(f"   http://{host.replace('ftp.', '')}/unzip.php")
-        print("   (Si tu dominio ya está activo, usa http://tudominio.com/unzip.php)")
-        print("2. Espera a que el navegador muestre '¡DESPLIEGUE FINALIZADO EXITOSAMENTE!'.")
-        print("3. Entra a tu panel Ferozo/cPanel de DonWeb, ve al Administrador de Archivos,")
-        print("   crea el archivo .env de producción, configura los accesos y borra unzip.php y deploy.zip.")
+        print("Siguientes pasos en producción:")
+        
+        if choice in ["1", "3"]:
+            print("\nPARA LA TIENDA LARAVEL:")
+            print("1. Abre tu navegador y visita:")
+            print("   http://lydamworld.com.ar/unzip.php")
+            print("2. Espera a que diga '¡DESPLIEGUE FINALIZADO EXITOSAMENTE!'.")
+            print("3. Crea tu archivo '.env' en esa carpeta, configurá la DB y la Key de Gemini.")
+            print("4. Ejecuta las migraciones y seeders abriendo en tu navegador:")
+            print("   https://lydamworld.com.ar/run_migrations.php")
+            print("5. BORRA DE INMEDIATO los archivos 'unzip.php', 'deploy_laravel.zip' y 'run_migrations.php'.")
+
+        if choice in ["2", "3"]:
+            print("\nPARA EL LINKTREE:")
+            print("1. Abre tu navegador y visita:")
+            print("   http://lydam.store/unzip.php")
+            print("2. Espera a que diga '¡DESPLIEGUE FINALIZADO EXITOSAMENTE!'.")
+            print("3. BORRA DE INMEDIATO los archivos 'unzip.php' y 'deploy_linktree.zip'.")
 
     except Exception as e:
-        print(f"\n❌ Error durante la transferencia de archivos: {e}")
+        print(f"\n❌ Error durante la transferencia: {e}")
     finally:
         try:
             ftp.quit()
@@ -111,4 +162,4 @@ def upload_to_donweb():
             pass
 
 if __name__ == "__main__":
-    upload_to_donweb()
+    upload_donweb()

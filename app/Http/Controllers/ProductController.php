@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -10,41 +11,24 @@ class ProductController extends Controller
 {
     public function index(Request $request): View|\Illuminate\Http\JsonResponse
     {
-        $query = Product::query()->where('is_active', true);
+        // 1. If category is not selected and not an AJAX call, display category grid
+        if (! $request->has('category') && ! $request->ajax()) {
+            $categories = Category::all();
+            return view('catalog.index', [
+                'categories' => $categories,
+                'selectedCategory' => null
+            ]);
+        }
 
-        // 1. Category Filter
-        if ($request->has('categories')) {
-            $categories = (array) $request->input('categories');
-            $query->where(function ($q) use ($categories) {
-                $first = true;
-                if (in_array('pantalones', $categories)) {
-                    $q->where(function ($sub) {
-                        $sub->where('name', 'like', '%jean%')
-                            ->orWhere('name', 'like', '%pants%')
-                            ->orWhere('name', 'like', '%baggy%')
-                            ->orWhere('name', 'like', '%denim%')
-                            ->orWhere('name', 'like', '%pantalon%');
-                    });
-                    $first = false;
-                }
-                if (in_array('remeras', $categories)) {
-                    $clause = $first ? 'where' : 'orWhere';
-                    $q->$clause(function ($sub) {
-                        $sub->where('name', 'like', '%tee%')
-                            ->orWhere('name', 'like', '%remera%')
-                            ->orWhere('name', 'like', '%remeron%')
-                            ->orWhere('name', 'like', '%shirt%')
-                            ->orWhere('name', 'like', '%cyber%');
-                    });
-                    $first = false;
-                }
-                if (in_array('sweaters', $categories)) {
-                    $clause = $first ? 'where' : 'orWhere';
-                    $q->$clause(function ($sub) {
-                        $sub->where('name', 'like', '%sweater%');
-                    });
-                }
-            });
+        $query = Product::query()->where('is_active', true);
+        $selectedCategory = null;
+
+        if ($request->has('category')) {
+            $categorySlug = $request->input('category');
+            $selectedCategory = Category::where('slug', $categorySlug)->first();
+            if ($selectedCategory) {
+                $query->where('category_id', $selectedCategory->id);
+            }
         }
 
         // 2. Price Filter
@@ -100,7 +84,11 @@ class ProductController extends Controller
             ]);
         }
 
-        return view('catalog.index', compact('products'));
+        return view('catalog.index', [
+            'products' => $products,
+            'selectedCategory' => $selectedCategory,
+            'categories' => Category::all(),
+        ]);
     }
 
     public function show(Product $product): View

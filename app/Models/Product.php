@@ -22,6 +22,7 @@ class Product extends Model
         'stock',
         'image_path',
         'is_active',
+        'category_id',
     ];
 
     protected function casts(): array
@@ -34,6 +35,7 @@ class Product extends Model
             'sizes' => 'array',
             'stock' => 'integer',
             'is_active' => 'boolean',
+            'category_id' => 'integer',
         ];
     }
 
@@ -52,6 +54,11 @@ class Product extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function translatedName(?string $locale = null): string

@@ -36,4 +36,6 @@ yarn-error.log
 /.vscode
 /composer.phar
 /deploy.zip
+/deploy_laravel.zip
+/deploy_linktree.zip
 /unzip.php

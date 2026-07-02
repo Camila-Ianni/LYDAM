@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class ProductController extends Controller
     {
         return view('admin.products.ai-upload', [
             'product' => new Product(),
+            'categories' => Category::all(),
         ]);
     }
 
@@ -59,6 +61,7 @@ class ProductController extends Controller
     {
         return view('admin.products.create', [
             'product' => new Product(),
+            'categories' => Category::all(),
         ]);
     }
 
@@ -96,6 +99,7 @@ class ProductController extends Controller
     {
         return view('admin.products.edit', [
             'product' => $product,
+            'categories' => Category::all(),
         ]);
     }
 
@@ -222,6 +226,7 @@ class ProductController extends Controller
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'max:8192'],
             'is_active' => ['nullable', 'boolean'],
+            'category_id' => ['nullable', 'exists:categories,id'],
         ]);
     }
 
