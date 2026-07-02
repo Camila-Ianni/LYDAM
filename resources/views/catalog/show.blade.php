@@ -73,8 +73,19 @@
                 @csrf
                 <div class="flex flex-col gap-4 mb-4">
                     <label for="quantity" class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest">CANTIDAD DE CURVAS</label>
-                    <div class="flex items-center">
-                        <input id="quantity" name="quantity" type="number" min="1" max="{{ max($product->stock, 1) }}" value="{{ old('quantity', 1) }}" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps text-center w-24 focus:border-blood-red focus:ring-0 rounded-none">
+                    <div class="flex items-center border border-surface-container-highest w-36 bg-void-black">
+                        <!-- Decrement Button -->
+                        <button type="button" id="qty-dec-btn" class="h-12 w-12 flex items-center justify-center text-ash-grey hover:text-raw-white transition-colors focus:outline-none select-none">
+                            <span class="material-symbols-outlined text-sm font-bold">remove</span>
+                        </button>
+                        
+                        <!-- Input -->
+                        <input id="quantity" name="quantity" type="number" min="1" max="{{ max($product->stock, 1) }}" value="{{ old('quantity', 1) }}" class="bg-transparent text-raw-white border-none px-2 py-3 font-label-caps text-center w-12 focus:outline-none focus:ring-0 focus:border-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                        
+                        <!-- Increment Button -->
+                        <button type="button" id="qty-inc-btn" class="h-12 w-12 flex items-center justify-center text-ash-grey hover:text-raw-white transition-colors focus:outline-none select-none">
+                            <span class="material-symbols-outlined text-sm font-bold">add</span>
+                        </button>
                     </div>
                 </div>
                 
@@ -120,6 +131,30 @@
             btn.addEventListener('click', updateImage);
             btn.addEventListener('mouseenter', updateImage);
         });
+
+        // Quantity +/- Buttons Logic
+        const qtyInput = document.getElementById('quantity');
+        const decBtn = document.getElementById('qty-dec-btn');
+        const incBtn = document.getElementById('qty-inc-btn');
+        
+        if (qtyInput && decBtn && incBtn) {
+            const min = parseInt(qtyInput.getAttribute('min')) || 1;
+            const max = parseInt(qtyInput.getAttribute('max')) || 999;
+            
+            decBtn.addEventListener('click', () => {
+                let current = parseInt(qtyInput.value) || 1;
+                if (current > min) {
+                    qtyInput.value = current - 1;
+                }
+            });
+            
+            incBtn.addEventListener('click', () => {
+                let current = parseInt(qtyInput.value) || 1;
+                if (current < max) {
+                    qtyInput.value = current + 1;
+                }
+            });
+        }
     });
 </script>
 @endsection

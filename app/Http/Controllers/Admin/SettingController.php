@@ -23,6 +23,7 @@ class SettingController extends Controller
             'contact_instagram' => Setting::get('contact_instagram', 'https://instagram.com/lydam'),
             'contact_tiktok' => Setting::get('contact_tiktok', 'https://tiktok.com/@lydam'),
             'contact_whatsapp' => Setting::get('contact_whatsapp', 'https://wa.me/5491122334455'),
+            'contact_maps' => Setting::get('contact_maps', 'https://maps.app.goo.gl/GkTdDPHLtpZ8qmbz7'),
             'faq_data' => Setting::get('faq_data', '[]'),
             'categories' => \App\Models\Category::all(),
         ]);
@@ -41,6 +42,7 @@ class SettingController extends Controller
             'contact_instagram' => ['nullable', 'string', 'max:500'],
             'contact_tiktok' => ['nullable', 'string', 'max:500'],
             'contact_whatsapp' => ['nullable', 'string', 'max:500'],
+            'contact_maps' => ['nullable', 'string', 'max:500'],
             'faq_data' => ['nullable', 'string'],
         ]);
 

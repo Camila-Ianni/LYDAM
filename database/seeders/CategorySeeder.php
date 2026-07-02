@@ -13,24 +13,39 @@ class CategorySeeder extends Seeder
     {
         $categoriesData = [
             [
-                'name' => 'BAGGYS POR MAYOR',
-                'slug' => 'baggys-por-mayor',
-                'image_path' => 'images/categories/baggys_mayor.png',
-            ],
-            [
                 'name' => 'BAGGYS POR CURVA',
                 'slug' => 'baggys-por-curva',
                 'image_path' => 'images/categories/baggys_curva.png',
             ],
             [
-                'name' => 'JORTS POR MAYOR',
-                'slug' => 'jorts-por-mayor',
-                'image_path' => 'images/categories/jorts_mayor.png',
+                'name' => 'BAGGYS POR MAYOR',
+                'slug' => 'baggys-por-mayor',
+                'image_path' => 'images/categories/baggys_mayor.png',
             ],
             [
-                'name' => 'JORTS POR CURVA',
-                'slug' => 'jorts-por-curva',
-                'image_path' => 'images/categories/jorts_curva.png',
+                'name' => 'BERMUDAS POR CURVA',
+                'slug' => 'bermudas-por-curva',
+                'image_path' => 'images/categories/bermudas_curva.png',
+            ],
+            [
+                'name' => 'BERMUDAS POR MAYOR',
+                'slug' => 'bermudas-por-mayor',
+                'image_path' => 'images/categories/bermudas_mayor.png',
+            ],
+            [
+                'name' => 'REMERAS BOXIFIT POR MAYOR',
+                'slug' => 'remeras-boxifit-por-mayor',
+                'image_path' => 'images/categories/remeras_boxifit_mayor.png',
+            ],
+            [
+                'name' => 'SWEATERS POR MAYOR',
+                'slug' => 'sweaters-por-mayor',
+                'image_path' => 'images/categories/sweaters_mayor.png',
+            ],
+            [
+                'name' => 'CÁPSULA LYDAM',
+                'slug' => 'capsula-lydam',
+                'image_path' => 'images/categories/capsula_lydam.png',
             ],
         ];
 
@@ -45,21 +60,33 @@ class CategorySeeder extends Seeder
             );
         }
 
+        // Remove any obsolete categories (like jorts ones from previous turns)
+        Category::whereNotIn('slug', array_keys($categories))->delete();
+
         // Classify existing products
         $products = Product::all();
         foreach ($products as $product) {
             $nameEs = strtolower($product->translatedName('es'));
             
-            if (Str::contains($nameEs, 'jort')) {
-                // If it contains jort, put it in Jorts
+            if (Str::contains($nameEs, ['void walker'])) {
+                // Limited drop goes to Capsula
+                $product->category_id = $categories['capsula-lydam']->id;
+            } elseif (Str::contains($nameEs, ['tee', 'remera', 'remeron', 'shirt'])) {
+                // Remeras
+                $product->category_id = $categories['remeras-boxifit-por-mayor']->id;
+            } elseif (Str::contains($nameEs, 'sweater')) {
+                // Sweaters
+                $product->category_id = $categories['sweaters-por-mayor']->id;
+            } elseif (Str::contains($nameEs, ['jort', 'short', 'bermuda'])) {
+                // Bermudas
                 if (Str::contains($nameEs, ['mayor', 'pack'])) {
-                    $product->category_id = $categories['jorts-por-mayor']->id;
+                    $product->category_id = $categories['bermudas-por-mayor']->id;
                 } else {
-                    $product->category_id = $categories['jorts-por-curva']->id;
+                    $product->category_id = $categories['bermudas-por-curva']->id;
                 }
             } else {
-                // If it is baggy/pants/sweater/tee
-                if (Str::contains($nameEs, ['mayor', 'pack', 'tee', 'sweater', 'shirt'])) {
+                // Baggys / Pants
+                if (Str::contains($nameEs, ['mayor', 'pack'])) {
                     $product->category_id = $categories['baggys-por-mayor']->id;
                 } else {
                     $product->category_id = $categories['baggys-por-curva']->id;

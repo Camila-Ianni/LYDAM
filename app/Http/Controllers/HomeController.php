@@ -23,8 +23,9 @@ class HomeController extends Controller
     {
         return view('contact', [
             'instagram' => \App\Models\Setting::get('contact_instagram', 'https://instagram.com/lydam'),
-            'tiktok' => \App\Models\Setting::get('contact_tiktok', 'https://tiktok.com/@lydam'),
-            'whatsapp' => \App\Models\Setting::get('contact_whatsapp', 'https://wa.me/5491122334455'),
+            'tiktok' => \App\Models\Setting::get('contact_tiktok', 'https://www.tiktok.com/@lydam.worldwide?is_from_webapp=1&sender_device=pc'),
+            'whatsapp' => \App\Models\Setting::get('contact_whatsapp', 'https://wa.me/5491151442988'),
+            'maps' => \App\Models\Setting::get('contact_maps', 'https://maps.app.goo.gl/GkTdDPHLtpZ8qmbz7'),
             'faqs' => json_decode(\App\Models\Setting::get('faq_data', '[]'), true),
         ]);
     }

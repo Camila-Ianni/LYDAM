@@ -8,7 +8,7 @@
     </div>
 
     <!-- Social Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         <!-- Instagram -->
         <a href="{{ $instagram ?? '#' }}" target="_blank" class="group block bg-surface-container-low border border-surface-container-highest p-8 hover:border-blood-red transition-all duration-300 relative overflow-hidden">
             <div class="flex flex-col h-full justify-between gap-8">
@@ -49,6 +49,21 @@
                 </div>
                 <div class="flex justify-between items-center mt-4">
                     <span class="text-[10px] font-label-caps text-raw-white group-hover:underline">ENVIAR MENSAJE</span>
+                    <span class="material-symbols-outlined text-raw-white group-hover:text-blood-red transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Google Maps Location -->
+        <a href="{{ $maps ?? '#' }}" target="_blank" class="group block bg-surface-container-low border border-surface-container-highest p-8 hover:border-blood-red transition-all duration-300 relative overflow-hidden">
+            <div class="flex flex-col h-full justify-between gap-8">
+                <div>
+                    <span class="font-label-caps text-[10px] text-blood-red tracking-wider block mb-1">SHOWROOM</span>
+                    <h3 class="font-headline-lg-mobile text-raw-white uppercase group-hover:text-blood-red transition-colors">UBICACIÓN</h3>
+                    <p class="text-xs text-ash-grey font-label-caps mt-2 uppercase tracking-wide">Vení a conocer nuestro showroom en persona.</p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-[10px] font-label-caps text-raw-white group-hover:underline">VER EN GOOGLE MAPS</span>
                     <span class="material-symbols-outlined text-raw-white group-hover:text-blood-red transform group-hover:translate-x-1 transition-all">arrow_forward</span>
                 </div>
             </div>

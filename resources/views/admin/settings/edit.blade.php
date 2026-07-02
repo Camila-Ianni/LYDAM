@@ -62,7 +62,7 @@
     <div class="mt-6 border-t border-surface-container-highest pt-6">
         <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white mb-4 uppercase tracking-wide">Redes Sociales y Contacto</h2>
         
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-4">
             <div>
                 <label for="contact_instagram" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Enlace de Instagram</label>
                 <input id="contact_instagram" name="contact_instagram" type="url" value="{{ old('contact_instagram', $contact_instagram) }}" placeholder="https://instagram.com/tu_usuario" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
@@ -74,8 +74,13 @@
             </div>
 
             <div>
-                <label for="contact_whatsapp" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Enlace de WhatsApp (wa.me)</label>
+                <label for="contact_whatsapp" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">WhatsApp (número o wa.me)</label>
                 <input id="contact_whatsapp" name="contact_whatsapp" type="text" value="{{ old('contact_whatsapp', $contact_whatsapp) }}" placeholder="https://wa.me/5491122334455" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+            </div>
+
+            <div>
+                <label for="contact_maps" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Google Maps (Ubicación)</label>
+                <input id="contact_maps" name="contact_maps" type="url" value="{{ old('contact_maps', $contact_maps) }}" placeholder="https://maps.app.goo.gl/..." class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
             </div>
         </div>
     </div>
