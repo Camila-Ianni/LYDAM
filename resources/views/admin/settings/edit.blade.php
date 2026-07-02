@@ -6,7 +6,7 @@
     <h1 class="font-headline-lg text-headline-lg text-raw-white uppercase mt-2">CONFIGURACIÓN BANCARIA</h1>
 </div>
 
-<form method="POST" action="{{ route('admin.settings.update') }}" class="bg-surface-container-low border border-surface-container-highest p-8">
+<form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data" class="bg-surface-container-low border border-surface-container-highest p-8">
     @csrf
 
     <div class="grid gap-6 md:grid-cols-2">
@@ -77,6 +77,35 @@
                 <label for="contact_whatsapp" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Enlace de WhatsApp (wa.me)</label>
                 <input id="contact_whatsapp" name="contact_whatsapp" type="text" value="{{ old('contact_whatsapp', $contact_whatsapp) }}" placeholder="https://wa.me/5491122334455" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
             </div>
+        </div>
+    </div>
+
+    <!-- Category Images Management -->
+    <div class="mt-6 border-t border-surface-container-highest pt-6">
+        <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white mb-2 uppercase tracking-wide">Imágenes de Categorías (Catálogo)</h2>
+        <p class="text-ash-grey text-xs font-label-caps mb-4 uppercase tracking-wider">Subí nuevas imágenes para personalizar las portadas de las categorías en el catálogo público.</p>
+        
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            @foreach($categories as $category)
+                <div class="border border-surface-container-highest bg-void-black/50 p-4 flex flex-col gap-3">
+                    <span class="font-label-caps text-xs text-blood-red font-bold tracking-widest">{{ $category->name }}</span>
+                    
+                    <!-- Current Thumbnail -->
+                    <div class="w-full aspect-square border border-surface-container-highest overflow-hidden bg-void-black flex items-center justify-center">
+                        @if($category->imageUrl())
+                            <img src="{{ $category->imageUrl() }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
+                        @else
+                            <span class="text-ash-grey text-xs font-label-caps">Sin Imagen</span>
+                        @endif
+                    </div>
+                    
+                    <!-- File Input -->
+                    <div>
+                        <label for="category_img_{{ $category->id }}" class="block font-label-caps text-[10px] text-ash-grey uppercase tracking-wider mb-1">Nueva Imagen</label>
+                        <input id="category_img_{{ $category->id }}" name="categories[{{ $category->id }}][image]" type="file" accept="image/*" class="text-xs text-ash-grey font-label-caps file:bg-surface-container file:text-raw-white file:border-none file:px-3 file:py-2 file:mr-3 hover:file:bg-blood-red transition-all cursor-pointer">
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 

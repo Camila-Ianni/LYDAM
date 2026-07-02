@@ -16,6 +16,18 @@
     </div>
 </div>
 
+<!-- Category Filters Tabs -->
+<div class="flex flex-wrap gap-2 mb-6">
+    <a href="{{ route('admin.products.index') }}" class="px-4 py-2 text-xs font-label-caps uppercase border {{ is_null($selectedCategoryId) ? 'bg-blood-red text-raw-white border-blood-red' : 'bg-void-black text-ash-grey border-surface-container-highest hover:text-raw-white' }} transition-colors">
+        Todos
+    </a>
+    @foreach($categories as $cat)
+        <a href="{{ route('admin.products.index', ['category_id' => $cat->id]) }}" class="px-4 py-2 text-xs font-label-caps uppercase border {{ $selectedCategoryId == $cat->id ? 'bg-blood-red text-raw-white border-blood-red' : 'bg-void-black text-ash-grey border-surface-container-highest hover:text-raw-white' }} transition-colors">
+            {{ $cat->name }}
+        </a>
+    @endforeach
+</div>
+
 <div class="bg-surface-container-low border border-surface-container-highest p-8">
     <div class="overflow-x-auto">
         <table class="w-full text-left font-label-caps text-sm border-collapse">
@@ -23,6 +35,7 @@
                 <tr class="bg-void-black text-ash-grey border-b border-surface-container-highest text-xs uppercase font-bold">
                     <th class="px-6 py-4">{{ __('messages.product') }}</th>
                     <th class="px-6 py-4">{{ __('messages.sku') }}</th>
+                    <th class="px-6 py-4">Categoría</th>
                     <th class="px-6 py-4">{{ __('messages.price') }}</th>
                     <th class="px-6 py-4 text-center">{{ __('messages.stock') }}</th>
                     <th class="px-6 py-4 text-center">{{ __('messages.status') }}</th>
@@ -48,6 +61,11 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 text-ash-grey font-mono">{{ $product->sku }}</td>
+                        <td class="px-6 py-4">
+                            <span class="border {{ $product->category_id ? 'border-blood-red text-blood-red' : 'border-surface-container-highest text-ash-grey' }} px-3 py-1 text-xs uppercase tracking-wider">
+                                {{ $product->category ? $product->category->name : 'Sin Categoría' }}
+                            </span>
+                        </td>
                         <td class="px-6 py-4 text-raw-white font-bold">${{ number_format((float) $product->price, 0, ',', '.') }} ARS</td>
                         <td class="px-6 py-4 text-center text-raw-white">{{ $product->stock }}</td>
                         <td class="px-6 py-4 text-center">
@@ -76,9 +94,7 @@
     </div>
 </div>
 
-@if (method_exists($products, 'links'))
-    <div class="mt-8">
-        {{ $products->links() }}
-    </div>
-@endif
+<div class="mt-4 text-xs text-ash-grey font-label-caps uppercase tracking-wider">
+    Total: {{ $products->count() }} productos
+</div>
 @endsection

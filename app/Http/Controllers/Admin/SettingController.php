@@ -24,6 +24,7 @@ class SettingController extends Controller
             'contact_tiktok' => Setting::get('contact_tiktok', 'https://tiktok.com/@lydam'),
             'contact_whatsapp' => Setting::get('contact_whatsapp', 'https://wa.me/5491122334455'),
             'faq_data' => Setting::get('faq_data', '[]'),
+            'categories' => \App\Models\Category::all(),
         ]);
     }
 
@@ -45,6 +46,20 @@ class SettingController extends Controller
 
         foreach ($data as $key => $value) {
             Setting::set($key, $value);
+        }
+
+        // Handle Category Images
+        if ($request->hasFile('categories')) {
+            foreach ($request->file('categories') as $catId => $catData) {
+                if (isset($catData['image'])) {
+                    $category = \App\Models\Category::find($catId);
+                    if ($category) {
+                        $path = $catData['image']->store('categories', 'public');
+                        $category->image_path = $path;
+                        $category->save();
+                    }
+                }
+            }
         }
 
         return redirect()

@@ -14,12 +14,21 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $query = Product::query()->latest();
+
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->input('category_id'));
+        }
+
+        $products = $query->get();
+        $categories = Category::all();
+
         return view('admin.products.index', [
-            'products' => Product::query()
-                ->latest()
-                ->paginate(15),
+            'products' => $products,
+            'categories' => $categories,
+            'selectedCategoryId' => $request->input('category_id'),
         ]);
     }
 
