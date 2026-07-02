@@ -72,7 +72,7 @@ def upload_donweb():
     # Credenciales y destino hardcodeados para despliegue automático
     host = "a0150776.ferozo.com"
     user = "a0150776"
-    password = "rl@3BEYXNE*o6yV"
+    password = "9lu*uRo6**@P8mY"
     remote_path = "public_html"
 
     ftp = connect_ftps(host, user, password)
@@ -84,17 +84,26 @@ def upload_donweb():
     try:
         print(f"\nPreparando carpeta de destino: {remote_path}")
         if change_or_create_dir(ftp, remote_path):
+            # 1. Subir unzip.php a la raíz de public_html
             upload_file_ftps(ftp, unzip_file, "unzip.php")
+            
+            # 2. Subir deploy.zip a la raíz de public_html
             upload_file_ftps(ftp, deploy_zip, "deploy.zip")
+            
+            # 3. Subir unzip.php a la carpeta public_html/public/
+            print("\nSubiendo copia de unzip.php a la carpeta public/ para evitar bloqueos de reescritura...")
+            ftp.cwd("/public_html")
+            if change_or_create_dir(ftp, "public_html/public"):
+                upload_file_ftps(ftp, unzip_file, "unzip.php")
             
             print("\n======================================================")
             print("     ¡SUBIDA AUTOMÁTICA FINALIZADA CON ÉXITO!        ")
             print("======================================================")
             print("Siguientes pasos en producción:")
             print("\n1. Abre tu navegador y visita:")
-            print("   http://lydam.store/unzip.php")
+            print("   https://lydam.store/public/unzip.php")
             print("2. Espera a que en pantalla diga '¡DESPLIEGUE FINALIZADO EXITOSAMENTE!'.")
-            print("3. BORRA DE INMEDIATO los archivos 'unzip.php' y 'deploy.zip' del FTP.")
+            print("3. BORRA DE INMEDIATO los archivos 'unzip.php' y 'deploy.zip' de tu FTP (tanto en la raíz como en public/).")
             print("4. Ejecuta las migraciones y seeders de categorías abriendo en tu navegador:")
             print("   https://lydam.store/run_migrations.php")
             print("5. BORRA DE INMEDIATO el archivo 'run_migrations.php' de tu servidor.")

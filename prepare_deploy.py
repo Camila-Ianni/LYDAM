@@ -39,6 +39,8 @@ def create_zip():
         ".DS_Store",
         "test_ftp.txt",
         "test_ftp_conn.py",
+        "list_remote.py",
+        "read_remote_config.py",
     }
 
     count = 0
@@ -80,16 +82,28 @@ header('Content-Type: text/plain; charset=utf-8');
 
 $zipFile = 'deploy.zip';
 
-if (!file_exists($zipFile)) {
-    die("Error: No se encontró el archivo $zipFile en la raíz.\\n");
+// Determinar el directorio de extracción.
+// Si se ejecuta dentro de public/, extrae en el directorio padre (raíz del hosting).
+$extractDir = __DIR__;
+if (basename($extractDir) === 'public') {
+    $extractDir = dirname($extractDir);
 }
 
-echo "Iniciando descompresión de $zipFile...\\n";
+$zipPath = $extractDir . '/' . $zipFile;
+if (!file_exists($zipPath) && file_exists(__DIR__ . '/' . $zipFile)) {
+    $zipPath = __DIR__ . '/' . $zipFile;
+}
+
+if (!file_exists($zipPath)) {
+    die("Error: No se encontró el archivo $zipFile en la ruta: $zipPath\\n");
+}
+
+echo "Iniciando descompresión de $zipFile en $extractDir...\\n";
 
 if (class_exists('ZipArchive')) {
     $zip = new ZipArchive;
-    if ($zip->open($zipFile) === TRUE) {
-        $zip->extractTo(__DIR__);
+    if ($zip->open($zipPath) === TRUE) {
+        $zip->extractTo($extractDir);
         $zip->close();
         echo "¡Descompresión completada con éxito!\\n\\n";
         
@@ -104,14 +118,14 @@ if (class_exists('ZipArchive')) {
         ];
         
         foreach ($dirs as $dir) {
-            if (!file_exists(__DIR__ . '/' . $dir)) {
-                mkdir(__DIR__ . '/' . $dir, 0775, true);
+            if (!file_exists($extractDir . '/' . $dir)) {
+                mkdir($extractDir . '/' . $dir, 0775, true);
                 echo "Directorio creado: $dir\\n";
             }
         }
         
         // Crear base de datos sqlite vacía si no existe
-        $dbFile = __DIR__ . '/database/database.sqlite';
+        $dbFile = $extractDir . '/database/database.sqlite';
         if (!file_exists($dbFile)) {
             if (!file_exists(dirname($dbFile))) {
                 mkdir(dirname($dbFile), 0775, true);
@@ -123,14 +137,14 @@ if (class_exists('ZipArchive')) {
         
         // Configurar permisos
         echo "Configurando permisos de escritura...\\n";
-        @chmod(__DIR__ . '/storage', 0775);
-        @chmod(__DIR__ . '/bootstrap/cache', 0775);
+        @chmod($extractDir . '/storage', 0775);
+        @chmod($extractDir . '/bootstrap/cache', 0775);
         
         echo "\\n======================================================\\n";
         echo "¡DESPLIEGUE FINALIZADO EXITOSAMENTE!\\n";
         echo "======================================================\\n";
         echo "ATENCIÓN: Por motivos de seguridad extrema, elimina de\\n";
-        echo "inmediato este archivo (unzip.php) y el zip (deploy.zip)\\n";
+        echo "inmediato este archivo (unzip.php) y el zip ($zipFile)\\n";
         echo "de tu servidor.\\n";
     } else {
         echo "Error al abrir el archivo $zipFile.\\n";
