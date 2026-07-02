@@ -2,7 +2,6 @@ import os
 import sys
 import ssl
 from ftplib import FTP_TLS
-import getpass
 
 def upload_file_ftps(ftp, local_file, remote_file):
     print(f"Subiendo {local_file} como {remote_file}...")
@@ -21,9 +20,9 @@ def upload_file_ftps(ftp, local_file, remote_file):
     print("\n✓ Subida completa.")
 
 def connect_ftps(host, user, password):
-    print("\nConectando al servidor FTPS seguro...")
+    print("Conectando al servidor FTPS seguro...")
     try:
-        # Configurar contexto SSL para ignorar verificación de certificado (común en Ferozo con certificados compartidos)
+        # Configurar contexto SSL para ignorar verificación de certificado (común en Ferozo)
         context = ssl.create_default_context()
         context.check_hostname = False
         context.verify_mode = ssl.CERT_NONE
@@ -57,7 +56,7 @@ def change_or_create_dir(ftp, remote_path):
 
 def upload_donweb():
     print("======================================================")
-    print("      ASISTENTE DE SUBIDA FTPS SEGURA A DONWEB        ")
+    print("      ASISTENTE DE SUBIDA FTPS 100% AUTOMÁTICA        ")
     print("======================================================")
     
     unzip_file = "unzip.php"
@@ -70,19 +69,11 @@ def upload_donweb():
         print(f"❌ Error: No se encontró '{unzip_file}'. Ejecuta primero 'python3 prepare_deploy.py'.")
         return
 
-    # Valores por defecto configurados para lydam.store
-    default_host = "a0150776.ferozo.com"
-    default_user = "a0150776"
-
-    host = input(f"Servidor FTP [Enter para {default_host}]: ").strip()
-    if not host:
-        host = default_host
-
-    user = input(f"Usuario FTP [Enter para {default_user}]: ").strip()
-    if not user:
-        user = default_user
-
-    password = getpass.getpass("Contraseña FTP: ")
+    # Credenciales y destino hardcodeados para despliegue automático
+    host = "a0150776.ferozo.com"
+    user = "a0150776"
+    password = "rl@3BEYXNE*o6yV"
+    remote_path = "public_html"
 
     ftp = connect_ftps(host, user, password)
     if not ftp:
@@ -91,16 +82,13 @@ def upload_donweb():
     ftp.set_pasv(True)
 
     try:
-        # Subida a la raíz de public_html
-        remote_path = "public_html"
         print(f"\nPreparando carpeta de destino: {remote_path}")
-        
         if change_or_create_dir(ftp, remote_path):
             upload_file_ftps(ftp, unzip_file, "unzip.php")
             upload_file_ftps(ftp, deploy_zip, "deploy.zip")
             
             print("\n======================================================")
-            print("          ¡SUBIDA FINALIZADA CON ÉXITO!               ")
+            print("     ¡SUBIDA AUTOMÁTICA FINALIZADA CON ÉXITO!        ")
             print("======================================================")
             print("Siguientes pasos en producción:")
             print("\n1. Abre tu navegador y visita:")
