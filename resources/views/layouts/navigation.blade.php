@@ -25,10 +25,12 @@
                 @else
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('home') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('home') }}">INICIO</a>
                     <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
+                    <a class="font-label-caps text-label-caps {{ request()->routeIs('contact') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('contact') }}">CONTACTO</a>
                 @endif
             @else
                 <a class="font-label-caps text-label-caps {{ request()->routeIs('home') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('home') }}">INICIO</a>
                 <a class="font-label-caps text-label-caps {{ request()->routeIs('products.index') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('products.index') }}">CATÁLOGO</a>
+                <a class="font-label-caps text-label-caps {{ request()->routeIs('contact') ? 'text-blood-red font-bold border-b border-blood-red' : 'text-raw-white font-normal hover:text-blood-red transition-all duration-200' }}" href="{{ route('contact') }}">CONTACTO</a>
             @endauth
         </nav>
         
@@ -75,11 +77,13 @@
                 <a class="text-ash-grey hover:text-blood-red py-2" href="{{ route('home') }}">VER TIENDA</a>
             @else
                 <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('home') }}">INICIO</a>
-                <a class="text-raw-white hover:text-blood-red py-2" href="{{ route('products.index') }}">CATÁLOGO</a>
+                <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('products.index') }}">CATÁLOGO</a>
+                <a class="text-raw-white hover:text-blood-red py-2" href="{{ route('contact') }}">CONTACTO</a>
             @endif
         @else
             <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('home') }}">INICIO</a>
-            <a class="text-raw-white hover:text-blood-red py-2" href="{{ route('products.index') }}">CATÁLOGO</a>
+            <a class="text-raw-white hover:text-blood-red py-2 border-b border-surface-container-highest" href="{{ route('products.index') }}">CATÁLOGO</a>
+            <a class="text-raw-white hover:text-blood-red py-2" href="{{ route('contact') }}">CONTACTO</a>
         @endauth
     </div>
 </header>

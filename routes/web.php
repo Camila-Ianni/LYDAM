@@ -16,6 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
 Route::get('/productos/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/contacto', [HomeController::class, 'contact'])->name('contact');
 
 Route::prefix('carrito')->name('cart.')->group(function (): void {
     Route::get('/', [CartController::class, 'index'])->name('index');

@@ -20,6 +20,10 @@ class SettingController extends Controller
             'bank_alias_2' => Setting::get('bank_alias_2', 'LYDAM.TRIBAL.DOS'),
             'bank_threshold' => Setting::get('bank_threshold', '300000'),
             'bank_receipt_email' => Setting::get('bank_receipt_email', 'hello@lydam.com'),
+            'contact_instagram' => Setting::get('contact_instagram', 'https://instagram.com/lydam'),
+            'contact_tiktok' => Setting::get('contact_tiktok', 'https://tiktok.com/@lydam'),
+            'contact_whatsapp' => Setting::get('contact_whatsapp', 'https://wa.me/5491122334455'),
+            'faq_data' => Setting::get('faq_data', '[]'),
         ]);
     }
 
@@ -33,6 +37,10 @@ class SettingController extends Controller
             'bank_alias_2' => ['required', 'string', 'max:255'],
             'bank_threshold' => ['required', 'numeric', 'min:0'],
             'bank_receipt_email' => ['required', 'email', 'max:255'],
+            'contact_instagram' => ['nullable', 'string', 'max:500'],
+            'contact_tiktok' => ['nullable', 'string', 'max:500'],
+            'contact_whatsapp' => ['nullable', 'string', 'max:500'],
+            'faq_data' => ['nullable', 'string'],
         ]);
 
         foreach ($data as $key => $value) {
@@ -41,6 +49,6 @@ class SettingController extends Controller
 
         return redirect()
             ->route('admin.settings.edit')
-            ->with('status', __('Configuraciones bancarias actualizadas correctamente.'));
+            ->with('status', __('Configuraciones actualizadas correctamente.'));
     }
 }

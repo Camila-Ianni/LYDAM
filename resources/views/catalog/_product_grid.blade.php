@@ -55,7 +55,11 @@
                             {{ $product->translatedName() }}
                         </a>
                     </h3>
-                    <p class="font-label-caps text-label-caps text-blood-red mb-1">CURVA: 38 - 40 - 42 - 44 - 46</p>
+                    @if(!empty($product->sizes) && is_array($product->sizes))
+                        <p class="font-label-caps text-label-caps text-blood-red mb-1">CURVA: {{ implode(' - ', $product->sizes) }}</p>
+                    @else
+                        <p class="font-label-caps text-label-caps text-blood-red mb-1">CURVA: ÚNICA</p>
+                    @endif
                     <div class="mt-auto pt-2">
                         <span class="font-label-caps text-label-caps text-ash-grey">
                             ${{ number_format($product->price, 0, ',', '.') }} ARS / CURVA
