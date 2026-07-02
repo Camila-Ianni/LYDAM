@@ -62,7 +62,7 @@
                         </td>
                         <td class="px-6 py-4 text-ash-grey font-mono">{{ $product->sku }}</td>
                         <td class="px-6 py-4">
-                            <span class="border {{ $product->category_id ? 'border-blood-red text-blood-red' : 'border-surface-container-highest text-ash-grey' }} px-3 py-1 text-xs uppercase tracking-wider">
+                            <span class="inline-block whitespace-nowrap border {{ $product->category_id ? 'border-blood-red text-blood-red' : 'border-surface-container-highest text-ash-grey' }} px-3 py-1 text-xs uppercase tracking-wider">
                                 {{ $product->category ? $product->category->name : 'Sin Categoría' }}
                             </span>
                         </td>
