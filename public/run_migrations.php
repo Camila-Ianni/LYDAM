@@ -3,8 +3,21 @@
 
 header('Content-Type: text/plain; charset=utf-8');
 
-// Boot Laravel
-require __DIR__.'/../bootstrap/app.php';
+// Habilitar reporte de errores para ver qué falla si ocurre un 500
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+define('LARAVEL_START', microtime(true));
+
+// Cargar el autoloader de Composer
+require __DIR__.'/../vendor/autoload.php';
+
+// Cargar la aplicación Laravel
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+// Inicializar el Kernel de consola para poder usar Artisan
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
 
 use Illuminate\Support\Facades\Artisan;
 
