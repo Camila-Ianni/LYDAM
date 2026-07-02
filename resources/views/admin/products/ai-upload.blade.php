@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     {
                         parts: [
                             {
-                                text: "Analiza la imagen de este producto de ropa. Genera un objeto JSON estructurado que contenga:\n- 'name': Un nombre de producto corto e impactante en español (en mayúsculas) al estilo brutalista / gothic streetwear (ej: 'BAGGY JEAN TRIBAL CROSS', 'REMERÓN VOID WHITE', 'SWEATER OVERSIZED RIP').\n- 'description': Una descripción detallada en español que venda el producto, mencionando la estética brutalista, urbana y de alta calidad (1 o 2 párrafos).\n- 'price': Precio sugerido en pesos argentinos (ARS), razonable y similar a otros productos (entre 120.000 y 550.000 ARS).\n- 'cost': Costo estimado (aproximadamente la mitad o el 40% del precio de venta).\n- 'sku': Un SKU único en mayúsculas (ej: 'LYD-TEE-VOD').\n- 'sizes': Una lista de talles sugeridos separados por coma (ej: 'S, M, L, XL' si es remera/sweater, o '38, 40, 42, 44, 46' si es pantalón/jean).\n- 'stock': Un stock por defecto (número entero entre 10 y 50).\n- 'slug': Un slug amigable para URL generado a partir del nombre en minúsculas y separado por guiones (ej: 'baggy-jean-tribal-cross')."
+                                text: "Analiza la imagen de este producto de ropa. Genera un objeto JSON estructurado que contenga:\n- 'name': Un nombre de producto corto e impactante en español (en mayúsculas) al estilo brutalista / gothic streetwear (ej: 'BAGGY JEAN TRIBAL CROSS', 'REMERÓN VOID WHITE', 'SWEATER OVERSIZED RIP').\n- 'description': Una descripción detallada en español que venda el producto, mencionando la estética brutalista, urbana y de alta calidad (1 o 2 párrafos).\n- 'price': Precio sugerido en pesos argentinos (ARS), razonable y similar a otros productos (entre 120.000 y 550.000 ARS).\n- 'cost': Costo estimado (aproximadamente la mitad o el 40% del precio de venta).\n- 'sku': Un SKU único en mayúsculas (ej: 'LYD-TEE-VOD').\n- 'sizes': Una lista de talles sugeridos separados por coma (ej: 'S, M, L, XL' si es remera/sweater, o '38, 40, 42, 44, 46' si es pantalón/jean).\n- 'stock': Un stock por defecto (número entero entre 10 y 50).\n- 'slug': Un slug amigable para URL generado a partir del nombre en minúsculas y separado por guiones (ej: 'baggy-jean-tribal-cross').\n- 'category_id': El ID numérico de la categoría que mejor corresponda al producto (debe ser un número: 1 para BAGGYS POR MAYOR, 2 para BAGGYS POR CURVA, 3 para JORTS POR MAYOR, o 4 para JORTS POR CURVA)."
                             },
                             {
                                 inlineData: {
@@ -220,6 +220,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cost').value = productData.cost ? Number(productData.cost).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
             document.getElementById('stock').value = productData.stock || '15';
             document.getElementById('sizes').value = productData.sizes || '';
+            if (productData.category_id) {
+                document.getElementById('category_id').value = productData.category_id;
+            }
 
             progressBar.style.width = '100%';
             statusSpinner.classList.add('hidden');
