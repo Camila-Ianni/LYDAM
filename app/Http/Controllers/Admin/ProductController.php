@@ -245,10 +245,6 @@ class ProductController extends Controller
             return null;
         }
 
-        if (is_numeric($value)) {
-            return (float) $value;
-        }
-
         // Remove spaces
         $value = str_replace(' ', '', $value);
 
@@ -270,7 +266,7 @@ class ProductController extends Controller
                     $value = str_replace(',', '.', $value);
                 }
             } else if (strpos($value, '.') !== false) {
-                // Contains only dot (e.g. 120.000)
+                // Contains only dot (e.g. 120.000 or 28.500)
                 $parts = explode('.', $value);
                 if (strlen(end($parts)) === 3) {
                     $value = str_replace('.', '', $value);
