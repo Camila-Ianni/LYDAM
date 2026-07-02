@@ -12,7 +12,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/tienda', [HomeController::class, 'index'])->name('home');
 
 Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
 Route::get('/productos/{product:slug}', [ProductController::class, 'show'])->name('products.show');
