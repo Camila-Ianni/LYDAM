@@ -36,23 +36,5 @@
     @include('catalog._product_grid', ['products' => $featuredProducts])
 </section>
 
-<!-- Categories / Bento Grid -->
-<section class="py-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-[60vh]">
-        <a class="relative group overflow-hidden border border-surface-variant flex items-center justify-center min-h-[300px]" href="{{ route('products.index') }}">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity opacity-60" style="background-image: url('{{ asset('images/jeans.jpg') }}');"></div>
-            <div class="absolute inset-0 bg-void-black/40 group-hover:bg-blood-red/20 transition-colors duration-500"></div>
-            <h2 class="relative z-10 font-display-xl text-headline-lg-mobile md:text-display-xl text-raw-white text-center border border-raw-white px-8 py-4 bg-void-black/80 backdrop-blur-sm group-hover:border-blood-red group-hover:text-blood-red transition-colors">
-                VER PANTALONES
-            </h2>
-        </a>
-        <a class="relative group overflow-hidden border border-surface-variant flex items-center justify-center min-h-[300px]" href="{{ route('products.index') }}">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity opacity-60" style="background-image: url('{{ asset('images/sweaters.jpg') }}');"></div>
-            <div class="absolute inset-0 bg-void-black/40 group-hover:bg-blood-red/20 transition-colors duration-500"></div>
-            <h2 class="relative z-10 font-display-xl text-headline-lg-mobile md:text-display-xl text-raw-white text-center border border-raw-white px-8 py-4 bg-void-black/80 backdrop-blur-sm group-hover:border-blood-red group-hover:text-blood-red transition-colors">
-                VER SWEATERS
-            </h2>
-        </a>
-    </div>
-</section>
+
 @endsection
