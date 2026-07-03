@@ -16,6 +16,25 @@
                 <h1 class="font-headline-lg text-headline-lg text-raw-white uppercase leading-tight mt-2">{{ __('messages.checkout_title') }}</h1>
             </div>
 
+            @guest
+                <div class="mb-8 border border-blood-red/45 bg-blood-red/5 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden group">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-blood-red"></div>
+                    
+                    <div class="max-w-md pl-2">
+                        <h3 class="font-headline-lg-mobile text-lg text-raw-white uppercase tracking-wider mb-2">¿Ya tenés una cuenta?</h3>
+                        <p class="font-label-caps text-[11px] text-ash-grey leading-relaxed uppercase">Accedé a tu cuenta para autocompletar tus datos y agilizar tu compra. Si no tenés una cuenta, podés crear una nueva ahora.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+                        <a href="{{ route('login', ['redirect' => route('checkout.create')]) }}" class="bg-blood-red text-raw-white border border-blood-red px-6 py-3 font-label-caps text-xs text-center hover:bg-void-black hover:text-blood-red transition-all duration-300">
+                            INICIAR SESIÓN
+                        </a>
+                        <a href="{{ route('register', ['redirect' => route('checkout.create')]) }}" class="bg-void-black text-ash-grey border border-surface-container-highest px-6 py-3 font-label-caps text-xs text-center hover:border-raw-white hover:text-raw-white transition-all duration-300">
+                            CREAR CUENTA
+                        </a>
+                    </div>
+                </div>
+            @endguest
+
             <form method="POST" action="{{ route('checkout.store') }}" class="grid gap-6">
                 @csrf
 
