@@ -26,7 +26,7 @@ Route::prefix('carrito')->name('cart.')->group(function (): void {
     Route::delete('/vaciar', [CartController::class, 'clear'])->name('clear');
 });
 
-Route::prefix('checkout')->name('checkout.')->group(function (): void {
+Route::prefix('checkout')->name('checkout.')->middleware('auth')->group(function (): void {
     Route::get('/', [CheckoutController::class, 'create'])->name('create');
     Route::post('/', [CheckoutController::class, 'store'])->name('store');
     Route::get('/exito/{order}', [CheckoutController::class, 'success'])->name('success');

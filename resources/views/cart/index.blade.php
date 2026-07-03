@@ -22,6 +22,25 @@
     </header>
 
     @if (count($cart))
+        @guest
+            <div class="w-full mb-8 border border-blood-red/45 bg-blood-red/5 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden group">
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-blood-red"></div>
+                
+                <div class="max-w-md pl-2">
+                    <h3 class="font-headline-lg-mobile text-lg text-raw-white uppercase tracking-wider mb-2">¿Ya tenés una cuenta?</h3>
+                    <p class="font-label-caps text-[11px] text-ash-grey leading-relaxed uppercase">Iniciá sesión o registrate ahora para poder finalizar tu compra y guardar tus datos.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+                    <a href="{{ route('login', ['redirect' => route('checkout.create')]) }}" class="bg-blood-red text-raw-white border border-blood-red px-6 py-3 font-label-caps text-xs text-center hover:bg-void-black hover:text-blood-red transition-all duration-300">
+                        INICIAR SESIÓN
+                    </a>
+                    <a href="{{ route('register', ['redirect' => route('checkout.create')]) }}" class="bg-void-black text-ash-grey border border-surface-container-highest px-6 py-3 font-label-caps text-xs text-center hover:border-raw-white hover:text-raw-white transition-all duration-300">
+                        CREAR CUENTA
+                    </a>
+                </div>
+            </div>
+        @endguest
+
         <!-- Cart Layout -->
         <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-gutter">
             
