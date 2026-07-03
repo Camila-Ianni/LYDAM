@@ -26,7 +26,18 @@
                         <td class="px-6 py-4 font-bold text-blood-red">#{{ $order->id }}</td>
                         <td class="px-6 py-4">
                             <p class="font-bold text-raw-white uppercase leading-tight">{{ $order->buyer_name }}</p>
-                            <p class="text-xs text-ash-grey mt-1 font-mono">{{ $order->buyer_email }}</p>
+                            <p class="text-[11px] text-ash-grey mt-1 font-mono flex items-center gap-2">
+                                <span>{{ $order->buyer_email }}</span>
+                                <span class="px-1.5 py-0.5 border border-surface-container-highest uppercase text-[9px] font-sans">
+                                    @if(($order->shipping_type ?? 'retiro') === 'envio')
+                                        Envío
+                                    @elseif(($order->shipping_type ?? 'retiro') === 'punto_encuentro')
+                                        Pto. Encuentro
+                                    @else
+                                        Retiro
+                                    @endif
+                                </span>
+                            </p>
                         </td>
                         <td class="px-6 py-4 text-ash-grey uppercase text-xs">{{ $order->payment_method }}</td>
                         <td class="px-6 py-4 text-center">

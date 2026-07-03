@@ -46,6 +46,8 @@ class CheckoutController extends Controller
                 Order::PAYMENT_TRANSFER,
                 Order::PAYMENT_MERCADOPAGO,
             ])],
+            'shipping_type' => ['required', Rule::in(['envio', 'retiro', 'punto_encuentro'])],
+            'shipping_address' => ['required_if:shipping_type,envio', 'nullable', 'string', 'max:500'],
         ]);
 
         $cart = session()->get('cart', []);
@@ -99,6 +101,8 @@ class CheckoutController extends Controller
                 'buyer_email' => $data['buyer_email'],
                 'buyer_phone' => $data['buyer_phone'],
                 'payment_method' => $data['payment_method'],
+                'shipping_type' => $data['shipping_type'],
+                'shipping_address' => $data['shipping_type'] === 'envio' ? $data['shipping_address'] : null,
                 'status' => Order::STATUS_PENDING,
                 'subtotal' => $subtotal,
                 'total' => $subtotal,

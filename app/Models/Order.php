@@ -33,6 +33,8 @@ class Order extends Model
         'subtotal',
         'total',
         'paid_at',
+        'shipping_type',
+        'shipping_address',
     ];
 
     protected function casts(): array

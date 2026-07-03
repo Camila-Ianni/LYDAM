@@ -35,12 +35,68 @@
                     </div>
                 </div>
 
-                <div>
-                    <label for="buyer_email" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.buyer_email') }}</label>
+                <div class="mt-6">
+                    <label for="buyer_email" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.email') }}</label>
                     <input id="buyer_email" name="buyer_email" type="email" value="{{ old('buyer_email', auth()->user()->email ?? '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
                 </div>
 
-                <div>
+                <!-- Método de Entrega -->
+                <div class="mt-6">
+                    <span class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-3">MÉTODO DE ENTREGA</span>
+                    <input type="hidden" id="shipping_type" name="shipping_type" value="{{ old('shipping_type', 'retiro') }}" required>
+                    
+                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
+                        <!-- Option 1: Retiro en Local -->
+                        <button type="button" class="shipping-card-btn text-left p-4 border transition-all duration-300 relative flex flex-col justify-between gap-4 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="retiro">
+                            <div class="flex justify-between items-start">
+                                <span class="material-symbols-outlined text-raw-white text-2xl font-light">store</span>
+                                <div class="shipping-check-indicator w-4 h-4 border border-surface-container-highest flex items-center justify-center">
+                                    <div class="shipping-check-dot w-2 h-2 bg-blood-red opacity-0 transition-opacity duration-200"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">RETIRO EN LOCAL</h3>
+                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Retira por nuestro showroom.</p>
+                            </div>
+                        </button>
+
+                        <!-- Option 2: Envío a Domicilio -->
+                        <button type="button" class="shipping-card-btn text-left p-4 border transition-all duration-300 relative flex flex-col justify-between gap-4 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="envio">
+                            <div class="flex justify-between items-start">
+                                <span class="material-symbols-outlined text-raw-white text-2xl font-light">local_shipping</span>
+                                <div class="shipping-check-indicator w-4 h-4 border border-surface-container-highest flex items-center justify-center">
+                                    <div class="shipping-check-dot w-2 h-2 bg-blood-red opacity-0 transition-opacity duration-200"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">ENVÍO A DOMICILIO</h3>
+                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Enviamos a todo el país.</p>
+                            </div>
+                        </button>
+
+                        <!-- Option 3: Punto de Encuentro -->
+                        <button type="button" class="shipping-card-btn text-left p-4 border transition-all duration-300 relative flex flex-col justify-between gap-4 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="punto_encuentro">
+                            <div class="flex justify-between items-start">
+                                <span class="material-symbols-outlined text-raw-white text-2xl font-light">handshake</span>
+                                <div class="shipping-check-indicator w-4 h-4 border border-surface-container-highest flex items-center justify-center">
+                                    <div class="shipping-check-dot w-2 h-2 bg-blood-red opacity-0 transition-opacity duration-200"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">PUNTO ENCUENTRO</h3>
+                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Coordinar entrega en zona.</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Shipping Address Input (conditional) -->
+                <div id="shipping-address-container" class="mt-6 hidden">
+                    <label for="shipping_address" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Dirección de Envío Completa</label>
+                    <input id="shipping_address" name="shipping_address" type="text" value="{{ old('shipping_address') }}" placeholder="Calle, Número, Piso, Departamento, Código Postal, Localidad, Provincia" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+                </div>
+
+                <div class="mt-6">
                     <span class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-3">MÉTODO DE PAGO</span>
                     <input type="hidden" id="payment_method" name="payment_method" value="{{ old('payment_method', 'transferencia') }}" required>
                     
@@ -121,6 +177,50 @@
             card.addEventListener('click', function () {
                 const val = card.getAttribute('data-value');
                 selectPaymentMethod(val);
+            });
+        });
+
+        // Shipping Selection Logic
+        const shippingCards = document.querySelectorAll('.shipping-card-btn');
+        const shippingInput = document.getElementById('shipping_type');
+        const addressContainer = document.getElementById('shipping-address-container');
+        const addressInput = document.getElementById('shipping_address');
+
+        function selectShippingMethod(value) {
+            shippingInput.value = value;
+            shippingCards.forEach(card => {
+                const cardValue = card.getAttribute('data-value');
+                const dot = card.querySelector('.shipping-check-dot');
+                if (cardValue === value) {
+                    card.classList.remove('border-surface-container-highest', 'bg-void-black/20');
+                    card.classList.add('border-blood-red', 'bg-void-black/60');
+                    if (dot) dot.classList.remove('opacity-0');
+                } else {
+                    card.classList.remove('border-blood-red', 'bg-void-black/60');
+                    card.classList.add('border-surface-container-highest', 'bg-void-black/20');
+                    if (dot) dot.classList.add('opacity-0');
+                }
+            });
+
+            if (value === 'envio') {
+                addressContainer.classList.remove('hidden');
+                if (addressInput) addressInput.setAttribute('required', 'required');
+            } else {
+                addressContainer.classList.add('hidden');
+                if (addressInput) {
+                    addressInput.removeAttribute('required');
+                    addressInput.value = '';
+                }
+            }
+        }
+
+        const initialShippingValue = shippingInput.value || 'retiro';
+        selectShippingMethod(initialShippingValue);
+
+        shippingCards.forEach(card => {
+            card.addEventListener('click', function () {
+                const val = card.getAttribute('data-value');
+                selectShippingMethod(val);
             });
         });
     });
