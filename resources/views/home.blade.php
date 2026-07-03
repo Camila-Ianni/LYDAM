@@ -15,7 +15,7 @@
         <h1 class="font-display-xl text-headline-lg-mobile md:text-display-xl text-raw-white mb-8 drop-shadow-lg gothic-text tracking-widest leading-none">
             COLECCIÓN TRIBAL UNDER
         </h1>
-        <a class="inline-block bg-blood-red text-raw-white font-headline-lg-mobile text-headline-lg-mobile py-4 px-12 border border-raw-white hover:bg-void-black hover:text-blood-red hover:border-blood-red transition-colors duration-300" href="#new-drop">
+        <a class="inline-block bg-blood-red text-raw-white font-headline-lg-mobile text-headline-lg-mobile py-4 px-12 border border-raw-white hover:bg-void-black hover:text-blood-red hover:border-blood-red transition-colors duration-300" href="{{ route('products.index') }}">
             VER CATÁLOGO MAYORISTA
         </a>
     </div>
