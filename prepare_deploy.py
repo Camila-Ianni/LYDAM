@@ -26,6 +26,8 @@ def create_zip():
         "storage/framework/sessions",
         "storage/framework/views",
         "storage/logs",
+        "storage/app/public",
+        "public/storage",
     }
     
     exclude_files = {
@@ -41,6 +43,7 @@ def create_zip():
         "test_ftp_conn.py",
         "list_remote.py",
         "read_remote_config.py",
+        "database/database.sqlite",
     }
 
     count = 0
