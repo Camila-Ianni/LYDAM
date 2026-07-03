@@ -58,6 +58,25 @@
         </div>
     </div>
 
+    <!-- Descuento por Monto -->
+    <div class="mt-6 border-t border-surface-container-highest pt-6">
+        <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white mb-4 uppercase tracking-wide">Descuento Automático por Monto de Compra</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+            <div>
+                <label for="discount_threshold" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Monto Mínimo de Pedido ($ ARS)</label>
+                <input id="discount_threshold" name="discount_threshold" type="number" step="1" min="0" value="{{ old('discount_threshold', $discount_threshold) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+                <p class="mt-2 text-xs text-ash-grey font-label-caps">Monto del carrito a partir del cual se aplicará el descuento de forma automática.</p>
+            </div>
+
+            <div>
+                <label for="discount_percent" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Porcentaje de Descuento (%)</label>
+                <input id="discount_percent" name="discount_percent" type="number" step="0.1" min="0" max="100" value="{{ old('discount_percent', $discount_percent) }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+                <p class="mt-2 text-xs text-ash-grey font-label-caps">Porcentaje a descontar del total del carrito (ej. 10 para hacer un 10% de descuento). Colocar 0 para desactivar.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Contact & Social Networks -->
     <div class="mt-6 border-t border-surface-container-highest pt-6">
         <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-raw-white mb-4 uppercase tracking-wide">Redes Sociales y Contacto</h2>

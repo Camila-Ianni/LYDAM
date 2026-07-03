@@ -94,6 +94,15 @@ class CheckoutController extends Controller
                 $subtotal += (float) $product->price * $quantity;
             }
 
+            $discountThreshold = (float) \App\Models\Setting::get('discount_threshold', 0);
+            $discountPercent = (float) \App\Models\Setting::get('discount_percent', 0);
+
+            $discount = 0;
+            if ($discountPercent > 0 && $subtotal >= $discountThreshold) {
+                $discount = $subtotal * ($discountPercent / 100);
+            }
+            $total = $subtotal - $discount;
+
             $order = Order::create([
                 'user_id' => $request->user()?->id,
                 'buyer_name' => $data['buyer_name'],
@@ -105,7 +114,7 @@ class CheckoutController extends Controller
                 'shipping_address' => $data['shipping_type'] === 'envio' ? $data['shipping_address'] : null,
                 'status' => Order::STATUS_PENDING,
                 'subtotal' => $subtotal,
-                'total' => $subtotal,
+                'total' => $total,
             ]);
 
             foreach ($cart as $productId => $item) {

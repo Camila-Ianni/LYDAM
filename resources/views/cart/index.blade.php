@@ -3,7 +3,16 @@
 @section('content')
 @php
     $cart = $cart ?? session()->get('cart', []);
-    $total = collect($cart)->sum(fn ($item) => (float) $item['price'] * (int) $item['quantity']);
+    $subtotal = collect($cart)->sum(fn ($item) => (float) $item['price'] * (int) $item['quantity']);
+
+    $discountThreshold = (float) \App\Models\Setting::get('discount_threshold', 0);
+    $discountPercent = (float) \App\Models\Setting::get('discount_percent', 0);
+
+    $discount = 0;
+    if ($discountPercent > 0 && $subtotal >= $discountThreshold) {
+        $discount = $subtotal * ($discountPercent / 100);
+    }
+    $total = $subtotal - $discount;
 @endphp
 
 <main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-24 md:py-32 flex flex-col items-center">
@@ -75,8 +84,14 @@
                     <div class="space-y-4 font-label-caps text-label-caps mb-8 border-b border-surface-container-highest pb-8">
                         <div class="flex justify-between items-center text-ash-grey">
                             <span>SUBTOTAL</span>
-                            <span class="text-raw-white">${{ number_format($total, 0, ',', '.') }} ARS</span>
+                            <span class="text-raw-white">${{ number_format($subtotal, 0, ',', '.') }} ARS</span>
                         </div>
+                        @if($discount > 0)
+                            <div class="flex justify-between items-center text-emerald-500 text-xs">
+                                <span>DESCUENTO ({{ $discountPercent }}%)</span>
+                                <span>-${{ number_format($discount, 0, ',', '.') }} ARS</span>
+                            </div>
+                        @endif
                         <div class="flex justify-between items-center text-ash-grey">
                             <span>ENVÍO</span>
                             <span class="text-raw-white text-xs">CALCULADO AL FINALIZAR</span>
