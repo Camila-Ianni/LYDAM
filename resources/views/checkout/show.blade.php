@@ -44,35 +44,19 @@
                     <span class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-3">MÉTODO DE PAGO</span>
                     <input type="hidden" id="payment_method" name="payment_method" value="{{ old('payment_method', 'transferencia') }}" required>
                     
-                    <div class="grid gap-6 sm:grid-cols-2">
-                        <!-- Option 1: Transferencia -->
-                        <button type="button" id="pay-btn-transfer" class="payment-card-btn text-left p-6 border transition-all duration-300 relative flex flex-col justify-between gap-6 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="transferencia">
-                            <div class="flex justify-between items-start">
-                                <span class="material-symbols-outlined text-raw-white text-3xl font-light">account_balance</span>
-                                <div class="payment-check-indicator w-5 h-5 border border-surface-container-highest flex items-center justify-center">
-                                    <div class="payment-check-dot w-2.5 h-2.5 bg-blood-red opacity-0 transition-opacity duration-200"></div>
-                                </div>
+                    <!-- Option: Transferencia -->
+                    <button type="button" id="pay-btn-transfer" class="payment-card-btn text-left p-6 border transition-all duration-300 relative flex flex-col justify-between gap-6 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white w-full" data-value="transferencia">
+                        <div class="flex justify-between items-start">
+                            <span class="material-symbols-outlined text-raw-white text-3xl font-light">account_balance</span>
+                            <div class="payment-check-indicator w-5 h-5 border border-surface-container-highest flex items-center justify-center">
+                                <div class="payment-check-dot w-2.5 h-2.5 bg-blood-red opacity-0 transition-opacity duration-200"></div>
                             </div>
-                            <div>
-                                <h3 class="font-headline-lg-mobile text-xl text-raw-white uppercase tracking-wider mb-1">TRANSFERENCIA</h3>
-                                <p class="font-label-caps text-[10px] text-ash-grey leading-tight uppercase">Datos para depositar al confirmar. 10% de descuento adicional.</p>
-                            </div>
-                        </button>
-
-                        <!-- Option 2: MercadoPago -->
-                        <button type="button" id="pay-btn-mercadopago" class="payment-card-btn text-left p-6 border transition-all duration-300 relative flex flex-col justify-between gap-6 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="mercadopago">
-                            <div class="flex justify-between items-start">
-                                <span class="material-symbols-outlined text-raw-white text-3xl font-light">credit_card</span>
-                                <div class="payment-check-indicator w-5 h-5 border border-surface-container-highest flex items-center justify-center">
-                                    <div class="payment-check-dot w-2.5 h-2.5 bg-blood-red opacity-0 transition-opacity duration-200"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="font-headline-lg-mobile text-xl text-raw-white uppercase tracking-wider mb-1">MERCADOPAGO</h3>
-                                <p class="font-label-caps text-[10px] text-ash-grey leading-tight uppercase">Paga con tarjeta o dinero en cuenta. Acreditación inmediata.</p>
-                            </div>
-                        </button>
-                    </div>
+                        </div>
+                        <div>
+                            <h3 class="font-headline-lg-mobile text-xl text-raw-white uppercase tracking-wider mb-1">TRANSFERENCIA BANCARIA</h3>
+                            <p class="font-label-caps text-[10px] text-ash-grey leading-tight uppercase">Datos para depositar al confirmar tu pedido. 10% de descuento adicional.</p>
+                        </div>
+                    </button>
                 </div>
 
                 <button type="submit" class="w-full bg-blood-red text-raw-white font-headline-lg-mobile text-2xl uppercase py-4 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-300 rounded-none tracking-wider mt-4">
