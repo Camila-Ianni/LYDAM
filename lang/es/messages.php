@@ -12,7 +12,7 @@ return [
     'bank_holder' => 'Titular',
     'bank_name' => 'Banco',
     'buyer_dni' => 'DNI',
-    'buyer_email' => 'Email',
+    'buyer_email' => 'Dirección de correo',
     'buyer_name' => 'Nombre',
     'buyer_phone' => 'WhatsApp',
     'cancel' => 'Cancelar',

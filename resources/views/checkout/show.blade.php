@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <label for="buyer_email" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.email') }}</label>
+                    <label for="buyer_email" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">{{ __('messages.buyer_email') }}</label>
                     <input id="buyer_email" name="buyer_email" type="email" value="{{ old('buyer_email', auth()->user()->email ?? '') }}" required class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
                 </div>
 
