@@ -89,9 +89,19 @@
                     </div>
                 </div>
                 
-                <button type="submit" @disabled($product->stock < 1) class="w-full bg-blood-red text-raw-white font-headline-lg-mobile text-2xl uppercase py-4 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-300 rounded-none tracking-wider disabled:bg-surface-container-highest disabled:text-ash-grey disabled:border-surface-container-highest disabled:cursor-not-allowed">
-                    {{ $product->stock < 1 ? 'SIN STOCK' : 'AGREGAR CURVA' }}
+                <button type="submit" @disabled($product->stock < 1 || $product->in_restock) class="w-full bg-blood-red text-raw-white font-headline-lg-mobile text-2xl uppercase py-4 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-300 rounded-none tracking-wider disabled:bg-surface-container-highest disabled:text-ash-grey disabled:border-surface-container-highest disabled:cursor-not-allowed">
+                    @if($product->in_restock)
+                        EN REPOSICIÓN
+                    @else
+                        {{ $product->stock < 1 ? 'SIN STOCK' : 'AGREGAR CURVA' }}
+                    @endif
                 </button>
+
+                @if($product->in_restock && $product->restock_date)
+                    <p class="mt-3 text-xs text-blood-red font-label-caps uppercase tracking-wider text-center">
+                        📅 REINGRESO ESTIMADO: {{ $product->restock_date->format('d/m/Y') }}
+                    </p>
+                @endif
             </form>
             
             <!-- Accordion details (simulated) -->

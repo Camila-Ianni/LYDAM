@@ -88,6 +88,8 @@ class ProductController extends Controller
 
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']['es']);
         $data['is_active'] = $request->boolean('is_active');
+        $data['in_restock'] = $request->boolean('in_restock');
+        $data['restock_date'] = $request->filled('restock_date') ? $request->input('restock_date') : null;
 
         $sizesString = $request->input('sizes');
         $data['sizes'] = $sizesString ? array_filter(array_map('trim', explode(',', $sizesString))) : [];
@@ -146,6 +148,8 @@ class ProductController extends Controller
         $data['image_path'] = !empty($currentPaths) ? json_encode($currentPaths) : null;
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']['es']);
         $data['is_active'] = $request->boolean('is_active');
+        $data['in_restock'] = $request->boolean('in_restock');
+        $data['restock_date'] = $request->filled('restock_date') ? $request->input('restock_date') : null;
 
         $sizesString = $request->input('sizes');
         $data['sizes'] = $sizesString ? array_filter(array_map('trim', explode(',', $sizesString))) : [];
@@ -236,6 +240,8 @@ class ProductController extends Controller
             'images.*' => ['image', 'max:8192'],
             'is_active' => ['nullable', 'boolean'],
             'category_id' => ['nullable', 'exists:categories,id'],
+            'in_restock' => ['nullable', 'boolean'],
+            'restock_date' => ['nullable', 'date'],
         ]);
     }
 

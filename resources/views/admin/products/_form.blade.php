@@ -77,6 +77,23 @@
     </div>
 @endif
 
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+    <!-- Restock Checkbox -->
+    <label class="flex items-center gap-3 border border-surface-container-highest bg-void-black p-4 rounded-none cursor-pointer group">
+        <input type="checkbox" id="in_restock" name="in_restock" value="1" @checked(old('in_restock', $product->in_restock ?? false)) class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none">
+        <div class="flex flex-col">
+            <span class="font-label-caps text-label-caps text-ash-grey group-hover:text-raw-white transition-colors uppercase">Agotado pero en Reposición</span>
+            <span class="text-[10px] text-ash-grey font-label-caps lowercase">Muestra un indicador especial de reposición en la web.</span>
+        </div>
+    </label>
+
+    <!-- Restock Date Field -->
+    <div id="restock_date_container" class="{{ old('in_restock', $product->in_restock) ? '' : 'opacity-50 pointer-events-none' }} transition-opacity duration-300">
+        <label for="restock_date" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Fecha Estimada de Reingreso (Opcional)</label>
+        <input id="restock_date" name="restock_date" type="date" value="{{ old('restock_date', $product->restock_date ? $product->restock_date->format('Y-m-d') : '') }}" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+    </div>
+</div>
+
 <label class="mt-6 flex items-center gap-3 border border-surface-container-highest bg-void-black p-4 rounded-none cursor-pointer group">
     <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $product->is_active ?? true)) class="form-checkbox bg-void-black border-outline-variant text-blood-red focus:ring-blood-red focus:ring-offset-void-black rounded-none">
     <span class="font-label-caps text-label-caps text-ash-grey group-hover:text-raw-white transition-colors">{{ __('messages.product_active') }}</span>
@@ -215,6 +232,21 @@ document.addEventListener('DOMContentLoaded', function() {
             reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result);
             reader.onerror = error => reject(error);
+        });
+    }
+    // Restock toggle listener
+    const inRestockCheckbox = document.getElementById('in_restock');
+    const restockDateContainer = document.getElementById('restock_date_container');
+    
+    if (inRestockCheckbox && restockDateContainer) {
+        inRestockCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                restockDateContainer.classList.remove('opacity-50', 'pointer-events-none');
+            } else {
+                restockDateContainer.classList.add('opacity-50', 'pointer-events-none');
+                const dateInput = document.getElementById('restock_date');
+                if (dateInput) dateInput.value = ''; // clear value if unchecked
+            }
         });
     }
 });

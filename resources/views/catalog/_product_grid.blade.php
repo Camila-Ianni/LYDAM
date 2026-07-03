@@ -19,7 +19,19 @@
                         @endif
                     </a>
 
-                    @if($product->stock <= 5)
+                    @if($product->in_restock)
+                        <div class="absolute top-2 left-2 z-20 bg-void-black text-blood-red border border-blood-red font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider pointer-events-none">
+                            @if($product->restock_date)
+                                REINGRESO: {{ $product->restock_date->format('d/m') }}
+                            @else
+                                EN REPOSICIÓN
+                            @endif
+                        </div>
+                    @elseif($product->stock <= 0)
+                        <div class="absolute top-2 left-2 z-20 bg-surface-container-highest text-ash-grey font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black pointer-events-none">
+                            AGOTADO
+                        </div>
+                    @elseif($product->stock <= 5)
                         <div class="absolute top-2 left-2 z-20 bg-raw-white text-void-black font-label-caps text-label-caps px-2 py-1 uppercase tracking-wider border border-void-black pointer-events-none">
                             STOCK BAJO
                         </div>
@@ -32,7 +44,7 @@
                     <!-- Add to Cart Overlay on Hover -->
                     <div class="absolute bottom-0 left-0 w-full bg-void-black/90 backdrop-blur-sm border-t border-surface-container-highest p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 flex flex-col gap-2">
                         <span class="font-label-caps text-label-caps text-ash-grey uppercase text-center block mb-1">VENTA POR CURVA</span>
-                        @if ($product->stock > 0)
+                        @if ($product->stock > 0 && !$product->in_restock)
                             <form action="{{ route('cart.add', $product) }}" method="POST" class="w-full">
                                 @csrf
                                 <input type="hidden" name="quantity" value="1">
@@ -40,6 +52,10 @@
                                     AGREGAR CURVA (x5 U.)
                                 </button>
                             </form>
+                        @elseif ($product->in_restock)
+                            <button disabled class="border border-blood-red px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps text-blood-red text-xs cursor-not-allowed bg-void-black">
+                                EN REPOSICIÓN
+                            </button>
                         @else
                             <button disabled class="border border-outline-variant px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps text-ash-grey text-xs cursor-not-allowed">
                                 SIN STOCK

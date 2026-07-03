@@ -23,6 +23,8 @@ class Product extends Model
         'image_path',
         'is_active',
         'category_id',
+        'in_restock',
+        'restock_date',
     ];
 
     protected function casts(): array
@@ -36,6 +38,8 @@ class Product extends Model
             'stock' => 'integer',
             'is_active' => 'boolean',
             'category_id' => 'integer',
+            'in_restock' => 'boolean',
+            'restock_date' => 'date',
         ];
     }
 
