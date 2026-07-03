@@ -14,7 +14,7 @@ return [
     'buyer_dni' => 'DNI',
     'buyer_email' => 'Email',
     'buyer_name' => 'Nombre',
-    'buyer_phone' => 'Teléfono',
+    'buyer_phone' => 'WhatsApp',
     'cancel' => 'Cancelar',
     'cart_badge' => 'Tu pedido LYDAM',
     'catalog_badge' => 'Colección Tribal Under',

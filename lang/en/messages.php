@@ -14,7 +14,7 @@ return [
     'buyer_dni' => 'ID number',
     'buyer_email' => 'Email',
     'buyer_name' => 'Name',
-    'buyer_phone' => 'Phone',
+    'buyer_phone' => 'WhatsApp',
     'cancel' => 'Cancel',
     'cart_badge' => 'Your LYDAM order',
     'catalog_badge' => 'Tribal Under collection',
