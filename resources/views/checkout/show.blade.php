@@ -88,7 +88,7 @@
                             </div>
                         </button>
 
-                        <!-- Option 2: Envío a Domicilio -->
+                        <!-- Option 2: Envío a Localidad -->
                         <button type="button" class="shipping-card-btn text-left p-4 border transition-all duration-300 relative flex flex-col justify-between gap-4 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="envio">
                             <div class="flex justify-between items-start">
                                 <span class="material-symbols-outlined text-raw-white text-2xl font-light">local_shipping</span>
@@ -97,12 +97,12 @@
                                 </div>
                             </div>
                             <div>
-                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">ENVÍO A DOMICILIO</h3>
-                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Enviamos a todo el país.</p>
+                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">ENVÍO A LOCALIDAD</h3>
+                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Envío por transporte o correo.</p>
                             </div>
                         </button>
 
-                        <!-- Option 3: Punto de Encuentro -->
+                        <!-- Option 3: Entrega a los tours en la salada -->
                         <button type="button" class="shipping-card-btn text-left p-4 border transition-all duration-300 relative flex flex-col justify-between gap-4 select-none rounded-none focus:outline-none bg-void-black/20 hover:border-raw-white" data-value="punto_encuentro">
                             <div class="flex justify-between items-start">
                                 <span class="material-symbols-outlined text-raw-white text-2xl font-light">handshake</span>
@@ -111,8 +111,8 @@
                                 </div>
                             </div>
                             <div>
-                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">PUNTO ENCUENTRO</h3>
-                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Coordinar entrega en zona.</p>
+                                <h3 class="font-headline-lg-mobile text-sm text-raw-white uppercase tracking-wider mb-1">TOURS EN LA SALADA</h3>
+                                <p class="font-label-caps text-[9px] text-ash-grey leading-tight uppercase">Entrega a los tours en La Salada.</p>
                             </div>
                         </button>
                     </div>
@@ -120,8 +120,8 @@
 
                 <!-- Shipping Address Input (conditional) -->
                 <div id="shipping-address-container" class="mt-6 hidden">
-                    <label for="shipping_address" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Dirección de Envío Completa</label>
-                    <input id="shipping_address" name="shipping_address" type="text" value="{{ old('shipping_address') }}" placeholder="Calle, Número, Piso, Departamento, Código Postal, Localidad, Provincia" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
+                    <label for="shipping_address" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Localidad y Dirección de Envío</label>
+                    <input id="shipping_address" name="shipping_address" type="text" value="{{ old('shipping_address') }}" placeholder="Localidad, Provincia, Dirección completa / Datos del transporte o colectivo" class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full">
                 </div>
 
                 <div class="mt-6">

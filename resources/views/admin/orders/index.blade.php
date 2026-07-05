@@ -30,9 +30,9 @@
                                 <span>{{ $order->buyer_email }}</span>
                                 <span class="px-1.5 py-0.5 border border-surface-container-highest uppercase text-[9px] font-sans">
                                     @if(($order->shipping_type ?? 'retiro') === 'envio')
-                                        Envío
+                                        Envío Loc.
                                     @elseif(($order->shipping_type ?? 'retiro') === 'punto_encuentro')
-                                        Pto. Encuentro
+                                        Tours La Salada
                                     @else
                                         Retiro
                                     @endif

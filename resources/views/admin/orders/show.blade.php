@@ -70,9 +70,9 @@
                     <dt class="text-ash-grey uppercase tracking-wider mb-1">Método de Entrega</dt>
                     <dd class="font-bold text-raw-white uppercase">
                         @if(($order->shipping_type ?? 'retiro') === 'envio')
-                            Envío a Domicilio
+                            Envío a Localidad
                         @elseif(($order->shipping_type ?? 'retiro') === 'punto_encuentro')
-                            Punto de Encuentro
+                            Entrega a los Tours en La Salada
                         @else
                             Retiro en Local
                         @endif
@@ -80,7 +80,7 @@
                 </div>
                 @if(($order->shipping_type ?? 'retiro') === 'envio')
                     <div class="sm:col-span-2">
-                        <dt class="text-ash-grey uppercase tracking-wider mb-1">Dirección de Envío</dt>
+                        <dt class="text-ash-grey uppercase tracking-wider mb-1">Localidad y Dirección de Envío</dt>
                         <dd class="font-bold text-raw-white">{{ $order->shipping_address ?? 'No especificada' }}</dd>
                     </div>
                 @endif
