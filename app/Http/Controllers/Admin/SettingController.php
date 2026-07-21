@@ -60,8 +60,10 @@ class SettingController extends Controller
                 if (isset($catData['image'])) {
                     $category = \App\Models\Category::find($catId);
                     if ($category) {
-                        $path = $catData['image']->store('categories', 'public');
-                        $category->image_path = $path;
+                        $file = $catData['image'];
+                        $filename = $category->slug . '_' . time() . '.' . $file->getClientOriginalExtension();
+                        $file->move(public_path('images/categories'), $filename);
+                        $category->image_path = 'images/categories/' . $filename;
                         $category->save();
                     }
                 }
