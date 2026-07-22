@@ -63,49 +63,6 @@
                         </div>
                     @endif
                     
-                    <!-- Add to Cart Overlay on Hover -->
-                    <div class="absolute bottom-0 left-0 w-full bg-void-black/90 backdrop-blur-sm border-t border-surface-container-highest p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 flex flex-col gap-2">
-                        <span class="font-label-caps text-label-caps text-ash-grey uppercase text-center block mb-1">VENTA POR CURVA</span>
-                        @if ($product->stock > 0 && !$product->in_restock)
-                            <form action="{{ route('cart.add', $product) }}" method="POST" class="w-full flex flex-col gap-2">
-                                @csrf
-                                <!-- Quantity controls -->
-                                <div class="flex items-center justify-between border border-outline-variant bg-void-black">
-                                    <button type="button" 
-                                            class="w-8 h-8 flex items-center justify-center text-raw-white hover:bg-blood-red hover:text-raw-white transition-colors"
-                                            onclick="event.preventDefault(); event.stopPropagation(); decrementCardQty(this)">
-                                        <span class="material-symbols-outlined text-sm font-light">remove</span>
-                                    </button>
-                                    <input type="number" 
-                                           name="quantity" 
-                                           value="1" 
-                                           min="1" 
-                                           max="{{ $product->stock }}" 
-                                           class="w-12 h-8 bg-transparent text-center font-label-caps text-label-caps text-raw-white border-none focus:ring-0 p-0 m-0 card-qty-input" 
-                                           readonly
-                                           onclick="event.preventDefault(); event.stopPropagation();">
-                                    <button type="button" 
-                                            class="w-8 h-8 flex items-center justify-center text-raw-white hover:bg-blood-red hover:text-raw-white transition-colors"
-                                            onclick="event.preventDefault(); event.stopPropagation(); incrementCardQty(this, {{ $product->stock }})">
-                                        <span class="material-symbols-outlined text-sm font-light">add</span>
-                                    </button>
-                                </div>
-                                <button type="submit" 
-                                        class="bg-blood-red border border-blood-red px-2 py-2 w-full flex items-center justify-center font-label-caps text-label-caps hover:bg-void-black hover:text-blood-red transition-all text-raw-white text-xs tracking-wider"
-                                        onclick="event.stopPropagation();">
-                                    AGREGAR AL CARRITO
-                                </button>
-                            </form>
-                        @elseif ($product->in_restock)
-                            <button disabled class="border border-blood-red px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps text-blood-red text-xs cursor-not-allowed bg-void-black">
-                                EN REPOSICIÓN
-                            </button>
-                        @else
-                            <button disabled class="border border-outline-variant px-2 py-1 w-full flex items-center justify-center font-label-caps text-label-caps text-ash-grey text-xs cursor-not-allowed">
-                                SIN STOCK
-                            </button>
-                        @endif
-                    </div>
                 </div>
 
                 <!-- Product Info -->
@@ -120,10 +77,51 @@
                     @else
                         <p class="font-label-caps text-label-caps text-blood-red mb-1">CURVA: ÚNICA</p>
                     @endif
-                    <div class="mt-auto pt-2">
+                    <div class="pt-2 mb-4">
                         <span class="font-label-caps text-label-caps text-ash-grey">
                             ${{ number_format($product->price, 0, ',', '.') }} ARS / CURVA
                         </span>
+                    </div>
+
+                    <!-- Action Form at the Bottom of Card -->
+                    <div class="mt-auto pt-4 border-t border-surface-container/40">
+                        @if ($product->stock > 0 && !$product->in_restock)
+                            <form action="{{ route('cart.add', $product) }}" method="POST" class="w-full flex flex-col gap-2">
+                                @csrf
+                                <!-- Quantity controls -->
+                                <div class="flex items-center justify-between border border-surface-container-highest bg-void-black">
+                                    <button type="button" 
+                                            class="w-8 h-8 flex items-center justify-center text-raw-white hover:bg-blood-red hover:text-raw-white transition-colors"
+                                            onclick="decrementCardQty(this)">
+                                        <span class="material-symbols-outlined text-sm font-light">remove</span>
+                                    </button>
+                                    <input type="number" 
+                                           name="quantity" 
+                                           value="1" 
+                                           min="1" 
+                                           max="{{ $product->stock }}" 
+                                           class="w-12 h-8 bg-transparent text-center font-label-caps text-label-caps text-raw-white border-none focus:ring-0 p-0 m-0 card-qty-input" 
+                                           readonly>
+                                    <button type="button" 
+                                            class="w-8 h-8 flex items-center justify-center text-raw-white hover:bg-blood-red hover:text-raw-white transition-colors"
+                                            onclick="incrementCardQty(this, {{ $product->stock }})">
+                                        <span class="material-symbols-outlined text-sm font-light">add</span>
+                                    </button>
+                                </div>
+                                <button type="submit" 
+                                        class="bg-blood-red border border-blood-red px-2 py-2 w-full flex items-center justify-center font-label-caps text-label-caps hover:bg-void-black hover:text-blood-red transition-all text-raw-white text-xs tracking-wider">
+                                    AGREGAR AL CARRITO
+                                </button>
+                            </form>
+                        @elseif ($product->in_restock)
+                            <button disabled class="border border-blood-red px-2 py-2 w-full flex items-center justify-center font-label-caps text-label-caps text-blood-red text-xs cursor-not-allowed bg-void-black uppercase tracking-wider">
+                                EN REPOSICIÓN
+                            </button>
+                        @else
+                            <button disabled class="border border-outline-variant px-2 py-2 w-full flex items-center justify-center font-label-caps text-label-caps text-ash-grey text-xs cursor-not-allowed uppercase tracking-wider">
+                                SIN STOCK
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
