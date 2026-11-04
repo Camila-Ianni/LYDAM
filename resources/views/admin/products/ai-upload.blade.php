@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Enable analyze button
         analyzeBtn.disabled = false;
         analyzeBtn.classList.remove('bg-void-black', 'text-ash-grey');
-        analyzeBtn.classList.add('bg-blood-red', 'text-raw-white', 'border-blood-red');
+        analyzeBtn.classList.add('bg-blood-red', 'text-white', 'border-blood-red');
     }
 
     // Analyze with IA

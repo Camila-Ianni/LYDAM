@@ -124,7 +124,7 @@
                         <option value="{{ $value }}" @selected($order->status === $value)>{{ $label }}</option>
                     @endforeach
                 </select>
-                <button type="submit" class="w-full bg-blood-red text-raw-white font-headline-lg-mobile text-xl uppercase py-3 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-300 rounded-none tracking-wider text-center justify-center">
+                <button type="submit" class="w-full bg-blood-red text-white font-headline-lg-mobile text-xl uppercase py-3 border border-blood-red hover:bg-zinc-950 hover:text-white transition-all duration-300 rounded-none tracking-wider text-center justify-center">
                     {{ __('messages.save_status') }}
                 </button>
             </form>
@@ -133,7 +133,7 @@
             <form method="POST" action="{{ route('admin.orders.destroy', $order) }}" class="border-t border-surface-container-highest pt-6 mt-6" onsubmit="return confirm('¿Estás seguro de que querés eliminar este pedido de forma permanente?');">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="w-full bg-void-black text-blood-red font-headline-lg-mobile text-xl uppercase py-3 border border-blood-red/30 hover:bg-blood-red hover:text-raw-white transition-all duration-300 rounded-none tracking-wider text-center justify-center">
+                <button type="submit" class="w-full bg-surface text-blood-red font-headline-lg-mobile text-xl uppercase py-3 border border-blood-red/30 hover:bg-blood-red hover:text-white transition-all duration-300 rounded-none tracking-wider text-center justify-center">
                     ELIMINAR PEDIDO
                 </button>
             </form>

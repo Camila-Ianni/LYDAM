@@ -37,6 +37,15 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Por favor, ingresá tu nombre.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'email.required' => 'Por favor, ingresá tu correo electrónico.',
+            'email.email' => 'Por favor, ingresá un correo electrónico válido.',
+            'email.unique' => 'Esta dirección de correo ya está registrada en la tienda. Si ya tenés cuenta, iniciá sesión o probá con otra.',
+            'password.required' => 'Por favor, ingresá una contraseña.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres. Intentá con una contraseña más segura (podés combinar mayúsculas, minúsculas y números).',
+            'password.confirmed' => 'Las contraseñas no coinciden. Revisá que ambas sean iguales.',
         ]);
 
         $user = User::create([

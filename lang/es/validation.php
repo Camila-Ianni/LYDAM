@@ -105,7 +105,7 @@ return [
         'array' => 'El campo :attribute debe tener al menos :min elementos.',
         'file' => 'El archivo :attribute debe pesar al menos :min kilobytes.',
         'numeric' => 'El campo :attribute debe ser al menos :min.',
-        'string' => 'El campo :attribute (como la contraseña) debe tener al menos :min caracteres.',
+        'string' => 'La contraseña debe tener al menos :min caracteres. Intentá con otra contraseña más segura, usando mayúsculas o números.',
     ],
     'min_digits' => 'El campo :attribute debe tener al menos :min dígitos.',
     'missing' => 'El campo :attribute no debe estar presente.',

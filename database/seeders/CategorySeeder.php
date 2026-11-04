@@ -51,13 +51,16 @@ class CategorySeeder extends Seeder
 
         $categories = [];
         foreach ($categoriesData as $data) {
-            $categories[$data['slug']] = Category::updateOrCreate(
-                ['slug' => $data['slug']],
-                [
+            $existing = Category::where('slug', $data['slug'])->first();
+            if ($existing) {
+                $existing->update([
                     'name' => $data['name'],
-                    'image_path' => $data['image_path']
-                ]
-            );
+                    'image_path' => $existing->image_path ?: $data['image_path']
+                ]);
+                $categories[$data['slug']] = $existing;
+            } else {
+                $categories[$data['slug']] = Category::create($data);
+            }
         }
 
         // Remove any obsolete categories (like jorts ones from previous turns)

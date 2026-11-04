@@ -4,7 +4,7 @@
 <main class="flex-grow max-w-max-width mx-auto w-full px-margin-mobile md:px-margin-desktop py-8 md:py-16">
     <!-- Back link -->
     <div class="w-full mb-8">
-        <a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-ash-grey hover:text-raw-white transition-colors group" href="{{ route('products.index') }}">
+        <a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-ash-grey hover:text-black transition-colors group" href="{{ route('products.index') }}">
             <span class="material-symbols-outlined text-sm transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
             VOLVER AL CATÁLOGO
         </a>
@@ -16,25 +16,23 @@
         <!-- Left: Thumbnail Gallery -->
         <div class="md:col-span-1 order-2 md:order-1 flex md:flex-col gap-4 overflow-x-auto md:overflow-visible no-scrollbar pb-4 md:pb-0">
             @foreach ($product->imageUrls() as $index => $url)
-                <button type="button" class="thumbnail-btn flex-shrink-0 w-20 h-24 md:w-full md:h-32 border {{ $loop->first ? 'border-blood-red' : 'border-surface-container-highest hover:border-raw-white' }} relative overflow-hidden group transition-colors duration-200" data-large-url="{{ $url }}" data-index="{{ $index }}">
+                <button type="button" class="thumbnail-btn flex-shrink-0 w-20 h-24 md:w-full md:h-32 border {{ $loop->first ? 'border-blood-red' : 'border-surface-container-highest hover:border-black' }} relative overflow-hidden group transition-colors duration-200" data-large-url="{{ $url }}" data-index="{{ $index }}">
                     <img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300" src="{{ $url }}"/>
                 </button>
             @endforeach
         </div>
         
         <!-- Center: Main Image -->
-        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-void-black relative w-full max-w-[500px] aspect-[2/3] mx-auto border border-surface-container-highest overflow-hidden group select-none">
+        <div id="main-image-container" class="md:col-span-7 order-1 md:order-2 bg-surface-container-low relative w-full max-w-[500px] aspect-[2/3] mx-auto border border-surface-container-highest overflow-hidden group select-none shadow-sm">
             @if ($product->imageUrl())
                 <img id="main-image" alt="{{ $product->translatedName() }}" class="absolute inset-0 w-full h-full object-cover object-center z-10" src="{{ $product->imageUrl() }}"/>
             @else
                 <div class="absolute inset-0 flex items-center justify-center bg-surface-container-low p-12">
-                    <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="max-w-xs w-full h-auto object-contain opacity-40">
+                    <img src="{{ asset('images/logo.png') }}" alt="LYDAM" class="max-w-xs w-full h-auto object-contain opacity-40 brand-logo-dark">
                 </div>
             @endif
-            <!-- Overlay for depth -->
-            <div class="absolute inset-0 bg-gradient-to-t from-void-black via-transparent to-transparent opacity-80 pointer-events-none z-20"></div>
             <!-- Drop Badge -->
-            <div class="absolute top-4 left-4 bg-blood-red text-void-black font-label-caps text-label-caps px-4 py-2 uppercase tracking-widest font-bold border border-void-black z-20">
+            <div class="absolute top-4 left-4 bg-blood-red text-white font-label-caps text-label-caps px-4 py-2 uppercase tracking-widest font-bold shadow-md z-20">
                 NUEVO DROP
             </div>
         </div>
@@ -42,25 +40,25 @@
         <!-- Right: Product Info -->
         <div class="md:col-span-4 order-3 flex flex-col gap-8 md:pl-8">
             <div class="flex flex-col gap-2">
-                <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-raw-white uppercase gothic-font leading-none">
+                <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-zinc-950 uppercase gothic-font leading-none font-bold">
                     {{ $product->translatedName() }}
                 </h1>
-                <p class="font-label-caps text-label-caps text-blood-red text-xl tracking-widest mt-2">
+                <p class="font-label-caps text-label-caps text-blood-red text-xl tracking-widest mt-2 font-bold">
                     ${{ number_format($product->price, 0, ',', '.') }} ARS <span class="text-sm text-ash-grey ml-2">(PRECIO POR CURVA)</span>
                 </p>
             </div>
             
-            <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            <div class="font-body-md text-body-md text-zinc-700 leading-relaxed">
                 <p>{{ $product->translatedDescription() }}</p>
             </div>
             
             <!-- Size Selector -->
             @if(!empty($product->sizes))
                 <div class="flex flex-col gap-4">
-                    <span class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest">VENTA POR CURVA (TALLES INCLUIDOS)</span>
+                    <span class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest font-bold">VENTA POR CURVA (TALLES INCLUIDOS)</span>
                     <div class="flex flex-wrap gap-3">
                         @foreach($product->sizes as $size)
-                            <div class="px-4 h-12 min-w-[3rem] flex items-center justify-center border border-surface-container-highest bg-surface-container text-raw-white font-label-caps rounded-none">
+                            <div class="px-4 h-12 min-w-[3rem] flex items-center justify-center border border-surface-container-highest bg-white text-zinc-950 font-label-caps rounded-none font-bold shadow-sm">
                                 {{ $size }}
                             </div>
                         @endforeach
@@ -72,24 +70,24 @@
             <form method="POST" action="{{ route('cart.add', $product) }}">
                 @csrf
                 <div class="flex flex-col gap-4 mb-4">
-                    <label for="quantity" class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest">CANTIDAD DE CURVAS</label>
-                    <div class="flex items-center border border-surface-container-highest w-36 bg-void-black">
+                    <label for="quantity" class="font-label-caps text-label-caps text-ash-grey uppercase tracking-widest font-bold">CANTIDAD DE CURVAS</label>
+                    <div class="flex items-center border border-surface-container-highest w-36 bg-surface-container-low">
                         <!-- Decrement Button -->
-                        <button type="button" id="qty-dec-btn" class="h-12 w-12 flex items-center justify-center text-ash-grey hover:text-raw-white transition-colors focus:outline-none select-none">
+                        <button type="button" id="qty-dec-btn" class="h-12 w-12 flex items-center justify-center text-zinc-800 hover:text-blood-red transition-colors focus:outline-none select-none">
                             <span class="material-symbols-outlined text-sm font-bold">remove</span>
                         </button>
                         
                         <!-- Input -->
-                        <input id="quantity" name="quantity" type="number" min="1" max="{{ max($product->stock, 1) }}" value="{{ old('quantity', 1) }}" class="bg-transparent text-raw-white border-none px-2 py-3 font-label-caps text-center w-12 focus:outline-none focus:ring-0 focus:border-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                        <input id="quantity" name="quantity" type="number" min="1" max="{{ max($product->stock, 1) }}" value="{{ old('quantity', 1) }}" class="bg-transparent text-zinc-950 border-none px-2 py-3 font-label-caps text-center w-12 focus:outline-none focus:ring-0 focus:border-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none font-bold">
                         
                         <!-- Increment Button -->
-                        <button type="button" id="qty-inc-btn" class="h-12 w-12 flex items-center justify-center text-ash-grey hover:text-raw-white transition-colors focus:outline-none select-none">
+                        <button type="button" id="qty-inc-btn" class="h-12 w-12 flex items-center justify-center text-zinc-800 hover:text-blood-red transition-colors focus:outline-none select-none">
                             <span class="material-symbols-outlined text-sm font-bold">add</span>
                         </button>
                     </div>
                 </div>
                 
-                <button type="submit" @disabled($product->stock < 1 || $product->in_restock) class="w-full bg-blood-red text-raw-white font-headline-lg-mobile text-2xl uppercase py-4 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-300 rounded-none tracking-wider disabled:bg-surface-container-highest disabled:text-ash-grey disabled:border-surface-container-highest disabled:cursor-not-allowed">
+                <button type="submit" @disabled($product->stock < 1 || $product->in_restock) class="w-full bg-blood-red text-white font-headline-lg-mobile text-2xl uppercase py-4 border border-blood-red hover:bg-black hover:text-white transition-all duration-300 rounded-none tracking-wider disabled:bg-zinc-200 disabled:text-zinc-400 disabled:border-zinc-300 disabled:cursor-not-allowed font-bold">
                     @if($product->in_restock)
                         EN REPOSICIÓN
                     @else
@@ -98,7 +96,7 @@
                 </button>
 
                 @if($product->in_restock && $product->restock_date)
-                    <p class="mt-3 text-xs text-blood-red font-label-caps uppercase tracking-wider text-center">
+                    <p class="mt-3 text-xs text-blood-red font-label-caps uppercase tracking-wider text-center font-bold">
                         📅 REINGRESO ESTIMADO: {{ $product->restock_date->format('d/m/Y') }}
                     </p>
                 @endif
@@ -107,7 +105,7 @@
             <!-- Accordion details (simulated) -->
             <div class="border-t border-surface-container-highest mt-8 pt-6 flex flex-col gap-4">
                 <div class="flex justify-between items-center cursor-pointer group">
-                    <span class="font-label-caps text-label-caps uppercase tracking-widest text-raw-white group-hover:text-blood-red transition-colors">DETALLES Y CUIDADO</span>
+                    <span class="font-label-caps text-label-caps uppercase tracking-widest text-zinc-950 group-hover:text-blood-red transition-colors font-bold">DETALLES Y CUIDADO</span>
                     <span class="material-symbols-outlined text-raw-white group-hover:text-blood-red">add</span>
                 </div>
                 <div class="flex justify-between items-center cursor-pointer group border-t border-surface-container-highest pt-4">

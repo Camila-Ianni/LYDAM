@@ -55,14 +55,18 @@ class SettingController extends Controller
         }
 
         // Handle Category Images
-        if ($request->hasFile('categories')) {
+        if ($request->file('categories')) {
+            $destDir = public_path('images/categories');
+            if (!file_exists($destDir)) {
+                mkdir($destDir, 0755, true);
+            }
             foreach ($request->file('categories') as $catId => $catData) {
-                if (isset($catData['image'])) {
+                if (isset($catData['image']) && $catData['image'] instanceof \Illuminate\Http\UploadedFile && $catData['image']->isValid()) {
                     $category = \App\Models\Category::find($catId);
                     if ($category) {
                         $file = $catData['image'];
                         $filename = $category->slug . '_' . time() . '.' . $file->getClientOriginalExtension();
-                        $file->move(public_path('images/categories'), $filename);
+                        $file->move($destDir, $filename);
                         $category->image_path = 'images/categories/' . $filename;
                         $category->save();
                     }

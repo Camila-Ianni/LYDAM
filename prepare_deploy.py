@@ -127,6 +127,14 @@ if (class_exists('ZipArchive')) {
             }
         }
         
+        // Limpiar archivos de cache de Laravel en bootstrap/cache y framework/views
+        foreach (glob($extractDir . '/bootstrap/cache/*.php') as $cFile) {
+            @unlink($cFile);
+        }
+        foreach (glob($extractDir . '/storage/framework/views/*.php') as $vFile) {
+            @unlink($vFile);
+        }
+
         // Crear base de datos sqlite vacía si no existe
         $dbFile = $extractDir . '/database/database.sqlite';
         if (!file_exists($dbFile)) {

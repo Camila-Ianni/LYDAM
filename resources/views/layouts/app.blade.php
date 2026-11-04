@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +12,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-void-black text-on-surface font-body-md antialiased selection:bg-blood-red selection:text-raw-white min-h-screen flex flex-col">
+<body class="bg-zinc-50 text-on-surface font-body-md antialiased selection:bg-blood-red selection:text-white min-h-screen flex flex-col">
     <!-- Top Bar -->
-    <div class="bg-blood-red text-raw-white text-center py-2 font-label-caps text-label-caps border-b border-surface-variant">
+    <div class="bg-blood-red text-white text-center py-2 font-label-caps text-label-caps border-b border-blood-red/20 font-bold tracking-wider">
         PANEL DE ADMINISTRACIÓN • LYDAM STORE
     </div>
 
@@ -28,7 +28,7 @@
         @endif
 
         @if ($errors->any())
-            <div class="mb-6 bg-surface-container border border-blood-red px-4 py-3 text-sm text-raw-white">
+            <div class="mb-6 bg-surface-container border border-blood-red px-4 py-3 text-sm text-on-surface">
                 <p class="font-bold font-label-caps text-blood-red">{{ __('Revisá los datos ingresados.') }}</p>
                 <ul class="mt-2 list-disc space-y-1 pl-5 font-label-caps">
                     @foreach ($errors->all() as $error)
@@ -46,7 +46,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-void-black dark:bg-surface-container-lowest border-t border-surface-variant">
+    <footer class="bg-white border-t border-surface-container-highest">
         <div class="flex justify-between items-center w-full px-margin-desktop py-12 max-w-max-width mx-auto font-label-caps text-label-caps text-ash-grey">
             <div>LYDAM PANEL</div>
             <div>© 2026 LYDAM. TODOS LOS DERECHOS RESERVADOS.</div>

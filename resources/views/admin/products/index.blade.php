@@ -10,7 +10,7 @@
         <a href="{{ route('admin.products.ai-upload') }}" class="bg-surface-container border border-surface-container-highest text-raw-white font-label-caps text-xs py-3 px-6 hover:border-blood-red hover:text-blood-red transition-all duration-200 uppercase tracking-widest text-center">
             Subir con IA
         </a>
-        <a href="{{ route('admin.products.create') }}" class="bg-blood-red text-raw-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-200 uppercase tracking-widest text-center">
+        <a href="{{ route('admin.products.create') }}" class="bg-blood-red text-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-zinc-950 hover:text-white transition-all duration-200 uppercase tracking-widest text-center">
             {{ __('messages.new_product') }}
         </a>
     </div>
@@ -18,11 +18,11 @@
 
 <!-- Category Filters Tabs -->
 <div class="flex flex-wrap gap-2 mb-6">
-    <a href="{{ route('admin.products.index') }}" class="px-4 py-2 text-xs font-label-caps uppercase border {{ is_null($selectedCategoryId) ? 'bg-blood-red text-raw-white border-blood-red' : 'bg-void-black text-ash-grey border-surface-container-highest hover:text-raw-white' }} transition-colors">
+    <a href="{{ route('admin.products.index') }}" class="px-4 py-2 text-xs font-label-caps uppercase border {{ is_null($selectedCategoryId) ? 'bg-blood-red text-white border-blood-red' : 'bg-surface text-ash-grey border-surface-container-highest hover:text-on-surface' }} transition-colors">
         Todos
     </a>
     @foreach($categories as $cat)
-        <a href="{{ route('admin.products.index', ['category_id' => $cat->id]) }}" class="px-4 py-2 text-xs font-label-caps uppercase border {{ $selectedCategoryId == $cat->id ? 'bg-blood-red text-raw-white border-blood-red' : 'bg-void-black text-ash-grey border-surface-container-highest hover:text-raw-white' }} transition-colors">
+        <a href="{{ route('admin.products.index', ['category_id' => $cat->id]) }}" class="px-4 py-2 text-xs font-label-caps uppercase border {{ $selectedCategoryId == $cat->id ? 'bg-blood-red text-white border-blood-red' : 'bg-surface text-ash-grey border-surface-container-highest hover:text-on-surface' }} transition-colors">
             {{ $cat->name }}
         </a>
     @endforeach
@@ -81,7 +81,7 @@
                                 <form method="POST" action="{{ route('admin.products.destroy', $product) }}" onsubmit="return confirm('{{ __('messages.confirm_delete_product') }}')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-void-black border border-surface-container-highest px-3 py-2 text-xs font-label-caps text-blood-red hover:bg-blood-red hover:text-raw-white transition-colors">
+                                    <button type="submit" class="bg-surface border border-surface-container-highest px-3 py-2 text-xs font-label-caps text-blood-red hover:bg-blood-red hover:text-white transition-colors">
                                         {{ __('messages.delete') }}
                                     </button>
                                 </form>

@@ -62,7 +62,7 @@
                             <form action="{{ route('admin.orders.destroy', $order) }}" method="POST" class="inline-block ms-2" onsubmit="return confirm('¿Estás seguro de que querés eliminar este pedido de forma permanente?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-blood-red/10 border border-blood-red/30 px-3 py-2 text-xs font-label-caps text-blood-red hover:bg-blood-red hover:text-raw-white transition-colors">
+                                <button type="submit" class="bg-blood-red/10 border border-blood-red/30 px-3 py-2 text-xs font-label-caps text-blood-red hover:bg-blood-red hover:text-white transition-colors">
                                     ELIMINAR
                                 </button>
                             </form>

@@ -56,7 +56,7 @@
 
 <div class="mt-6">
     <label for="images" class="block font-label-caps text-label-caps text-ash-grey uppercase tracking-widest mb-2">Imágenes del Producto (Subir una o más)</label>
-    <input id="images" name="images[]" type="file" accept="image/*" multiple class="bg-void-black text-raw-white border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full file:bg-blood-red file:border-none file:text-raw-white file:px-4 file:py-2 file:font-bold file:cursor-pointer uppercase file:font-label-caps">
+    <input id="images" name="images[]" type="file" accept="image/*" multiple class="bg-surface text-on-surface border border-surface-container-highest px-4 py-3 font-label-caps focus:border-blood-red focus:ring-0 rounded-none w-full file:bg-blood-red file:border-none file:text-white file:px-4 file:py-2 file:font-bold file:cursor-pointer uppercase file:font-label-caps">
     <p class="mt-2 text-xs text-ash-grey font-label-caps">Formatos soportados: JPG, PNG, WEBP, GIF. Podés seleccionar múltiples archivos. Máximo recomendado: 8MB por imagen.</p>
 </div>
 
@@ -100,7 +100,7 @@
 </label>
 
 <div class="mt-8 flex flex-wrap gap-3">
-    <button type="submit" class="bg-blood-red text-raw-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-200 uppercase tracking-widest">
+    <button type="submit" class="bg-blood-red text-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-zinc-950 hover:text-white transition-all duration-200 uppercase tracking-widest">
         {{ $buttonText }}
     </button>
     <a href="{{ route('admin.products.index') }}" class="bg-void-black border border-surface-container-highest px-6 py-3 text-xs font-label-caps text-raw-white hover:border-blood-red hover:text-blood-red transition-colors uppercase">

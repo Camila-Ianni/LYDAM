@@ -35,6 +35,13 @@ class NewPasswordController extends Controller
             'token' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'token.required' => 'El enlace de recuperación es inválido o ha expirado.',
+            'email.required' => 'Ingresá tu correo electrónico.',
+            'email.email' => 'Ingresá un correo electrónico válido.',
+            'password.required' => 'Ingresá tu nueva contraseña.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres. Intentá con una contraseña más segura (podés combinar mayúsculas y números).',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we

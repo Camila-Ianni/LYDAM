@@ -115,18 +115,15 @@
                     <span class="font-label-caps text-xs text-blood-red font-bold tracking-widest">{{ $category->name }}</span>
                     
                     <!-- Current Thumbnail -->
-                    <div class="w-full aspect-square border border-surface-container-highest overflow-hidden bg-void-black flex items-center justify-center">
-                        @if($category->imageUrl())
-                            <img src="{{ $category->imageUrl() }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
-                        @else
-                            <span class="text-ash-grey text-xs font-label-caps">Sin Imagen</span>
-                        @endif
+                    <div class="w-full aspect-square border border-surface-container-highest overflow-hidden bg-surface-container flex items-center justify-center relative">
+                        <img id="cat_preview_{{ $category->id }}" src="{{ $category->imageUrl() ?? '' }}" alt="{{ $category->name }}" class="w-full h-full object-cover {{ $category->imageUrl() ? '' : 'hidden' }}">
+                        <span id="cat_placeholder_{{ $category->id }}" class="text-ash-grey text-xs font-label-caps {{ $category->imageUrl() ? 'hidden' : '' }}">Sin Imagen</span>
                     </div>
                     
                     <!-- File Input -->
                     <div>
                         <label for="category_img_{{ $category->id }}" class="block font-label-caps text-[10px] text-ash-grey uppercase tracking-wider mb-1">Nueva Imagen</label>
-                        <input id="category_img_{{ $category->id }}" name="categories[{{ $category->id }}][image]" type="file" accept="image/*" class="text-xs text-ash-grey font-label-caps file:bg-surface-container file:text-raw-white file:border-none file:px-3 file:py-2 file:mr-3 hover:file:bg-blood-red transition-all cursor-pointer">
+                        <input id="category_img_{{ $category->id }}" name="categories[{{ $category->id }}][image]" type="file" accept="image/*" onchange="previewCatImage(this, '{{ $category->id }}')" class="text-xs text-on-surface font-label-caps file:bg-surface-container file:text-on-surface file:border-none file:px-3 file:py-2 file:mr-3 hover:file:bg-blood-red hover:file:text-white transition-all cursor-pointer">
                     </div>
                 </div>
             @endforeach
@@ -142,19 +139,32 @@
         
         <div id="faq-items-container" class="space-y-4 mb-6"></div>
         
-        <button type="button" id="add-faq-btn" class="bg-surface-container border border-surface-container-highest text-raw-white font-label-caps text-xs py-3 px-6 hover:border-blood-red hover:text-blood-red transition-all duration-200 uppercase tracking-widest">
+        <button type="button" id="add-faq-btn" class="bg-surface-container border border-surface-container-highest text-on-surface font-label-caps text-xs py-3 px-6 hover:border-blood-red hover:text-blood-red transition-all duration-200 uppercase tracking-widest">
             Añadir Pregunta
         </button>
     </div>
 
     <div class="mt-8 flex flex-wrap gap-3">
-        <button type="submit" class="bg-blood-red text-raw-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-void-black hover:text-blood-red transition-all duration-200 uppercase tracking-widest">
+        <button type="submit" class="bg-blood-red text-white font-label-caps text-xs py-3 px-6 border border-blood-red hover:bg-zinc-950 hover:text-white transition-all duration-200 uppercase tracking-widest">
             Guardar Configuración
         </button>
     </div>
 </form>
 
 <script>
+function previewCatImage(input, catId) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById('cat_preview_' + catId);
+            const placeholder = document.getElementById('cat_placeholder_' + catId);
+            img.src = e.target.result;
+            img.classList.remove('hidden');
+            if (placeholder) placeholder.classList.add('hidden');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 document.addEventListener('DOMContentLoaded', function() {
     const faqDataInput = document.getElementById('faq_data_input');
     const container = document.getElementById('faq-items-container');
