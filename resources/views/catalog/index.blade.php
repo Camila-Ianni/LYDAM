@@ -25,15 +25,13 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
             @foreach($categories as $category)
                 <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="group relative aspect-square block overflow-hidden border border-surface-container-highest hover:border-blood-red transition-all duration-300 bg-surface-container-low shadow-sm">
-                    <!-- Background Image -->
+                    <!-- Background Image (Fully clear, no dark wash) -->
                     @if($category->imageUrl())
-                        <img src="{{ $category->imageUrl() }}" alt="{{ $category->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+                        <img src="{{ $category->imageUrl() }}" alt="{{ $category->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     @endif
-                    <!-- Darkened Overlay for high-contrast white text -->
-                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300 z-10"></div>
-                    <!-- Text -->
-                    <div class="absolute inset-0 flex items-center justify-center p-4 z-20 text-center">
-                        <span class="font-headline-lg-mobile md:font-headline-lg text-white uppercase tracking-wider group-hover:text-blood-red transition-colors duration-300 leading-tight drop-shadow-md">
+                    <!-- Text Badge -->
+                    <div class="absolute inset-0 flex items-center justify-center p-3 z-20 text-center">
+                        <span class="font-headline-lg-mobile md:font-headline-lg text-white uppercase tracking-wider bg-zinc-950/80 px-4 py-2 border border-white/20 group-hover:bg-blood-red group-hover:border-blood-red transition-all duration-300 leading-tight shadow-md">
                             {{ $category->name }}
                         </span>
                     </div>
